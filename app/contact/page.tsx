@@ -3,17 +3,27 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useSearchParams } from "next/navigation";
-import { useEffect, useState, Suspense } from "react";
+import { useEffect, useState, Suspense, ChangeEvent } from "react";
 import { Navbar } from "@/components/Navbar";
 import emailjs from "@emailjs/browser";
+
+// Define form data type
+interface FormData {
+  clinicName: string;
+  fullName: string;
+  email: string;
+  phone: string;
+  contactMethod: string;
+  message: string;
+}
 
 // A separate component to handle the dynamic search params logic
 function ContactFormContent() {
   const searchParams = useSearchParams();
-  const [selectedService, setSelectedService] = useState("");
-  const [selectedDate, setSelectedDate] = useState("");
-  const [selectedTime, setSelectedTime] = useState("");
-  const [formData, setFormData] = useState({
+  const [selectedService, setSelectedService] = useState<string>("");
+  const [selectedDate, setSelectedDate] = useState<string>("");
+  const [selectedTime, setSelectedTime] = useState<string>("");
+  const [formData, setFormData] = useState<FormData>({
     clinicName: "",
     fullName: "",
     email: "",
@@ -21,7 +31,7 @@ function ContactFormContent() {
     contactMethod: "",
     message: "",
   });
-  const [openFAQ, setOpenFAQ] = useState(null); // Explicitly type as number | null
+  const [openFAQ, setOpenFAQ] = useState<number | null>(null);
 
   useEffect(() => {
     const plan = searchParams.get("plan");
@@ -36,8 +46,8 @@ function ContactFormContent() {
   threeMonthsLater.setMonth(currentDate.getMonth() + 3);
 
   // Generate time slots (9:00 AM to 5:00 PM, every 15 minutes, Eastern Time)
-  const generateTimeSlots = () => {
-    const slots = [];
+  const generateTimeSlots = (): string[] => {
+    const slots: string[] = [];
     let hour = 9; // Start at 9 AM
     while (hour < 17) {
       slots.push(`${hour < 10 ? "0" + hour : hour}:00 AM`);
@@ -57,12 +67,14 @@ function ContactFormContent() {
 
   const timeSlots = generateTimeSlots();
 
-  const handleInputChange = (e) => {
+  const handleInputChange = (
+    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
+  ) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     const submissionData = {
@@ -72,12 +84,26 @@ function ContactFormContent() {
       auditTime: selectedTime,
     };
 
-    const SERVICE_ID =
-      process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID || "service_vbw0zm9";
-    const TEMPLATE_ID =
-      process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID || "template_gdwtnsh";
-    const PUBLIC_KEY =
-      process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY || "RyK08ZkilNemSbKYg";
+    // Define EmailJS credentials
+    const SERVICE_ID = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID;
+    const TEMPLATE_ID = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID;
+    const PUBLIC_KEY = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY;
+
+    // Check if credentials are missing
+    if (!SERVICE_ID || !TEMPLATE_ID || !PUBLIC_KEY) {
+      console.error("🚨 Missing EmailJS credentials:", {
+        SERVICE_ID,
+        TEMPLATE_ID,
+        PUBLIC_KEY,
+      });
+      alert("❌ Configuration error. Please contact support.");
+      return;
+    }
+
+    // Log credentials for debugging
+    console.log("Service ID:", SERVICE_ID);
+    console.log("Template ID:", TEMPLATE_ID);
+    console.log("Public Key:", PUBLIC_KEY);
 
     try {
       const result = await emailjs.send(
@@ -101,11 +127,12 @@ function ContactFormContent() {
       );
       console.log("✅ Email successfully sent:", result.text);
       alert("🎉 Submission received successfully! We'll get back to you soon.");
-    } catch (error) {
-      console.error("🚨 Error sending email:", error);
+    } catch (error: any) {
+      console.error("🚨 Error sending email:", error.status, error.text);
       alert("❌ Failed to send the submission. Please try again.");
     }
 
+    // Reset form fields
     setFormData({
       clinicName: "",
       fullName: "",
@@ -295,7 +322,9 @@ function ContactFormContent() {
                 id="service"
                 name="service"
                 value={selectedService}
-                onChange={(e) => setSelectedService(e.target.value)}
+                onChange={(e: ChangeEvent<HTMLSelectElement>) =>
+                  setSelectedService(e.target.value)
+                }
                 className="w-full border-[#6C5CE7]/20 rounded-lg border-2 bg-white/90 shadow-sm focus:border-[#6C5CE7] focus:ring-[#6C5CE7]/50"
               >
                 <option value="">Select Service</option>
@@ -314,7 +343,9 @@ function ContactFormContent() {
                 type="date"
                 name="date"
                 value={selectedDate}
-                onChange={(e) => setSelectedDate(e.target.value)}
+                onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                  setSelectedDate(e.target.value)
+                }
                 min={currentDate.toISOString().split("T")[0]}
                 max={threeMonthsLater.toISOString().split("T")[0]}
                 className="w-full border-[#6C5CE7]/20 rounded-lg border-2 bg-white/90 shadow-sm focus:border-[#6C5CE7] focus:ring-[#6C5CE7]/50"
@@ -329,7 +360,9 @@ function ContactFormContent() {
                 id="time"
                 name="time"
                 value={selectedTime}
-                onChange={(e) => setSelectedTime(e.target.value)}
+                onChange={(e: ChangeEvent<HTMLSelectElement>) =>
+                  setSelectedTime(e.target.value)
+                }
                 className="w-full border-[#6C5CE7]/20 rounded-lg border-2 bg-white/90 shadow-sm focus:border-[#6C5CE7] focus:ring-[#6C5CE7]/50"
               >
                 <option value="">Select Time</option>
