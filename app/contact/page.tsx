@@ -36,17 +36,17 @@ export default function ContactPage() {
   threeMonthsLater.setMonth(currentDate.getMonth() + 3);
 
   // Generate dates for the next three months (May, June, July 2025)
-  const months = [
-    new Date(
-      threeMonthsLater.setMonth(threeMonthsLater.getMonth() - 2)
-    ).toLocaleString("default", { month: "long", year: "numeric" }),
-    new Date(
-      threeMonthsLater.setMonth(threeMonthsLater.getMonth() + 1)
-    ).toLocaleString("default", { month: "long", year: "numeric" }),
-    new Date(
-      threeMonthsLater.setMonth(threeMonthsLater.getMonth() + 1)
-    ).toLocaleString("default", { month: "long", year: "numeric" }),
-  ];
+  // const months = [
+  //   new Date(
+  //     threeMonthsLater.setMonth(threeMonthsLater.getMonth() - 2)
+  //   ).toLocaleString("default", { month: "long", year: "numeric" }),
+  //   new Date(
+  //     threeMonthsLater.setMonth(threeMonthsLater.getMonth() + 1)
+  //   ).toLocaleString("default", { month: "long", year: "numeric" }),
+  //   new Date(
+  //     threeMonthsLater.setMonth(threeMonthsLater.getMonth() + 1)
+  //   ).toLocaleString("default", { month: "long", year: "numeric" }),
+  // ];
 
   // Generate time slots (9:00 AM to 5:00 PM, every 15 minutes, Eastern Time)
   const generateTimeSlots = () => {
