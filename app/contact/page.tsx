@@ -128,7 +128,11 @@ function ContactFormContent() {
       console.log("✅ Email successfully sent:", result.text);
       alert("🎉 Submission received successfully! We'll get back to you soon.");
     } catch (error) {
-      console.error("🚨 Error sending email:", error.status, error.text);
+      if (error instanceof Error) {
+        console.error("🚨 Error sending email:", error.message);
+      } else {
+        console.error("🚨 Error sending email:", error);
+      }
       alert("❌ Failed to send the submission. Please try again.");
     }
 
