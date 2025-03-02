@@ -1,5 +1,4 @@
-"use client";
-
+import React, { Suspense } from "react"; // Add Suspense
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -34,19 +33,6 @@ export default function ContactPage() {
   const currentDate = new Date(); // Use current date
   const threeMonthsLater = new Date(currentDate);
   threeMonthsLater.setMonth(currentDate.getMonth() + 3);
-
-  // Generate dates for the next three months (May, June, July 2025)
-  // const months = [
-  //   new Date(
-  //     threeMonthsLater.setMonth(threeMonthsLater.getMonth() - 2)
-  //   ).toLocaleString("default", { month: "long", year: "numeric" }),
-  //   new Date(
-  //     threeMonthsLater.setMonth(threeMonthsLater.getMonth() + 1)
-  //   ).toLocaleString("default", { month: "long", year: "numeric" }),
-  //   new Date(
-  //     threeMonthsLater.setMonth(threeMonthsLater.getMonth() + 1)
-  //   ).toLocaleString("default", { month: "long", year: "numeric" }),
-  // ];
 
   // Generate time slots (9:00 AM to 5:00 PM, every 15 minutes, Eastern Time)
   const generateTimeSlots = () => {
@@ -307,67 +293,80 @@ export default function ContactPage() {
                 onChange={handleInputChange}
                 className="w-full border-[#6C5CE7]/20 rounded-lg border-2 bg-white/90 shadow-sm focus:border-[#6C5CE7] focus:ring-[#6C5CE7]/50"
               >
-                <option value="">Preferred Contact Method</option>
-                <option value="Email">Email</option>
-                <option value="Phone">Phone</option>
+                <option value="" disabled>
+                  Select Contact Method
+                </option>
+                <option value="email">Email</option>
+                <option value="phone">Phone</option>
               </select>
             </div>
 
-            {/* Select Service */}
+            {/* Service, Date & Time Selection */}
             <div>
-              <label htmlFor="service" className="sr-only">
-                Service
+              <label className="block text-sm font-medium text-gray-700">
+                Select Service
               </label>
               <select
-                id="service"
                 name="service"
                 value={selectedService}
                 onChange={(e) => setSelectedService(e.target.value)}
                 className="w-full border-[#6C5CE7]/20 rounded-lg border-2 bg-white/90 shadow-sm focus:border-[#6C5CE7] focus:ring-[#6C5CE7]/50"
               >
-                <option value="">Select Service</option>
-                <option value="Medical Billing">Medical Billing</option>
-                <option value="Medical Coding">Medical Coding</option>
-                <option value="Prior Authorization">Prior Authorization</option>
+                <option value="Medical Billing & Claims Submission">
+                  Medical Billing & Claims Submission
+                </option>
+                <option value="Medical Coding (ICD-10, CPT)">
+                  Medical Coding
+                </option>
+                <option value="Prior Authorization & Insurance Verification">
+                  Prior Authorization & Insurance Verification
+                </option>
+                <option value="Virtual Medical Scribing">
+                  Virtual Medical Scribing
+                </option>
+                <option value="Medical Transcription">
+                  Medical Transcription
+                </option>
+                <option value="Physician Credentialing">
+                  Physician Credentialing
+                </option>
               </select>
             </div>
 
-            {/* Date Picker */}
-            <div>
-              <label htmlFor="date" className="sr-only">
-                Select Date
-              </label>
-              <input
-                id="date"
-                type="date"
-                name="date"
-                value={selectedDate}
-                onChange={(e) => setSelectedDate(e.target.value)}
-                min={currentDate.toISOString().split("T")[0]}
-                max={threeMonthsLater.toISOString().split("T")[0]}
-                className="w-full border-[#6C5CE7]/20 rounded-lg border-2 bg-white/90 shadow-sm focus:border-[#6C5CE7] focus:ring-[#6C5CE7]/50"
-              />
-            </div>
-
-            {/* Time Picker */}
-            <div>
-              <label htmlFor="time" className="sr-only">
-                Select Time
-              </label>
-              <select
-                id="time"
-                name="time"
-                value={selectedTime}
-                onChange={(e) => setSelectedTime(e.target.value)}
-                className="w-full border-[#6C5CE7]/20 rounded-lg border-2 bg-white/90 shadow-sm focus:border-[#6C5CE7] focus:ring-[#6C5CE7]/50"
-              >
-                <option value="">Select Time</option>
-                {timeSlots.map((slot, index) => (
-                  <option key={index} value={slot}>
-                    {slot}
-                  </option>
-                ))}
-              </select>
+            {/* Date and Time for Audit */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <label htmlFor="auditDate" className="sr-only">
+                  Select Audit Date
+                </label>
+                <input
+                  id="auditDate"
+                  name="auditDate"
+                  type="date"
+                  min={currentDate.toISOString().split("T")[0]}
+                  max={threeMonthsLater.toISOString().split("T")[0]}
+                  value={selectedDate}
+                  onChange={(e) => setSelectedDate(e.target.value)}
+                  className="w-full border-[#6C5CE7]/20 rounded-lg border-2 bg-white/90 shadow-sm focus:border-[#6C5CE7] focus:ring-[#6C5CE7]/50"
+                />
+              </div>
+              <div>
+                <label htmlFor="auditTime" className="sr-only">
+                  Select Audit Time
+                </label>
+                <select
+                  name="auditTime"
+                  value={selectedTime}
+                  onChange={(e) => setSelectedTime(e.target.value)}
+                  className="w-full border-[#6C5CE7]/20 rounded-lg border-2 bg-white/90 shadow-sm focus:border-[#6C5CE7] focus:ring-[#6C5CE7]/50"
+                >
+                  {timeSlots.map((slot, index) => (
+                    <option key={index} value={slot}>
+                      {slot}
+                    </option>
+                  ))}
+                </select>
+              </div>
             </div>
 
             {/* Message */}
@@ -378,44 +377,24 @@ export default function ContactPage() {
               <Textarea
                 id="message"
                 name="message"
-                placeholder="Any message or questions?"
+                rows={5}
+                placeholder="Your message"
                 value={formData.message}
                 onChange={handleInputChange}
-                rows={4}
                 className="border-[#6C5CE7]/20 rounded-lg border-2 bg-white/90 shadow-sm focus:border-[#6C5CE7] focus:ring-[#6C5CE7]/50"
               />
             </div>
 
             {/* Submit Button */}
-            <Button
-              type="submit"
-              className="w-full bg-[#6C5CE7] text-white py-3 rounded-lg hover:bg-[#5b4ada]"
-            >
-              Submit
-            </Button>
+            <div className="mt-8 flex justify-center">
+              <Button
+                type="submit"
+                className="bg-[#6C5CE7] hover:bg-[#5A4FC2] text-white rounded-lg py-3 px-6"
+              >
+                Submit Request
+              </Button>
+            </div>
           </form>
-        </div>
-
-        {/* FAQ Accordion */}
-        <div className="space-y-4">
-          <h2 className="text-2xl font-semibold text-[#3E37A1]">
-            Frequently Asked Questions
-          </h2>
-          <div className="bg-white p-8 rounded-2xl shadow-lg">
-            {faqs.map((faq, index) => (
-              <div key={index} className="mb-4">
-                <button
-                  onClick={() => setOpenFAQ(openFAQ === index ? null : index)}
-                  className="w-full text-left text-xl font-medium text-[#3E37A1] py-2"
-                >
-                  {faq.question}
-                </button>
-                {openFAQ === index && (
-                  <div className="pt-2 text-lg text-gray-700">{faq.answer}</div>
-                )}
-              </div>
-            ))}
-          </div>
         </div>
       </div>
     </div>
