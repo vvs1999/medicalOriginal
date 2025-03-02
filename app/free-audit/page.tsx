@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Checkbox } from "@/components/ui/checkbox";
+import Link from "next/link";
 
 export default function FreeAuditPage() {
   const [step, setStep] = useState(1);
@@ -165,7 +166,7 @@ export default function FreeAuditPage() {
                 billing and increase your revenue.
               </p>
               <Button asChild>
-                <a href="/">Return to Homepage</a>
+                <Link href="/">Return to Homepage</Link>
               </Button>
             </div>
           )}

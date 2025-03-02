@@ -3,7 +3,15 @@
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Navbar } from "@/components/Navbar";
-import { FaFileInvoiceDollar, FaClipboardCheck, FaUserMd, FaLaptopMedical, FaDatabase, FaIdCard, FaStar } from "react-icons/fa";
+import {
+  FaFileInvoiceDollar,
+  FaClipboardCheck,
+  FaUserMd,
+  FaLaptopMedical,
+  FaDatabase,
+  FaIdCard,
+  FaStar,
+} from "react-icons/fa";
 
 // Removed unused import: Image
 
@@ -92,7 +100,9 @@ export default function ServicesPage() {
             </h1>
             {/* Lines 93:15 and 93:69 - Fix unescaped double quotes */}
             <p className="text-2xl text-gray-700 max-w-3xl mx-auto">
-              "Your Practice’s Shield Against Revenue Loss & Burnout" – We don’t just manage tasks—we fix broken workflows, defend your revenue, and protect your time.
+              &quot;Your Practice’s Shield Against Revenue Loss & Burnout&quot;
+              – We don’t just manage tasks—we fix broken workflows, defend your
+              revenue, and protect your time.
             </p>
           </div>
         </section>
@@ -108,17 +118,22 @@ export default function ServicesPage() {
                   className="bg-white p-8 rounded-xl shadow-lg border border-[#6C5CE7]/10 hover:shadow-xl transition duration-300"
                 >
                   <div className="flex items-center mb-6">
-                    <div className="mr-4">
-                      {service.icon}
-                    </div>
-                    <h2 className="text-2xl font-semibold text-[#3E37A1]">{service.title}</h2>
+                    <div className="mr-4">{service.icon}</div>
+                    <h2 className="text-2xl font-semibold text-[#3E37A1]">
+                      {service.title}
+                    </h2>
                   </div>
-                  <p className="text-lg mb-6 text-gray-700 font-medium">{service.description}</p>
+                  <p className="text-lg mb-6 text-gray-700 font-medium">
+                    {service.description}
+                  </p>
 
                   {/* Steps List (No Animations, Gold Star Bullets) */}
                   <ul className="list-none space-y-2 pl-6 mb-8 text-gray-700">
                     {service.steps.map((step, i) => (
-                      <li key={i} className="flex items-start space-x-2 text-base">
+                      <li
+                        key={i}
+                        className="flex items-start space-x-2 text-base"
+                      >
                         <FaStar className="text-[#FFC107] mt-1 flex-shrink-0" />
                         <span>{step}</span>
                       </li>
@@ -137,7 +152,8 @@ export default function ServicesPage() {
               Ready to Optimize Your Practice?
             </h2>
             <p className="text-xl mb-8 max-w-2xl mx-auto">
-              Take the first step toward streamlined billing and maximized revenue today!
+              Take the first step toward streamlined billing and maximized
+              revenue today!
             </p>
             <div>
               <Button
@@ -155,13 +171,26 @@ export default function ServicesPage() {
       {/* Footer */}
       <footer className="bg-[#3E37A1] text-white py-12">
         <div className="container mx-auto px-4 text-center">
-          <p className="text-base mb-4">© 2024 AccurusBill. Empowering Private Clinics with Comprehensive Solutions</p>
-          <p className="text-sm mb-4">Phone: (XXX) XXX-XXXX | Email: info@accurusbill.com</p>
+          <p className="text-base mb-4">
+            © 2024 AccurusBill. Empowering Private Clinics with Comprehensive
+            Solutions
+          </p>
+          <p className="text-sm mb-4">
+            Phone: (XXX) XXX-XXXX | Email: info@accurusbill.com
+          </p>
           <div className="space-x-4">
-            <Link href="/" className="hover:text-[#FFC107] text-sm">Home</Link>
-            <Link href="/about" className="hover:text-[#FFC107] text-sm">About</Link>
-            <Link href="/services" className="hover:text-[#FFC107] text-sm">Services</Link>
-            <Link href="/contact" className="hover:text-[#FFC107] text-sm">Contact</Link>
+            <Link href="/" className="hover:text-[#FFC107] text-sm">
+              Home
+            </Link>
+            <Link href="/about" className="hover:text-[#FFC107] text-sm">
+              About
+            </Link>
+            <Link href="/services" className="hover:text-[#FFC107] text-sm">
+              Services
+            </Link>
+            <Link href="/contact" className="hover:text-[#FFC107] text-sm">
+              Contact
+            </Link>
           </div>
         </div>
       </footer>

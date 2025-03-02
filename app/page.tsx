@@ -4,7 +4,20 @@ import { Navbar } from "@/components/Navbar";
 import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { FaHeartbeat, FaCog, FaChartLine, FaUserMd, FaXRay, FaBrain, FaLungs, FaStethoscope, FaUsers, FaCheckCircle, FaMoneyBillWave, FaShieldAlt } from "react-icons/fa";
+import {
+  FaHeartbeat,
+  FaCog,
+  FaChartLine,
+  FaUserMd,
+  FaXRay,
+  FaBrain,
+  FaLungs,
+  FaStethoscope,
+  FaUsers,
+  FaCheckCircle,
+  FaMoneyBillWave,
+  FaShieldAlt,
+} from "react-icons/fa";
 import { motion } from "framer-motion";
 
 export default function HomePage() {
@@ -123,17 +136,22 @@ export default function HomePage() {
               }}
             >
               <h1 className="text-5xl font-extrabold mb-6 leading-tight">
-                Transform Your Revenue Cycle with Efficient, Integrated Solutions
+                Transform Your Revenue Cycle with Efficient, Integrated
+                Solutions
               </h1>
               <p className="text-lg mb-8 opacity-90">
-                At AccurusBill, we empower independent physicians and clinics to streamline operations, reduce administrative burdens, and maximize revenue.
+                At AccurusBill, we empower independent physicians and clinics to
+                streamline operations, reduce administrative burdens, and
+                maximize revenue.
               </p>
               <Button
                 size="lg"
                 asChild
                 className="bg-[#3E37A1] text-white font-semibold hover:bg-[#4C45C2] transition duration-300"
               >
-                <Link href="/contact">Stop Losing Revenue—Get a Free Audit Now!</Link>
+                <Link href="/contact">
+                  Stop Losing Revenue—Get a Free Audit Now!
+                </Link>
               </Button>
             </motion.div>
           </div>
@@ -148,12 +166,36 @@ export default function HomePage() {
             </h2>
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
               {[
-                { title: "Medical Billing & Claims Submission", description: "Streamline billing processes and reduce claim denials for faster reimbursements." },
-                { title: "Medical Coding (ICD-10, CPT)", description: "Ensure accurate coding to maximize revenue and avoid compliance risks." },
-                { title: "Prior Authorization & Insurance Verification", description: "Eliminate delays with seamless insurance approvals." },
-                { title: "Virtual Medical Scribing", description: "Free up your time with real-time, accurate documentation." },
-                { title: "Medical Transcription Services", description: "Turn patient encounters into precise, actionable records." },
-                { title: "Physician Credentialing", description: "Stay credentialed and compliant without the hassle." },
+                {
+                  title: "Medical Billing & Claims Submission",
+                  description:
+                    "Streamline billing processes and reduce claim denials for faster reimbursements.",
+                },
+                {
+                  title: "Medical Coding (ICD-10, CPT)",
+                  description:
+                    "Ensure accurate coding to maximize revenue and avoid compliance risks.",
+                },
+                {
+                  title: "Prior Authorization & Insurance Verification",
+                  description:
+                    "Eliminate delays with seamless insurance approvals.",
+                },
+                {
+                  title: "Virtual Medical Scribing",
+                  description:
+                    "Free up your time with real-time, accurate documentation.",
+                },
+                {
+                  title: "Medical Transcription Services",
+                  description:
+                    "Turn patient encounters into precise, actionable records.",
+                },
+                {
+                  title: "Physician Credentialing",
+                  description:
+                    "Stay credentialed and compliant without the hassle.",
+                },
               ].map((service, index) => (
                 <motion.div
                   key={index}
@@ -163,9 +205,18 @@ export default function HomePage() {
                   transition={{ duration: 0.5, delay: index * 0.2 }}
                   className="bg-[#F5F5FC] p-6 rounded-lg shadow-md hover:shadow-xl transition duration-300 border border-gray-200"
                 >
-                  <h3 className="text-xl font-semibold mb-2 text-[#3E37A1]">{service.title}</h3>
-                  <p className="text-base mb-4 text-[#263238]">{service.description}</p>
-                  <Link href={`/services#${service.title.toLowerCase().replace(/ /g, "-")}`} className="text-base font-semibold text-[#FFC107] hover:underline">
+                  <h3 className="text-xl font-semibold mb-2 text-[#3E37A1]">
+                    {service.title}
+                  </h3>
+                  <p className="text-base mb-4 text-[#263238]">
+                    {service.description}
+                  </p>
+                  <Link
+                    href={`/services#${service.title
+                      .toLowerCase()
+                      .replace(/ /g, "-")}`}
+                    className="text-base font-semibold text-[#FFC107] hover:underline"
+                  >
                     Learn more →
                   </Link>
                 </motion.div>
@@ -183,16 +234,82 @@ export default function HomePage() {
             </h2>
             <div className="grid md:grid-cols-3 gap-10 mt-8">
               {[
-                { icon: <motion.div animate={{ rotate: 360 }} transition={{ repeat: Infinity, duration: 5, ease: "linear" }}><FaCog className="text-6xl text-[#5A50DA] mx-auto" /></motion.div>, title: "End-to-End Expertise" },
-                { icon: <motion.div animate={{ scale: [1, 1.2, 1] }} transition={{ repeat: Infinity, duration: 2 }}><FaMoneyBillWave className="text-6xl text-[#5A50DA] mx-auto" /></motion.div>, title: "Cost-Effective Solutions" },
-                { icon: <motion.div animate={{ opacity: [0.5, 1, 0.5] }} transition={{ repeat: Infinity, duration: 2 }}><FaShieldAlt className="text-6xl text-[#5A50DA] mx-auto" /></motion.div>, title: "Secure & Compliant" },
-                { icon: <motion.div animate={{ y: [0, -10, 0] }} transition={{ repeat: Infinity, duration: 2 }}><FaChartLine className="text-6xl text-[#5A50DA] mx-auto" /></motion.div>, title: "Real-Time Transparency" },
-                { icon: <motion.div animate={{ scale: [1, 1.1, 1] }} transition={{ repeat: Infinity, duration: 2 }}><FaCheckCircle className="text-6xl text-[#5A50DA] mx-auto" /></motion.div>, title: "95% Claim Acceptance" },
-                { icon: <motion.div animate={{ scale: [1, 1.05, 1] }} transition={{ repeat: Infinity, duration: 2 }}><FaUsers className="text-6xl text-[#5A50DA] mx-auto" /></motion.div>, title: "Dedicated Success Team" },
+                {
+                  icon: (
+                    <motion.div
+                      animate={{ rotate: 360 }}
+                      transition={{
+                        repeat: Infinity,
+                        duration: 5,
+                        ease: "linear",
+                      }}
+                    >
+                      <FaCog className="text-6xl text-[#5A50DA] mx-auto" />
+                    </motion.div>
+                  ),
+                  title: "End-to-End Expertise",
+                },
+                {
+                  icon: (
+                    <motion.div
+                      animate={{ scale: [1, 1.2, 1] }}
+                      transition={{ repeat: Infinity, duration: 2 }}
+                    >
+                      <FaMoneyBillWave className="text-6xl text-[#5A50DA] mx-auto" />
+                    </motion.div>
+                  ),
+                  title: "Cost-Effective Solutions",
+                },
+                {
+                  icon: (
+                    <motion.div
+                      animate={{ opacity: [0.5, 1, 0.5] }}
+                      transition={{ repeat: Infinity, duration: 2 }}
+                    >
+                      <FaShieldAlt className="text-6xl text-[#5A50DA] mx-auto" />
+                    </motion.div>
+                  ),
+                  title: "Secure & Compliant",
+                },
+                {
+                  icon: (
+                    <motion.div
+                      animate={{ y: [0, -10, 0] }}
+                      transition={{ repeat: Infinity, duration: 2 }}
+                    >
+                      <FaChartLine className="text-6xl text-[#5A50DA] mx-auto" />
+                    </motion.div>
+                  ),
+                  title: "Real-Time Transparency",
+                },
+                {
+                  icon: (
+                    <motion.div
+                      animate={{ scale: [1, 1.1, 1] }}
+                      transition={{ repeat: Infinity, duration: 2 }}
+                    >
+                      <FaCheckCircle className="text-6xl text-[#5A50DA] mx-auto" />
+                    </motion.div>
+                  ),
+                  title: "95% Claim Acceptance",
+                },
+                {
+                  icon: (
+                    <motion.div
+                      animate={{ scale: [1, 1.05, 1] }}
+                      transition={{ repeat: Infinity, duration: 2 }}
+                    >
+                      <FaUsers className="text-6xl text-[#5A50DA] mx-auto" />
+                    </motion.div>
+                  ),
+                  title: "Dedicated Success Team",
+                },
               ].map((feature, index) => (
                 <div key={index} className="text-center">
                   {feature.icon}
-                  <h3 className="text-xl font-semibold text-[#3E37A1] mt-4">{feature.title}</h3>
+                  <h3 className="text-xl font-semibold text-[#3E37A1] mt-4">
+                    {feature.title}
+                  </h3>
                 </div>
               ))}
             </div>
@@ -204,15 +321,37 @@ export default function HomePage() {
           <div className="container mx-auto px-4 flex flex-col lg:flex-row items-center gap-10">
             <div className="lg:w-3/5">
               <div className="text-center">
-                <h2 className="text-4xl font-bold text-[#3E37A1] mb-2">Our Process</h2>
+                <h2 className="text-4xl font-bold text-[#3E37A1] mb-2">
+                  Our Process
+                </h2>
                 <span className="block w-24 h-1 bg-[#6C5CE7] mx-auto mt-2 rounded-full"></span>
               </div>
               <div className="relative border-l-4 border-[#6C5CE7] pl-8 space-y-12 mt-8">
                 {[
-                  { step: "Step 1", title: "Understand Your Unique Needs", description: "We start with a free, no-obligation consultation to audit your workflows, pinpoint revenue leaks, and craft a custom roadmap." },
-                  { step: "Step 2", title: "Seamless Onboarding & Training", description: "Our team integrates with your EHR/EMR systems and trains your staff—zero downtime, zero hassle." },
-                  { step: "Step 3", title: "Proactive Revenue Cycle Management", description: "We take over billing, coding, and prior authorizations while you track progress via real-time dashboards." },
-                  { step: "Step 4", title: "Continuous Optimization & Support", description: "Monthly performance reviews, 24/7 support, and updates to keep your practice ahead of compliance changes." },
+                  {
+                    step: "Step 1",
+                    title: "Understand Your Unique Needs",
+                    description:
+                      "We start with a free, no-obligation consultation to audit your workflows, pinpoint revenue leaks, and craft a custom roadmap.",
+                  },
+                  {
+                    step: "Step 2",
+                    title: "Seamless Onboarding & Training",
+                    description:
+                      "Our team integrates with your EHR/EMR systems and trains your staff—zero downtime, zero hassle.",
+                  },
+                  {
+                    step: "Step 3",
+                    title: "Proactive Revenue Cycle Management",
+                    description:
+                      "We take over billing, coding, and prior authorizations while you track progress via real-time dashboards.",
+                  },
+                  {
+                    step: "Step 4",
+                    title: "Continuous Optimization & Support",
+                    description:
+                      "Monthly performance reviews, 24/7 support, and updates to keep your practice ahead of compliance changes.",
+                  },
                 ].map((item, index) => (
                   <motion.div
                     key={index}
@@ -225,7 +364,9 @@ export default function HomePage() {
                     <h3 className="text-2xl font-semibold text-[#3E37A1]">
                       {item.step}: {item.title}
                     </h3>
-                    <p className="text-gray-700 mt-2 leading-relaxed">{item.description}</p>
+                    <p className="text-gray-700 mt-2 leading-relaxed">
+                      {item.description}
+                    </p>
                   </motion.div>
                 ))}
               </div>
@@ -262,7 +403,8 @@ export default function HomePage() {
               <span className="block w-24 h-1 bg-[#FFC107] mx-auto mt-2 rounded-full"></span>
             </h2>
             <p className="text-lg mb-10 text-white opacity-90">
-              Supporting a wide range of medical specialties with tailored solutions.
+              Supporting a wide range of medical specialties with tailored
+              solutions.
             </p>
             <div className="relative">
               <motion.div
@@ -303,15 +445,25 @@ export default function HomePage() {
             </h2>
             <div className="grid md:grid-cols-2 gap-10">
               {[
-                { name: "Dr. Emily Carter", feedback: "AccurusBill streamlined our billing process and improved revenue significantly." },
-                { name: "Clinic Administrator", feedback: "Our clinic experienced fewer claim denials thanks to their expert team." },
+                {
+                  name: "Dr. Emily Carter",
+                  feedback:
+                    "AccurusBill streamlined our billing process and improved revenue significantly.",
+                },
+                {
+                  name: "Clinic Administrator",
+                  feedback:
+                    "Our clinic experienced fewer claim denials thanks to their expert team.",
+                },
               ].map((client, index) => (
                 <motion.div
                   key={index}
                   whileHover={{ scale: 1.05 }}
                   className="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition duration-300"
                 >
-                  <h3 className="text-lg font-semibold text-[#3E37A1]">{client.name}</h3>
+                  <h3 className="text-lg font-semibold text-[#3E37A1]">
+                    {client.name}
+                  </h3>
                   {/* Line 315: Fix unescaped double quotes */}
                   <p className="text-base text-[#263238]">{`"${client.feedback}"`}</p>
                 </motion.div>
@@ -325,7 +477,8 @@ export default function HomePage() {
           <div className="container mx-auto px-4">
             {/* Line 326: Fix unescaped double quotes */}
             <h2 className="text-4xl font-bold mb-6">
-              "Reclaim Time for Patient Care - Let Us Optimize Your Revenue Cycle"
+              &quot;Reclaim Time for Patient Care - Let Us Optimize Your Revenue
+              Cycle&quot;
             </h2>
             <Button
               size="lg"
@@ -347,8 +500,9 @@ export default function HomePage() {
           </p>
           <p>Phone: (XXX) XXX-XXXX | Email: info@AccurusBill.com</p>
           <div className="mt-4">
-            <Link href="/">Home</Link> | <Link href="/about">About Us</Link> |{' '}
-            <Link href="/services">Services</Link> | <Link href="/blog">Blog</Link> |{' '}
+            <Link href="/">Home</Link> | <Link href="/about">About Us</Link> |{" "}
+            <Link href="/services">Services</Link> |{" "}
+            <Link href="/blog">Blog</Link> |{" "}
             <Link href="/contact">Contact</Link>
           </div>
         </div>
