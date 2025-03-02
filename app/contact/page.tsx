@@ -1,3 +1,4 @@
+"use client";
 import React, { Suspense } from "react"; // Add Suspense
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
