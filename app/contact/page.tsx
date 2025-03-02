@@ -3,11 +3,12 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useState, Suspense } from "react";
 import { Navbar } from "@/components/Navbar";
-import emailjs from "@emailjs/browser"; // Added EmailJS import
+import emailjs from "@emailjs/browser";
 
-export default function ContactPage() {
+// A separate component to handle the dynamic search params logic
+function ContactFormContent() {
   const searchParams = useSearchParams();
   const [selectedService, setSelectedService] = useState("");
   const [selectedDate, setSelectedDate] = useState("");
@@ -20,7 +21,7 @@ export default function ContactPage() {
     contactMethod: "",
     message: "",
   });
-  const [openFAQ, setOpenFAQ] = useState<number | null>(null); // Explicitly type as number | null
+  const [openFAQ, setOpenFAQ] = useState(null); // Explicitly type as number | null
 
   useEffect(() => {
     const plan = searchParams.get("plan");
@@ -30,35 +31,21 @@ export default function ContactPage() {
   }, [searchParams]);
 
   // Get current date and calculate three months ahead
-  const currentDate = new Date(); // Use current date
+  const currentDate = new Date();
   const threeMonthsLater = new Date(currentDate);
   threeMonthsLater.setMonth(currentDate.getMonth() + 3);
-
-  // Generate dates for the next three months (May, June, July 2025)
-  // const months = [
-  //   new Date(
-  //     threeMonthsLater.setMonth(threeMonthsLater.getMonth() - 2)
-  //   ).toLocaleString("default", { month: "long", year: "numeric" }),
-  //   new Date(
-  //     threeMonthsLater.setMonth(threeMonthsLater.getMonth() + 1)
-  //   ).toLocaleString("default", { month: "long", year: "numeric" }),
-  //   new Date(
-  //     threeMonthsLater.setMonth(threeMonthsLater.getMonth() + 1)
-  //   ).toLocaleString("default", { month: "long", year: "numeric" }),
-  // ];
 
   // Generate time slots (9:00 AM to 5:00 PM, every 15 minutes, Eastern Time)
   const generateTimeSlots = () => {
     const slots = [];
     let hour = 9; // Start at 9 AM
     while (hour < 17) {
-      // End at 5 PM
       slots.push(`${hour < 10 ? "0" + hour : hour}:00 AM`);
       slots.push(`${hour < 10 ? "0" + hour : hour}:15 AM`);
       slots.push(`${hour < 10 ? "0" + hour : hour}:30 AM`);
       slots.push(`${hour < 10 ? "0" + hour : hour}:45 AM`);
       if (hour === 12) {
-        slots[slots.length - 4] = slots[slots.length - 4].replace("AM", "PM"); // Noon
+        slots[slots.length - 4] = slots[slots.length - 4].replace("AM", "PM");
         slots[slots.length - 3] = slots[slots.length - 3].replace("AM", "PM");
         slots[slots.length - 2] = slots[slots.length - 2].replace("AM", "PM");
         slots[slots.length - 1] = slots[slots.length - 1].replace("AM", "PM");
@@ -70,19 +57,14 @@ export default function ContactPage() {
 
   const timeSlots = generateTimeSlots();
 
-  const handleInputChange = (
-    e: React.ChangeEvent<
-      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
-    >
-  ) => {
+  const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = async (e: { preventDefault: () => void }) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Prepare data for submission
     const submissionData = {
       ...formData,
       service: selectedService,
@@ -90,17 +72,19 @@ export default function ContactPage() {
       auditTime: selectedTime,
     };
 
-    // EmailJS configuration (replace with your actual credentials)
-    const SERVICE_ID = "service_vbw0zm9";
-    const TEMPLATE_ID = "template_gdwtnsh"; // Updated based on your template (assumed from context)
-    const PUBLIC_KEY = "RyK08ZkilNemSbKYg"; // Replace with your actual public key
+    const SERVICE_ID =
+      process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID || "service_vbw0zm9";
+    const TEMPLATE_ID =
+      process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID || "template_gdwtnsh";
+    const PUBLIC_KEY =
+      process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY || "RyK08ZkilNemSbKYg";
 
     try {
       const result = await emailjs.send(
         SERVICE_ID,
         TEMPLATE_ID,
         {
-          to_name: "AccurusBill Team", // Default recipient name as per template
+          to_name: "AccurusBill Team",
           fullName: submissionData.fullName || "Not provided",
           clinicName: submissionData.clinicName || "Not provided",
           email: submissionData.email || "Not provided",
@@ -116,15 +100,12 @@ export default function ContactPage() {
         PUBLIC_KEY
       );
       console.log("✅ Email successfully sent:", result.text);
-      alert(
-        "🎉 Submission received successfully! We&apos;ll get back to you soon."
-      );
+      alert("🎉 Submission received successfully! We'll get back to you soon.");
     } catch (error) {
       console.error("🚨 Error sending email:", error);
       alert("❌ Failed to send the submission. Please try again.");
     }
 
-    // Reset form and selections
     setFormData({
       clinicName: "",
       fullName: "",
@@ -206,9 +187,7 @@ export default function ContactPage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#F5F5FC] to-[#EEF0FF]">
-      {/* Navbar with Prefetch */}
       <Navbar />
-
       <div className="container mx-auto px-4 py-16">
         <h1 className="text-5xl font-bold mb-6 text-center text-[#3E37A1]">
           Get in Touch with AccurusBill
@@ -219,7 +198,6 @@ export default function ContactPage() {
           audit? We’re here to assist!
         </p>
 
-        {/* Get in Touch with Us Section (Integrated Form + Audit Booking) */}
         <div className="bg-white p-8 rounded-2xl shadow-lg mb-12">
           <p className="text-gray-600 mb-6">
             Fill out the form below to reach out, and schedule a free audit to
@@ -227,7 +205,6 @@ export default function ContactPage() {
           </p>
 
           <form onSubmit={handleSubmit} className="space-y-6">
-            {/* Contact Information Fields */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
                 <label htmlFor="clinicName" className="sr-only">
@@ -261,7 +238,6 @@ export default function ContactPage() {
               </div>
             </div>
 
-            {/* Email & Phone */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
                 <label htmlFor="email" className="sr-only">
@@ -294,7 +270,6 @@ export default function ContactPage() {
               </div>
             </div>
 
-            {/* Select Contact Method */}
             <div>
               <label htmlFor="contactMethod" className="sr-only">
                 Preferred Contact Method
@@ -312,7 +287,6 @@ export default function ContactPage() {
               </select>
             </div>
 
-            {/* Select Service */}
             <div>
               <label htmlFor="service" className="sr-only">
                 Service
@@ -331,7 +305,6 @@ export default function ContactPage() {
               </select>
             </div>
 
-            {/* Date Picker */}
             <div>
               <label htmlFor="date" className="sr-only">
                 Select Date
@@ -348,7 +321,6 @@ export default function ContactPage() {
               />
             </div>
 
-            {/* Time Picker */}
             <div>
               <label htmlFor="time" className="sr-only">
                 Select Time
@@ -369,7 +341,6 @@ export default function ContactPage() {
               </select>
             </div>
 
-            {/* Message */}
             <div>
               <label htmlFor="message" className="sr-only">
                 Message
@@ -385,7 +356,6 @@ export default function ContactPage() {
               />
             </div>
 
-            {/* Submit Button */}
             <Button
               type="submit"
               className="w-full bg-[#6C5CE7] text-white py-3 rounded-lg hover:bg-[#5b4ada]"
@@ -395,7 +365,6 @@ export default function ContactPage() {
           </form>
         </div>
 
-        {/* FAQ Accordion */}
         <div className="space-y-4">
           <h2 className="text-2xl font-semibold text-[#3E37A1]">
             Frequently Asked Questions
@@ -418,5 +387,14 @@ export default function ContactPage() {
         </div>
       </div>
     </div>
+  );
+}
+
+// Main page component with Suspense boundary
+export default function ContactPage() {
+  return (
+    <Suspense fallback={<div>Loading contact form...</div>}>
+      <ContactFormContent />
+    </Suspense>
   );
 }
