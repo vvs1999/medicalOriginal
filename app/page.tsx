@@ -150,7 +150,7 @@ export default function HomePage() {
                 className="bg-[#3E37A1] text-white font-semibold hover:bg-[#4C45C2] transition duration-300"
               >
                 <Link href="/contact">
-                  Stop Losing Revenue—Get a Free Audit Now!
+                  Stop Losing Revenue — Get a Free Audit Now!
                 </Link>
               </Button>
             </motion.div>
@@ -498,7 +498,7 @@ export default function HomePage() {
             © 2024 AccurusBill. Empowering Private Clinics with Comprehensive,
             Cost-Effective Solutions
           </p>
-          <p>Phone: (XXX) XXX-XXXX | Email: info@AccurusBill.com</p>
+          <p> Email: info@AccurusBill.com</p>
           <div className="mt-4">
             <Link href="/">Home</Link> | <Link href="/about">About Us</Link> |{" "}
             <Link href="/services">Services</Link> |{" "}

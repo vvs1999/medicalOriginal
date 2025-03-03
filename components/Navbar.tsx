@@ -15,7 +15,10 @@ export function Navbar() {
         <div className="container mx-auto flex h-20 items-center justify-between px-4 md:px-8">
           {/* Logo Section */}
           <div className="flex items-center space-x-4">
-            <Link href="/" className="flex items-center space-x-3 transition-transform duration-300 hover:scale-105">
+            <Link
+              href="/"
+              className="flex items-center space-x-3 transition-transform duration-300 hover:scale-105"
+            >
               <Image
                 src="/logo.jpg"
                 alt="AccurusBill Logo"
@@ -25,7 +28,9 @@ export function Navbar() {
                 quality={80}
                 className="rounded-full shadow-md"
               />
-              <span className="text-2xl font-bold text-[#3E37A1] whitespace-nowrap tracking-wide">AccurusBill</span>
+              <span className="text-2xl font-bold text-[#3E37A1] whitespace-nowrap tracking-wide">
+                AccurusBill
+              </span>
             </Link>
           </div>
 
@@ -41,7 +46,9 @@ export function Navbar() {
           {/* Navigation Links (Desktop & Mobile) */}
           <div
             className={`absolute md:static top-20 left-0 w-full md:w-auto bg-white/95 md:bg-transparent shadow-xl md:shadow-none transition-all duration-500 ease-in-out transform ${
-              open ? "max-h-[100vh] opacity-100 translate-y-0" : "max-h-0 opacity-0 -translate-y-4"
+              open
+                ? "max-h-[100vh] opacity-100 translate-y-0"
+                : "max-h-0 opacity-0 -translate-y-4"
             } md:max-h-none md:opacity-100 md:translate-y-0 overflow-hidden md:flex md:items-center md:space-x-8`}
           >
             <ul className="flex flex-col md:flex-row md:space-x-8 text-center md:text-left p-4 md:p-0">
@@ -56,7 +63,7 @@ export function Navbar() {
           {/* Free Audit Button (Dynamic, Attractive) */}
           <div className="hidden md:block">
             <Link
-              href="/free-audit"
+              href="/contact"
               className="bg-[#6C5CE7] text-white px-6 py-3 rounded-lg shadow-md hover:bg-[#3E37A1] hover:shadow-lg transition-all duration-300 transform hover:scale-105 whitespace-nowrap font-semibold text-lg"
             >
               Get a Free Audit
@@ -77,7 +84,9 @@ function NavLink({ href, text }: { href: string; text: string }) {
       <Link
         href={href}
         className={`block px-4 py-2 text-gray-700 hover:text-[#3E37A1] hover:bg-[#F5F5FC]/50 rounded-md transition-all duration-300 ${
-          isActive ? "font-bold text-[#6C5CE7] border-b-2 border-[#6C5CE7] bg-[#F5F5FC]/70" : ""
+          isActive
+            ? "font-bold text-[#6C5CE7] border-b-2 border-[#6C5CE7] bg-[#F5F5FC]/70"
+            : ""
         }`}
       >
         {text}

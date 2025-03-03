@@ -50,18 +50,16 @@ function ContactFormContent() {
     const slots: string[] = [];
     let hour = 9; // Start at 9 AM
     while (hour < 17) {
-      slots.push(`${hour < 10 ? "0" + hour : hour}:00 AM`);
-      slots.push(`${hour < 10 ? "0" + hour : hour}:15 AM`);
-      slots.push(`${hour < 10 ? "0" + hour : hour}:30 AM`);
-      slots.push(`${hour < 10 ? "0" + hour : hour}:45 AM`);
-      if (hour === 12) {
-        slots[slots.length - 4] = slots[slots.length - 4].replace("AM", "PM");
-        slots[slots.length - 3] = slots[slots.length - 3].replace("AM", "PM");
-        slots[slots.length - 2] = slots[slots.length - 2].replace("AM", "PM");
-        slots[slots.length - 1] = slots[slots.length - 1].replace("AM", "PM");
-      }
+      const period = hour < 12 ? "AM" : "PM";
+      const displayHour = hour > 12 ? hour - 12 : hour; // Convert 13-16 to 1-4 for PM
+      slots.push(`${displayHour}:00 ${period}`);
+      slots.push(`${displayHour}:15 ${period}`);
+      slots.push(`${displayHour}:30 ${period}`);
+      slots.push(`${displayHour}:45 ${period}`);
+
       hour++;
     }
+
     return slots;
   };
 
@@ -318,7 +316,7 @@ function ContactFormContent() {
               </select>
             </div>
 
-            <div>
+            {/* <div>
               <label htmlFor="service" className="sr-only">
                 Service
               </label>
@@ -336,7 +334,7 @@ function ContactFormContent() {
                 <option value="Medical Coding">Medical Coding</option>
                 <option value="Prior Authorization">Prior Authorization</option>
               </select>
-            </div>
+            </div> */}
 
             <div>
               <label htmlFor="date" className="sr-only">

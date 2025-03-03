@@ -175,9 +175,7 @@ export default function ServicesPage() {
             © 2024 AccurusBill. Empowering Private Clinics with Comprehensive
             Solutions
           </p>
-          <p className="text-sm mb-4">
-            Phone: (XXX) XXX-XXXX | Email: info@accurusbill.com
-          </p>
+          <p className="text-sm mb-4">Email: info@accurusbill.com</p>
           <div className="space-x-4">
             <Link href="/" className="hover:text-[#FFC107] text-sm">
               Home
