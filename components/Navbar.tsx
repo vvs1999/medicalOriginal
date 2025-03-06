@@ -3,16 +3,29 @@
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export function Navbar() {
   const [open, setOpen] = useState(false);
-  // Removed unused pathname variable from Navbar
+  const [scrolled, setScrolled] = useState(false);
+
+  // Handle scroll effect
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 20);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   return (
     <header>
-      <nav className="sticky top-0 z-50 w-full border-b border-[#6C5CE7]/20 bg-white/95 backdrop-blur-md shadow-lg">
-        <div className="container mx-auto flex h-20 items-center justify-between px-4 md:px-8">
+      <nav
+        className={`fixed top-0 left-0 z-50 w-full border-b border-[#6C5CE7]/20 transition-all duration-300 ${
+          scrolled ? "bg-white/95 shadow-md" : "bg-white/90 shadow-lg"
+        } backdrop-blur-md`}
+      >
+        <div className="container mx-auto flex h-20 items-center justify-between px-2 md:px-4">
           {/* Logo Section */}
           <div className="flex items-center space-x-4">
             <Link
@@ -34,7 +47,7 @@ export function Navbar() {
             </Link>
           </div>
 
-          {/* Mobile Menu Button (Dynamic Hamburger) */}
+          {/* Mobile Menu Button */}
           <button
             onClick={() => setOpen(!open)}
             className="md:hidden p-2 text-[#3E37A1] focus:outline-none focus:ring-2 focus:ring-[#6C5CE7] transition-transform duration-300 hover:scale-110"
@@ -43,7 +56,7 @@ export function Navbar() {
             <span className="text-3xl">☰</span>
           </button>
 
-          {/* Navigation Links (Desktop & Mobile) */}
+          {/* Navigation Links */}
           <div
             className={`absolute md:static top-20 left-0 w-full md:w-auto bg-white/95 md:bg-transparent shadow-xl md:shadow-none transition-all duration-500 ease-in-out transform ${
               open
@@ -60,8 +73,8 @@ export function Navbar() {
             </ul>
           </div>
 
-          {/* Free Audit Button (Dynamic, Attractive) */}
-          <div className="hidden md:block">
+          {/* Free Audit Button */}
+          <div className="hidden md:block pr-2">
             <Link
               href="/contact"
               className="bg-[#6C5CE7] text-white px-6 py-3 rounded-lg shadow-md hover:bg-[#3E37A1] hover:shadow-lg transition-all duration-300 transform hover:scale-105 whitespace-nowrap font-semibold text-lg"
@@ -76,7 +89,7 @@ export function Navbar() {
 }
 
 function NavLink({ href, text }: { href: string; text: string }) {
-  const pathname = usePathname(); // Moved usePathname() here
+  const pathname = usePathname();
   const isActive = pathname === href;
 
   return (
