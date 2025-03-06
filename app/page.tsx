@@ -17,6 +17,9 @@ import {
   FaCheckCircle,
   FaMoneyBillWave,
   FaShieldAlt,
+  FaLinkedin,
+  FaTwitter,
+  FaMapMarkerAlt,
 } from "react-icons/fa";
 import { motion } from "framer-motion";
 
@@ -464,7 +467,6 @@ export default function HomePage() {
                   <h3 className="text-lg font-semibold text-[#3E37A1]">
                     {client.name}
                   </h3>
-                  {/* Line 315: Fix unescaped double quotes */}
                   <p className="text-base text-[#263238]">{`"${client.feedback}"`}</p>
                 </motion.div>
               ))}
@@ -475,10 +477,9 @@ export default function HomePage() {
         {/* Call to Action */}
         <section className="py-20 bg-gradient-to-r from-[#6C5CE7] to-[#5A50DA] text-white text-center">
           <div className="container mx-auto px-4">
-            {/* Line 326: Fix unescaped double quotes */}
             <h2 className="text-4xl font-bold mb-6">
-              &quot;Reclaim Time for Patient Care - Let Us Optimize Your Revenue
-              Cycle&quot;
+              "Reclaim Time for Patient Care - Let Us Optimize Your Revenue
+              Cycle"
             </h2>
             <Button
               size="lg"
@@ -493,17 +494,80 @@ export default function HomePage() {
 
       {/* Footer */}
       <footer className="bg-[#3E37A1] text-white py-12">
-        <div className="container mx-auto px-4 text-center">
-          <p className="text-base">
-            © 2024 AccurusBill. Empowering Private Clinics with Comprehensive,
-            Cost-Effective Solutions
-          </p>
-          <p> Email: info@AccurusBill.com</p>
-          <div className="mt-4">
-            <Link href="/">Home</Link> | <Link href="/about">About Us</Link> |{" "}
-            <Link href="/services">Services</Link> |{" "}
-            <Link href="/blog">Blog</Link> |{" "}
-            <Link href="/contact">Contact</Link>
+        <div className="container mx-auto px-4">
+          <div className="flex flex-col md:flex-row justify-between items-start">
+            {/* Left Section: Copyright, Email, Address, and Navigation */}
+            <div className="mb-6 md:mb-0">
+              <p className="text-base text-center md:text-left">
+                © 2024 AccurusBill. Empowering Private Clinics with Comprehensive,
+                Cost-Effective Solutions
+              </p>
+              <div className="mt-4 space-y-2 text-center md:text-left">
+                <p className="text-base flex items-center justify-center md:justify-start">
+                  <FaMapMarkerAlt className="mr-2 text-[#FFC107] text-lg" />
+                  30 N Gould St Ste R<br />
+                  Sheridan, Wyoming, United States, 82801
+                </p>
+                <p className="text-base">Email: info@AccurusBill.com</p>
+              </div>
+              <div className="mt-4 flex justify-center md:justify-start space-x-4">
+                <Link
+                  href="/"
+                  className="text-white hover:text-[#FFC107] transition duration-300"
+                >
+                  Home
+                </Link>
+                <Link
+                  href="/about"
+                  className="text-white hover:text-[#FFC107] transition duration-300"
+                >
+                  About Us
+                </Link>
+                <Link
+                  href="/services"
+                  className="text-white hover:text-[#FFC107] transition duration-300"
+                >
+                  Services
+                </Link>
+                <Link
+                  href="/blog"
+                  className="text-white hover:text-[#FFC107] transition duration-300"
+                >
+                  Blog
+                </Link>
+                <Link
+                  href="/contact"
+                  className="text-white hover:text-[#FFC107] transition duration-300"
+                >
+                  Contact
+                </Link>
+              </div>
+            </div>
+
+            {/* Right Section: Social Media */}
+            <div className="text-center md:text-right bg-white/10 p-4 rounded-lg">
+              <h3 className="text-lg font-semibold mb-4">Follow Us</h3>
+              <div className="flex justify-center md:justify-end space-x-6">
+                <Link
+                  href="https://www.linkedin.com/company/accurusbill/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-white hover:text-[#FFC107] transition duration-300 transform hover:scale-110"
+                >
+                  <FaLinkedin className="text-4xl" />
+                  <span className="sr-only">LinkedIn</span>
+                </Link>
+                <Link
+                  href="https://twitter.com/explore"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-white hover:text-[#FFC107] transition duration-300 transform hover:scale-110"
+                >
+                  <FaTwitter className="text-4xl" />
+                  <span className="sr-only">Twitter</span>
+                </Link>
+              </div>
+            </div>
           </div>
         </div>
       </footer>
