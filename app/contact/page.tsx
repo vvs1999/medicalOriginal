@@ -161,16 +161,6 @@ function ContactFormContent() {
         "We typically process claims within 24-48 hours of receipt, ensuring quick turnaround times for our clients.",
     },
     {
-      question: "Do you work with all private insurance providers?",
-      answer:
-        "Yes, we work with all major private insurance providers in Canada, as well as provincial health insurance plans.",
-    },
-    {
-      question: "What billing software do you integrate with?",
-      answer:
-        "We integrate with popular EMR/EHR systems including OSCAR, Telus Health, ClinicAid, and Medesync, among others.",
-    },
-    {
       question: "How do you ensure accurate and timely claim submissions?",
       answer:
         "Our process auto-captures charges directly from your EHR/EMR and scrubs errors in real time. We submit claims within 4 hours using payer-specific rules, track payments daily, and handle appeals for denials and underpayments on your behalf.",
