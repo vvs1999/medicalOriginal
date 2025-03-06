@@ -1,11 +1,11 @@
-"use client"; // Must be the very first line for client-side components
+"use client";
 
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { Navbar } from "@/components/Navbar";
 
-export default function ServicesPage() {
+export default function PricingPage() {
   const pricingPlans = [
     {
       title: "Pay-Per-Claim",
@@ -17,8 +17,10 @@ export default function ServicesPage() {
         "Suitable for low volume of claims",
       ],
       cta: "Start with Pay-Per-Claim",
-      color: "bg-blue-100 hover:bg-blue-200",
-      borderColor: "border-blue-300",
+      gradient: "from-[#6C5CE7]/10 to-[#F5F5FC]",
+      selectedGradient: "from-[#6C5CE7]/20 to-[#EDEFFA]",
+      borderColor: "border-[#6C5CE7]",
+      buttonHoverColor: "hover:bg-[#6C5CE7]",
     },
     {
       title: "Subscription-Based",
@@ -30,8 +32,10 @@ export default function ServicesPage() {
         "Ideal for consistent claim volumes",
       ],
       cta: "Subscribe to a Plan",
-      color: "bg-green-100 hover:bg-green-200",
-      borderColor: "border-green-300",
+      gradient: "from-[#3E37A1]/10 to-[#F5F5FC]",
+      selectedGradient: "from-[#3E37A1]/20 to-[#EDEFFA]",
+      borderColor: "border-[#3E37A1]",
+      buttonHoverColor: "hover:bg-[#3E37A1]",
     },
     {
       title: "Custom Enterprise",
@@ -43,66 +47,112 @@ export default function ServicesPage() {
         "Comprehensive reporting and analytics",
       ],
       cta: "Request a Custom Quote",
-      color: "bg-purple-100 hover:bg-purple-200",
-      borderColor: "border-purple-300",
+      gradient: "from-[#5A50DA]/10 to-[#F5F5FC]",
+      selectedGradient: "from-[#5A50DA]/20 to-[#EDEFFA]",
+      borderColor: "border-[#5A50DA]",
+      buttonHoverColor: "hover:bg-[#5A50DA]",
     },
   ];
 
   const [selectedPlan, setSelectedPlan] = useState<number | null>(null);
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white">
+    <div className="min-h-screen bg-[#F5F5FC] flex flex-col">
       <Navbar />
-      <div className="container mx-auto px-4 py-12">
-        <h1 className="text-4xl font-bold mb-4 text-center text-blue-800">
-          Flexible & Transparent Pricing
-        </h1>
-        <p className="text-xl text-center mb-12 text-gray-600">
-          Affordable billing solutions for solo practitioners, clinics, and healthcare groups.
-        </p>
+      <main className="flex-grow">
+        {/* Hero Section */}
+        <section className="relative py-32 overflow-hidden bg-gradient-to-br from-[#6C5CE7]/20 to-[#F5F5FC] bg-[url('/images/service-bg-pattern.png')] bg-no-repeat bg-center bg-cover">
+          <div className="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent opacity-30"></div>
+          <div className="container mx-auto px-4 relative z-10 text-center">
+            <h1 className="text-6xl font-extrabold text-[#3E37A1] mb-4 drop-shadow-md">
+              Flexible & Transparent Pricing
+            </h1>
+            <p className="text-2xl text-gray-700 max-w-3xl mx-auto">
+              Affordable billing solutions for solo practitioners, clinics, and healthcare groups.
+            </p>
+          </div>
+        </section>
 
-        <div className="grid md:grid-cols-3 gap-8 mb-16">
-          {pricingPlans.map((plan, index) => (
-            <div
-              key={index}
-              className={`${
-                plan.color
-              } ${selectedPlan === index ? `${plan.borderColor} shadow-lg` : "border-transparent"}
-               border-2 rounded-lg p-6 flex flex-col justify-between cursor-pointer transition-all duration-300`}
-              onClick={() => setSelectedPlan(index)}
-            >
-              <div>
-                <h2 className="text-2xl font-semibold mb-4 text-blue-800">{plan.title}</h2>
-                <p className="mb-6 text-gray-700">{plan.description}</p>
-                <ul className="list-disc pl-6 mb-6 text-gray-600">
-                  {plan.features.map((feature, i) => (
-                    <li key={i} className="mb-2">
-                      {feature}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-              <Button asChild className="w-full bg-blue-600 text-white hover:bg-blue-700">
-                <Link href={`/contact?plan=${encodeURIComponent(plan.title)}`}>
-                  {plan.cta}
-                </Link>
-              </Button>
+        {/* Pricing Grid */}
+        <section className="py-20 bg-white">
+          <div className="container mx-auto px-4">
+            <div className="grid md:grid-cols-3 gap-12">
+              {pricingPlans.map((plan, index) => (
+                <div
+                  key={index}
+                  className={`bg-gradient-to-br ${
+                    selectedPlan === index ? plan.selectedGradient : plan.gradient
+                  } p-8 rounded-xl shadow-lg border ${
+                    selectedPlan === index ? plan.borderColor : "border-[#6C5CE7]/10"
+                  } hover:shadow-xl hover:scale-105 transition-all duration-300 flex flex-col justify-between cursor-pointer`}
+                  onClick={() => setSelectedPlan(index)}
+                >
+                  <div>
+                    <h2 className="text-2xl font-semibold text-[#3E37A1] mb-4">{plan.title}</h2>
+                    <p className="text-lg mb-6 text-gray-700 font-medium">{plan.description}</p>
+                    <ul className="list-disc pl-6 mb-8 text-gray-700 text-base space-y-2">
+                      {plan.features.map((feature, i) => (
+                        <li key={i}>{feature}</li>
+                      ))}
+                    </ul>
+                  </div>
+                  <Button
+                    asChild
+                    className={`w-full bg-[#6C5CE7] text-white ${plan.buttonHoverColor} rounded-lg shadow-md hover:shadow-lg transition-all duration-300`}
+                  >
+                    <Link href={`/contact?plan=${encodeURIComponent(plan.title)}`}>
+                      {plan.cta}
+                    </Link>
+                  </Button>
+                </div>
+              ))}
             </div>
-          ))}
-        </div>
+          </div>
+        </section>
 
-        <div className="bg-blue-600 p-8 rounded-lg text-center text-white shadow-lg">
-          <h2 className="text-3xl font-semibold mb-6">
-            Not Sure Which Plan Is Right for You?
-          </h2>
-          <p className="text-lg mb-6">
-            Our experts can help you choose the best pricing model for your healthcare practice.
+        {/* Call to Action */}
+        <section className="py-20 bg-gradient-to-r from-[#6C5CE7] to-[#3E37A1] text-white text-center">
+          <div className="container mx-auto px-4">
+            <h2 className="text-4xl font-bold mb-6">
+              Not Sure Which Plan Is Right for You?
+            </h2>
+            <p className="text-xl mb-8 max-w-2xl mx-auto">
+              Our experts can help you choose the best pricing model for your healthcare practice.
+            </p>
+            <Button
+              asChild
+              size="lg"
+              className="bg-[#FFC107] text-[#3E37A1] font-bold shadow-lg hover:bg-[#FFD700] transition duration-300 rounded-lg"
+            >
+              <Link href="/contact">Get a Customized Quote</Link>
+            </Button>
+          </div>
+        </section>
+      </main>
+
+      {/* Footer */}
+      <footer className="bg-[#3E37A1] text-white py-12">
+        <div className="container mx-auto px-4 text-center">
+          <p className="text-base mb-4">
+            © 2024 AccurusBill. Empowering Private Clinics with Comprehensive Solutions
           </p>
-          <Button asChild size="lg" className="bg-white text-blue-600 hover:bg-gray-200">
-            <Link href="/contact">Get a Customized Quote</Link>
-          </Button>
+          <p className="text-sm mb-4">Email: info@accurusbill.com</p>
+          <div className="space-x-4">
+            <Link href="/" className="hover:text-[#FFC107] text-sm">
+              Home
+            </Link>
+            <Link href="/about" className="hover:text-[#FFC107] text-sm">
+              About
+            </Link>
+            <Link href="/services" className="hover:text-[#FFC107] text-sm">
+              Services
+            </Link>
+            <Link href="/contact" className="hover:text-[#FFC107] text-sm">
+              Contact
+            </Link>
+          </div>
         </div>
-      </div>
+      </footer>
     </div>
   );
 }
