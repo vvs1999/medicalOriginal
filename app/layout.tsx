@@ -7,7 +7,7 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata: Metadata = {
   title: "AccurusBill - Medical Billing Services for Healthcare Providers",
   description:
-    "Streamline your medical billing with AccurusBill. Expert services for RAMQ, OHIP, and private insurance claims. Get paid faster with our efficient billing solutions.",
+    "AccurasBill provides end-to-end Revenue Cycle Management (RCM) solutions, including Medical Billing, Coding, Prior Authorization & Denial Management for private clinics in the U.S. Get paid faster with optimized claims processing!.",
 };
 
 export default function RootLayout({
