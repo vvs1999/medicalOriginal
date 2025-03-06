@@ -467,7 +467,8 @@ export default function HomePage() {
                   <h3 className="text-lg font-semibold text-[#3E37A1]">
                     {client.name}
                   </h3>
-                  <p className="text-base text-[#263238]">{`"${client.feedback}"`}</p>
+                  {/* Fixed unescaped double quotes by using single quotes */}
+                  <p className="text-base text-[#263238]">{`'${client.feedback}'`}</p>
                 </motion.div>
               ))}
             </div>
@@ -477,9 +478,9 @@ export default function HomePage() {
         {/* Call to Action */}
         <section className="py-20 bg-gradient-to-r from-[#6C5CE7] to-[#5A50DA] text-white text-center">
           <div className="container mx-auto px-4">
+            {/* Fixed unescaped double quotes by using single quotes */}
             <h2 className="text-4xl font-bold mb-6">
-              "Reclaim Time for Patient Care - Let Us Optimize Your Revenue
-              Cycle"
+              {'Reclaim Time for Patient Care - Let Us Optimize Your Revenue Cycle'}
             </h2>
             <Button
               size="lg"
@@ -554,7 +555,7 @@ export default function HomePage() {
                   rel="noopener noreferrer"
                   className="text-white hover:text-[#FFC107] transition duration-300 transform hover:scale-110"
                 >
-                  <FaLinkedin className="text-4xl" />
+                  <FaLinkedin className="text-3xl" />
                   <span className="sr-only">LinkedIn</span>
                 </Link>
                 <Link
@@ -563,7 +564,7 @@ export default function HomePage() {
                   rel="noopener noreferrer"
                   className="text-white hover:text-[#FFC107] transition duration-300 transform hover:scale-110"
                 >
-                  <FaTwitter className="text-4xl" />
+                  <FaTwitter className="text-3xl" />
                   <span className="sr-only">Twitter</span>
                 </Link>
               </div>
