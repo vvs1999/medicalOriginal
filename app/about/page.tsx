@@ -230,10 +230,10 @@ export default function AboutPage() {
           <p className="text-base mt-6">
             Email:{" "}
             <a
-              href="mailto:info@accurusbill.com"
+              href="mailto:contact@accurusbill.com"
               className="underline hover:text-[#FFD700]"
             >
-              info@accurusbill.com
+              contact@accurusbill.com
             </a>
           </p>
         </div>
@@ -246,7 +246,7 @@ export default function AboutPage() {
             © 2024 AccurusBill. Empowering Private Clinics with Comprehensive,
             Cost-Effective Solutions
           </p>
-          <p className="mt-2">Email: info@accurusbill.com</p>
+          <p className="mt-2">Email: contact@accurusbill.com</p>
           <div className="mt-4 space-x-4">
             <Link href="/" prefetch={true} className="hover:text-[#FFC107]">
               Home
