@@ -136,7 +136,7 @@ export default function PricingPage() {
           <p className="text-base mb-4">
             © 2024 AccurusBill. Empowering Private Clinics with Comprehensive Solutions
           </p>
-          <p className="text-sm mb-4">Email: info@accurusbill.com</p>
+          <p className="text-sm mb-4">Email: contact@accurusbill.com</p>
           <div className="space-x-4">
             <Link href="/" className="hover:text-[#FFC107] text-sm">
               Home
