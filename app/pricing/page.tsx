@@ -132,24 +132,80 @@ export default function PricingPage() {
 
       {/* Footer */}
       <footer className="bg-[#3E37A1] text-white py-12">
-        <div className="container mx-auto px-4 text-center">
-          <p className="text-base mb-4">
-            © 2024 AccurusBill. Empowering Private Clinics with Comprehensive Solutions
-          </p>
-          <p className="text-sm mb-4">Email: contact@accurusbill.com</p>
-          <div className="space-x-4">
-            <Link href="/" className="hover:text-[#FFC107] text-sm">
-              Home
-            </Link>
-            <Link href="/about" className="hover:text-[#FFC107] text-sm">
-              About
-            </Link>
-            <Link href="/services" className="hover:text-[#FFC107] text-sm">
-              Services
-            </Link>
-            <Link href="/contact" className="hover:text-[#FFC107] text-sm">
-              Contact
-            </Link>
+        <div className="container mx-auto px-4">
+          <div className="flex flex-col md:flex-row justify-between items-start">
+            {/* Left Section: Copyright, Email, Address, and Navigation */}
+            <div className="mb-6 md:mb-0">
+              <p className="text-base text-center md:text-left">
+                © 2024 AccurusBill. Empowering Private Clinics with Comprehensive,
+                Cost-Effective Solutions
+              </p>
+              <div className="mt-4 space-y-2 text-center md:text-left">
+                <p className="text-base flex items-center justify-center md:justify-start">
+                  <FaMapMarkerAlt className="mr-2 text-[#FFC107] text-lg" />
+                  30 N Gould St Ste R<br />
+                  Sheridan, Wyoming, United States, 82801
+                </p>
+                <p className="text-base">Email: contact@accurusbill.com</p>
+              </div>
+              <div className="mt-4 flex justify-center md:justify-start space-x-4">
+                <Link
+                  href="/"
+                  className="text-white hover:text-[#FFC107] transition duration-300"
+                >
+                  Home
+                </Link>
+                <Link
+                  href="/about"
+                  className="text-white hover:text-[#FFC107] transition duration-300"
+                >
+                  About Us
+                </Link>
+                <Link
+                  href="/services"
+                  className="text-white hover:text-[#FFC107] transition duration-300"
+                >
+                  Services
+                </Link>
+                <Link
+                  href="/blog"
+                  className="text-white hover:text-[#FFC107] transition duration-300"
+                >
+                  Blog
+                </Link>
+                <Link
+                  href="/contact"
+                  className="text-white hover:text-[#FFC107] transition duration-300"
+                >
+                  Contact
+                </Link>
+              </div>
+            </div>
+
+            {/* Right Section: Social Media */}
+            <div className="text-center md:text-right bg-white/10 p-4 rounded-lg">
+              <h3 className="text-lg font-semibold mb-4">Follow Us</h3>
+              <div className="flex justify-center md:justify-end space-x-6">
+                <Link
+                  href="https://www.linkedin.com/company/accurusbill/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-white hover:text-[#FFC107] transition duration-300 transform hover:scale-110"
+                >
+                  <FaLinkedin className="text-4xl" />
+                  <span className="sr-only">LinkedIn</span>
+                </Link>
+                <Link
+                  href="https://twitter.com/explore"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-white hover:text-[#FFC107] transition duration-300 transform hover:scale-110"
+                >
+                  <FaTwitter className="text-4xl" />
+                  <span className="sr-only">Twitter</span>
+                </Link>
+              </div>
+            </div>
           </div>
         </div>
       </footer>
