@@ -1,4 +1,5 @@
 "use client";
+
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -6,6 +7,8 @@ import { useSearchParams } from "next/navigation";
 import { useEffect, useState, Suspense, ChangeEvent } from "react";
 import { Navbar } from "@/components/Navbar";
 import emailjs from "@emailjs/browser";
+import Link from "next/link";
+import { FaMapMarkerAlt, FaLinkedin, FaTwitter } from "react-icons/fa";
 
 // Define form data type
 interface FormData {
@@ -205,212 +208,273 @@ function ContactFormContent() {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[#F5F5FC] to-[#EEF0FF]">
+    <div className="min-h-screen bg-[#F5F5FC] flex flex-col">
       <Navbar />
-      <div className="container mx-auto px-4 py-16">
-        <h1 className="text-5xl font-bold mb-6 text-center text-[#3E37A1]">
-          Get in Touch with AccurusBill
-          <span className="block w-32 h-1 bg-gradient-to-r from-[#6C5CE7] to-[#3E37A1] mx-auto mt-3 rounded-full"></span>
-        </h1>
-        <p className="text-xl text-center mb-12 text-gray-700 max-w-2xl mx-auto">
-          Have questions about medical billing? Need a custom quote or a free
-          audit? We’re here to assist!
-        </p>
-
-        <div className="bg-white p-8 rounded-2xl shadow-lg mb-12">
-          <p className="text-gray-600 mb-6">
-            Fill out the form below to reach out, and schedule a free audit to
-            optimize your revenue cycle.
+      <main className="flex-grow">
+        <div className="container mx-auto px-4 pt-24 pb-16">
+          <h1 className="text-6xl font-extrabold mb-6 text-center text-[#3E37A1]">
+            Get in Touch with AccurusBill
+          </h1>
+          <p className="text-2xl text-center mb-12 text-gray-700 max-w-3xl mx-auto">
+            Have questions about medical billing? Need a custom quote or a free
+            audit? We’re here to assist!
           </p>
 
-          <form onSubmit={handleSubmit} className="space-y-6">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div>
-                <label htmlFor="clinicName" className="sr-only">
-                  Clinic/Company Name
-                </label>
-                <Input
-                  id="clinicName"
-                  type="text"
-                  name="clinicName"
-                  placeholder="Clinic/Company Name"
-                  required
-                  value={formData.clinicName}
-                  onChange={handleInputChange}
-                  className="border-[#6C5CE7]/20 rounded-lg border-2 bg-white/90 shadow-sm focus:border-[#6C5CE7] focus:ring-[#6C5CE7]/50"
-                />
+          <div className="bg-white p-8 rounded-xl shadow-lg border border-[#6C5CE7]/10 mb-12">
+            <p className="text-gray-600 mb-6">
+              Fill out the form below to reach out, and schedule a free audit to
+              optimize your revenue cycle.
+            </p>
+
+            <form onSubmit={handleSubmit} className="space-y-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                  <label htmlFor="clinicName" className="sr-only">
+                    Clinic/Company Name
+                  </label>
+                  <Input
+                    id="clinicName"
+                    type="text"
+                    name="clinicName"
+                    placeholder="Clinic/Company Name"
+                    required
+                    value={formData.clinicName}
+                    onChange={handleInputChange}
+                    className="border-[#6C5CE7]/20 rounded-lg border-2 bg-white/90 shadow-sm focus:border-[#6C5CE7] focus:ring-[#6C5CE7]/50"
+                  />
+                </div>
+                <div>
+                  <label htmlFor="fullName" className="sr-only">
+                    Full Name
+                  </label>
+                  <Input
+                    id="fullName"
+                    type="text"
+                    name="fullName"
+                    placeholder="Full Name"
+                    required
+                    value={formData.fullName}
+                    onChange={handleInputChange}
+                    className="border-[#6C5CE7]/20 rounded-lg border-2 bg-white/90 shadow-sm focus:border-[#6C5CE7] focus:ring-[#6C5CE7]/50"
+                  />
+                </div>
               </div>
-              <div>
-                <label htmlFor="fullName" className="sr-only">
-                  Full Name
-                </label>
-                <Input
-                  id="fullName"
-                  type="text"
-                  name="fullName"
-                  placeholder="Full Name"
-                  required
-                  value={formData.fullName}
-                  onChange={handleInputChange}
-                  className="border-[#6C5CE7]/20 rounded-lg border-2 bg-white/90 shadow-sm focus:border-[#6C5CE7] focus:ring-[#6C5CE7]/50"
-                />
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                  <label htmlFor="email" className="sr-only">
+                    Email
+                  </label>
+                  <Input
+                    id="email"
+                    type="email"
+                    name="email"
+                    placeholder="Email"
+                    required
+                    value={formData.email}
+                    onChange={handleInputChange}
+                    className="border-[#6C5CE7]/20 rounded-lg border-2 bg-white/90 shadow-sm focus:border-[#6C5CE7] focus:ring-[#6C5CE7]/50"
+                  />
+                </div>
+                <div>
+                  <label htmlFor="phone" className="sr-only">
+                    Phone
+                  </label>
+                  <Input
+                    id="phone"
+                    type="tel"
+                    name="phone"
+                    placeholder="Phone"
+                    value={formData.phone}
+                    onChange={handleInputChange}
+                    className="border-[#6C5CE7]/20 rounded-lg border-2 bg-white/90 shadow-sm focus:border-[#6C5CE7] focus:ring-[#6C5CE7]/50"
+                  />
+                </div>
               </div>
-            </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
-                <label htmlFor="email" className="sr-only">
-                  Email
+                <label htmlFor="contactMethod" className="sr-only">
+                  Preferred Contact Method
                 </label>
-                <Input
-                  id="email"
-                  type="email"
-                  name="email"
-                  placeholder="Email"
-                  required
-                  value={formData.email}
+                <select
+                  id="contactMethod"
+                  name="contactMethod"
+                  value={formData.contactMethod}
                   onChange={handleInputChange}
-                  className="border-[#6C5CE7]/20 rounded-lg border-2 bg-white/90 shadow-sm focus:border-[#6C5CE7] focus:ring-[#6C5CE7]/50"
-                />
-              </div>
-              <div>
-                <label htmlFor="phone" className="sr-only">
-                  Phone
-                </label>
-                <Input
-                  id="phone"
-                  type="tel"
-                  name="phone"
-                  placeholder="Phone"
-                  value={formData.phone}
-                  onChange={handleInputChange}
-                  className="border-[#6C5CE7]/20 rounded-lg border-2 bg-white/90 shadow-sm focus:border-[#6C5CE7] focus:ring-[#6C5CE7]/50"
-                />
-              </div>
-            </div>
-
-            <div>
-              <label htmlFor="contactMethod" className="sr-only">
-                Preferred Contact Method
-              </label>
-              <select
-                id="contactMethod"
-                name="contactMethod"
-                value={formData.contactMethod}
-                onChange={handleInputChange}
-                className="w-full border-[#6C5CE7]/20 rounded-lg border-2 bg-white/90 shadow-sm focus:border-[#6C5CE7] focus:ring-[#6C5CE7]/50"
-              >
-                <option value="">Preferred Contact Method</option>
-                <option value="Email">Email</option>
-                <option value="Phone">Phone</option>
-              </select>
-            </div>
-
-            {/* <div>
-              <label htmlFor="service" className="sr-only">
-                Service
-              </label>
-              <select
-                id="service"
-                name="service"
-                value={selectedService}
-                onChange={(e: ChangeEvent<HTMLSelectElement>) =>
-                  setSelectedService(e.target.value)
-                }
-                className="w-full border-[#6C5CE7]/20 rounded-lg border-2 bg-white/90 shadow-sm focus:border-[#6C5CE7] focus:ring-[#6C5CE7]/50"
-              >
-                <option value="">Select Service</option>
-                <option value="Medical Billing">Medical Billing</option>
-                <option value="Medical Coding">Medical Coding</option>
-                <option value="Prior Authorization">Prior Authorization</option>
-              </select>
-            </div> */}
-
-            <div>
-              <label htmlFor="date" className="sr-only">
-                Select Date
-              </label>
-              <input
-                id="date"
-                type="date"
-                name="date"
-                value={selectedDate}
-                onChange={(e: ChangeEvent<HTMLInputElement>) =>
-                  setSelectedDate(e.target.value)
-                }
-                min={currentDate.toISOString().split("T")[0]}
-                max={threeMonthsLater.toISOString().split("T")[0]}
-                className="w-full border-[#6C5CE7]/20 rounded-lg border-2 bg-white/90 shadow-sm focus:border-[#6C5CE7] focus:ring-[#6C5CE7]/50"
-              />
-            </div>
-
-            <div>
-              <label htmlFor="time" className="sr-only">
-                Select Time
-              </label>
-              <select
-                id="time"
-                name="time"
-                value={selectedTime}
-                onChange={(e: ChangeEvent<HTMLSelectElement>) =>
-                  setSelectedTime(e.target.value)
-                }
-                className="w-full border-[#6C5CE7]/20 rounded-lg border-2 bg-white/90 shadow-sm focus:border-[#6C5CE7] focus:ring-[#6C5CE7]/50"
-              >
-                <option value="">Select Time</option>
-                {timeSlots.map((slot, index) => (
-                  <option key={index} value={slot}>
-                    {slot}
-                  </option>
-                ))}
-              </select>
-            </div>
-
-            <div>
-              <label htmlFor="message" className="sr-only">
-                Message
-              </label>
-              <Textarea
-                id="message"
-                name="message"
-                placeholder="Any message or questions?"
-                value={formData.message}
-                onChange={handleInputChange}
-                rows={4}
-                className="border-[#6C5CE7]/20 rounded-lg border-2 bg-white/90 shadow-sm focus:border-[#6C5CE7] focus:ring-[#6C5CE7]/50"
-              />
-            </div>
-
-            <Button
-              type="submit"
-              className="w-full bg-[#6C5CE7] text-white py-3 rounded-lg hover:bg-[#5b4ada]"
-            >
-              Submit
-            </Button>
-          </form>
-        </div>
-
-        <div className="space-y-4">
-          <h2 className="text-2xl font-semibold text-[#3E37A1]">
-            Frequently Asked Questions
-          </h2>
-          <div className="bg-white p-8 rounded-2xl shadow-lg">
-            {faqs.map((faq, index) => (
-              <div key={index} className="mb-4">
-                <button
-                  onClick={() => setOpenFAQ(openFAQ === index ? null : index)}
-                  className="w-full text-left text-xl font-medium text-[#3E37A1] py-2"
+                  className="w-full border-[#6C5CE7]/20 rounded-lg border-2 bg-white/90 shadow-sm focus:border-[#6C5CE7] focus:ring-[#6C5CE7]/50"
                 >
-                  {faq.question}
-                </button>
-                {openFAQ === index && (
-                  <div className="pt-2 text-lg text-gray-700">{faq.answer}</div>
-                )}
+                  <option value="">Preferred Contact Method</option>
+                  <option value="Email">Email</option>
+                  <option value="Phone">Phone</option>
+                </select>
               </div>
-            ))}
+
+              <div>
+                <label htmlFor="date" className="sr-only">
+                  Select Date
+                </label>
+                <input
+                  id="date"
+                  type="date"
+                  name="date"
+                  value={selectedDate}
+                  onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                    setSelectedDate(e.target.value)
+                  }
+                  min={currentDate.toISOString().split("T")[0]}
+                  max={threeMonthsLater.toISOString().split("T")[0]}
+                  className="w-full border-[#6C5CE7]/20 rounded-lg border-2 bg-white/90 shadow-sm focus:border-[#6C5CE7] focus:ring-[#6C5CE7]/50"
+                />
+              </div>
+
+              <div>
+                <label htmlFor="time" className="sr-only">
+                  Select Time
+                </label>
+                <select
+                  id="time"
+                  name="time"
+                  value={selectedTime}
+                  onChange={(e: ChangeEvent<HTMLSelectElement>) =>
+                    setSelectedTime(e.target.value)
+                  }
+                  className="w-full border-[#6C5CE7]/20 rounded-lg border-2 bg-white/90 shadow-sm focus:border-[#6C5CE7] focus:ring-[#6C5CE7]/50"
+                >
+                  <option value="">Select Time</option>
+                  {timeSlots.map((slot, index) => (
+                    <option key={index} value={slot}>
+                      {slot}
+                    </option>
+                  ))}
+                </select>
+              </div>
+
+              <div>
+                <label htmlFor="message" className="sr-only">
+                  Message
+                </label>
+                <Textarea
+                  id="message"
+                  name="message"
+                  placeholder="Any message or questions?"
+                  value={formData.message}
+                  onChange={handleInputChange}
+                  rows={4}
+                  className="border-[#6C5CE7]/20 rounded-lg border-2 bg-white/90 shadow-sm focus:border-[#6C5CE7] focus:ring-[#6C5CE7]/50"
+                />
+              </div>
+
+              <Button
+                type="submit"
+                className="w-full bg-[#6C5CE7] text-white py-3 rounded-lg hover:bg-[#5A50DA] shadow-md hover:shadow-lg transition-all duration-300"
+              >
+                Submit
+              </Button>
+            </form>
+          </div>
+
+          <div className="space-y-4">
+            <h2 className="text-2xl font-semibold text-[#3E37A1]">
+              Frequently Asked Questions
+            </h2>
+            <div className="bg-white p-8 rounded-xl shadow-lg border border-[#6C5CE7]/10">
+              {faqs.map((faq, index) => (
+                <div key={index} className="mb-4">
+                  <button
+                    onClick={() => setOpenFAQ(openFAQ === index ? null : index)}
+                    className="w-full text-left text-xl font-medium text-[#3E37A1] py-2"
+                  >
+                    {faq.question}
+                  </button>
+                  {openFAQ === index && (
+                    <div className="pt-2 text-lg text-gray-700">{faq.answer}</div>
+                  )}
+                </div>
+              ))}
+            </div>
           </div>
         </div>
-      </div>
+      </main>
+
+      {/* Footer */}
+      <footer className="bg-[#3E37A1] text-white py-12">
+        <div className="container mx-auto px-4">
+          <div className="flex flex-col md:flex-row justify-between items-start">
+            {/* Left Section: Copyright, Email, Address, and Navigation */}
+            <div className="mb-6 md:mb-0">
+              <p className="text-base text-center md:text-left">
+                © 2024 AccurusBill. Empowering Private Clinics with Comprehensive,
+                Cost-Effective Solutions
+              </p>
+              <div className="mt-4 space-y-2 text-center md:text-left">
+                <p className="text-base flex items-center justify-center md:justify-start">
+                  <FaMapMarkerAlt className="mr-2 text-[#FFC107] text-lg" />
+                  30 N Gould St Ste R<br />
+                  Sheridan, Wyoming, United States, 82801
+                </p>
+                <p className="text-base">Email: contact@accurusbill.com</p>
+              </div>
+              <div className="mt-4 flex justify-center md:justify-start space-x-4">
+                <Link
+                  href="/"
+                  className="text-white hover:text-[#FFC107] transition duration-300"
+                >
+                  Home
+                </Link>
+                <Link
+                  href="/about"
+                  className="text-white hover:text-[#FFC107] transition duration-300"
+                >
+                  About Us
+                </Link>
+                <Link
+                  href="/services"
+                  className="text-white hover:text-[#FFC107] transition duration-300"
+                >
+                  Services
+                </Link>
+                <Link
+                  href="/blog"
+                  className="text-white hover:text-[#FFC107] transition duration-300"
+                >
+                  Blog
+                </Link>
+                <Link
+                  href="/contact"
+                  className="text-white hover:text-[#FFC107] transition duration-300"
+                >
+                  Contact
+                </Link>
+              </div>
+            </div>
+
+            {/* Right Section: Social Media */}
+            <div className="text-center md:text-right bg-white/10 p-4 rounded-lg">
+              <h3 className="text-lg font-semibold mb-4">Follow Us</h3>
+              <div className="flex justify-center md:justify-end space-x-6">
+                <Link
+                  href="https://www.linkedin.com/company/accurusbill/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-white hover:text-[#FFC107] transition duration-300 transform hover:scale-110"
+                >
+                  <FaLinkedin className="text-4xl" />
+                  <span className="sr-only">LinkedIn</span>
+                </Link>
+                <Link
+                  href="https://twitter.com/explore"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-white hover:text-[#FFC107] transition duration-300 transform hover:scale-110"
+                >
+                  <FaTwitter className="text-4xl" />
+                  <span className="sr-only">Twitter</span>
+                </Link>
+              </div>
+            </div>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 }
