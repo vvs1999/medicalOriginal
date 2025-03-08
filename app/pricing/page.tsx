@@ -4,6 +4,7 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { Navbar } from "@/components/Navbar";
+import { FaMapMarkerAlt, FaLinkedin, FaTwitter } from "react-icons/fa";
 
 export default function PricingPage() {
   const pricingPlans = [
@@ -146,7 +147,7 @@ export default function PricingPage() {
                   30 N Gould St Ste R<br />
                   Sheridan, Wyoming, United States, 82801
                 </p>
-                <p className="text-base">Email: contact@accurusbill.com</p>
+                <p className="text-base">Email: info@AccurusBill.com</p>
               </div>
               <div className="mt-4 flex justify-center md:justify-start space-x-4">
                 <Link
