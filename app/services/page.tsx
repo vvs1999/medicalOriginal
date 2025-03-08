@@ -11,9 +11,10 @@ import {
   FaDatabase,
   FaIdCard,
   FaStar,
+  FaMapMarkerAlt,
+  FaLinkedin,
+  FaTwitter,
 } from "react-icons/fa";
-
-// Removed unused import: Image
 
 export default function ServicesPage() {
   const services = [
@@ -92,17 +93,14 @@ export default function ServicesPage() {
 
       <main className="flex-grow">
         {/* Hero Section (No Animations) */}
-        <section className="relative py-32 overflow-hidden bg-gradient-to-br from-[#6C5CE7]/20 to-[#F5F5FC] bg-[url('/images/service-bg-pattern.png')] bg-no-repeat bg-center bg-cover">
+        <section className="relative py-24 overflow-hidden bg-gradient-to-br from-[#6C5CE7]/20 to-[#F5F5FC] bg-[url('/images/service-bg-pattern.png')] bg-no-repeat bg-center bg-cover">
           <div className="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent opacity-30"></div>
           <div className="container mx-auto px-4 relative z-10 text-center">
             <h1 className="text-6xl font-extrabold text-[#3E37A1] mb-4 drop-shadow-md">
               Our Services
             </h1>
-            {/* Lines 93:15 and 93:69 - Fix unescaped double quotes */}
             <p className="text-2xl text-gray-700 max-w-3xl mx-auto">
-              &quot;Your Practice’s Shield Against Revenue Loss & Burnout&quot;
-              – We don’t just manage tasks—we fix broken workflows, defend your
-              revenue, and protect your time.
+              {'Your Practice’s Shield Against Revenue Loss & Burnout'} – We don’t just manage tasks—we fix broken workflows, defend your revenue, and protect your time.
             </p>
           </div>
         </section>
@@ -111,8 +109,7 @@ export default function ServicesPage() {
         <section className="py-20 bg-white">
           <div className="container mx-auto px-4">
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-12">
-              {services.map((service) => (
-                // Line 102:39 - Use _ instead of index since it's unused
+              {services.map((service, _) => (
                 <div
                   key={service.id}
                   className="bg-white p-8 rounded-xl shadow-lg border border-[#6C5CE7]/10 hover:shadow-xl transition duration-300"
