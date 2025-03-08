@@ -5,7 +5,7 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { Navbar } from "@/components/Navbar";
-// Removed framer-motion imports (LazyMotion, m otion, AnimatePresence) and react-icons (FaHeartbeat, FaCog, etc.) since they're no longer needed
+import { FaMapMarkerAlt, FaLinkedin, FaTwitter } from "react-icons/fa";
 
 export default function AboutPage() {
   const teamMembers = [
@@ -15,7 +15,7 @@ export default function AboutPage() {
       image: "/images/team/sandeep.jpg",
     },
     {
-      name: "Nitesh virothi",
+      name: "Nitesh Virothi",
       role: "CTO",
       image: "/images/team/Nitesh.jpg",
     },
@@ -24,7 +24,7 @@ export default function AboutPage() {
   const [activeTeamMember, setActiveTeamMember] = useState<number | null>(null);
 
   return (
-    <div className="min-h-screen bg-[#F5F5FC]">
+    <div className="min-h-screen bg-[#F5F5FC] flex flex-col">
       {/* Navbar with Prefetch */}
       <Navbar />
 
@@ -33,7 +33,6 @@ export default function AboutPage() {
         <div className="container mx-auto px-6 relative z-10 text-center">
           <h1 className="text-6xl font-extrabold text-[#3E37A1] mb-4 drop-shadow-md">
             About AccurusBill
-            <span className="block w-32 h-1 bg-gradient-to-r from-[#6C5CE7] to-[#3E37A1] mx-auto mt-3 rounded-full"></span>
           </h1>
           <p className="text-2xl text-gray-700 max-w-3xl mx-auto">
             Discover our story, mission, and team dedicated to transforming
@@ -165,7 +164,7 @@ export default function AboutPage() {
             technical expertise with relentless advocacy. Trusted by clinics
             nationwide, we’re your partners in reclaiming the joy of medicine.
           </p>
-          <div className="flex fex-wrap justify-center gap-8">
+          <div className="flex flex-wrap justify-center gap-8">
             {teamMembers.map((member, index) => (
               <div
                 key={index}
@@ -240,41 +239,81 @@ export default function AboutPage() {
       </section>
 
       {/* Footer */}
-      <footer className="bg-[#3E37A1] text-white py-12 mt-12">
-        <div className="container mx-auto px-6 text-center">
-          <p className="text-base">
-            © 2024 AccurusBill. Empowering Private Clinics with Comprehensive,
-            Cost-Effective Solutions
-          </p>
-          <p className="mt-2">Email: contact@accurusbill.com</p>
-          <div className="mt-4 space-x-4">
-            <Link href="/" prefetch={true} className="hover:text-[#FFC107]">
-              Home
-            </Link>
-            <Link
-              href="/about"
-              prefetch={true}
-              className="hover:text-[#FFC107]"
-            >
-              About Us
-            </Link>
-            <Link
-              href="/services"
-              prefetch={true}
-              className="hover:text-[#FFC107]"
-            >
-              Services
-            </Link>
-            <Link href="/blog" prefetch={true} className="hover:text-[#FFC107]">
-              Blog
-            </Link>
-            <Link
-              href="/contact"
-              prefetch={true}
-              className="hover:text-[#FFC107]"
-            >
-              Contact
-            </Link>
+      <footer className="bg-[#3E37A1] text-white py-12">
+        <div className="container mx-auto px-4">
+          <div className="flex flex-col md:flex-row justify-between items-start">
+            {/* Left Section: Copyright, Email, Address, and Navigation */}
+            <div className="mb-6 md:mb-0">
+              <p className="text-base text-center md:text-left">
+                © 2024 AccurusBill. Empowering Private Clinics with Comprehensive,
+                Cost-Effective Solutions
+              </p>
+              <div className="mt-4 space-y-2 text-center md:text-left">
+                <p className="text-base flex items-center justify-center md:justify-start">
+                  <FaMapMarkerAlt className="mr-2 text-[#FFC107] text-lg" />
+                  30 N Gould St Ste R<br />
+                  Sheridan, Wyoming, United States, 82801
+                </p>
+                <p className="text-base">Email: contact@accurusbill.com</p>
+              </div>
+              <div className="mt-4 flex justify-center md:justify-start space-x-4">
+                <Link
+                  href="/"
+                  className="text-white hover:text-[#FFC107] transition duration-300"
+                >
+                  Home
+                </Link>
+                <Link
+                  href="/about"
+                  className="text-white hover:text-[#FFC107] transition duration-300"
+                >
+                  About Us
+                </Link>
+                <Link
+                  href="/services"
+                  className="text-white hover:text-[#FFC107] transition duration-300"
+                >
+                  Services
+                </Link>
+                <Link
+                  href="/blog"
+                  className="text-white hover:text-[#FFC107] transition duration-300"
+                >
+                  Blog
+                </Link>
+                <Link
+                  href="/contact"
+                  className="text-white hover:text-[#FFC107] transition duration-300"
+                >
+                  Contact
+                </Link>
+              </div>
+            </div>
+
+            {/* Right Section: Social Media */}
+            <div className="text-center md:text-right bg-white/10 p-4 rounded-lg">
+              <h3 className="text-lg font-semibold mb-4">Follow Us</h3>
+              <div className="flex justify-center md:justify-end space-x-6">
+                <Link
+                  href="https://www.linkedin.com/company/accurusbill/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-white hover:text-[#FFC107] transition duration-300 transform hover:scale-110"
+                >
+                  <FaLinkedin className="text-4xl" />
+                  <span className="sr-only">LinkedIn</span>
+                </Link>
+                <Link
+                  href="https://twitter.com/explore"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-white hover:text-[#FFC107] transition duration-300 transform hover:scale-110"
+                >
+                  <FaTwitter className="text-4xl" />
+                  <span className="sr-only">Twitter</span>
+                </Link>
+              </div>
+            </div>
           </div>
         </div>
       </footer>
