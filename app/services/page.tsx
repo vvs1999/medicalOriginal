@@ -109,7 +109,7 @@ export default function ServicesPage() {
         <section className="py-20 bg-white">
           <div className="container mx-auto px-4">
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-12">
-              {services.map((service, _) => (
+              {services.map((service) => (
                 <div
                   key={service.id}
                   className="bg-white p-8 rounded-xl shadow-lg border border-[#6C5CE7]/10 hover:shadow-xl transition duration-300"
