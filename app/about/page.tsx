@@ -1,9 +1,7 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { useState } from "react";
 import { Navbar } from "@/components/Navbar";
 import { FaMapMarkerAlt, FaLinkedin, FaTwitter } from "react-icons/fa";
 
@@ -11,17 +9,11 @@ export default function AboutPage() {
   const teamMembers = [
     {
       name: "Sandeep Kumar G",
-      role: "Co Founder",
-      image: "/images/team/sandeep.jpg",
     },
     {
       name: "Nitesh Virothi",
-      role: "CTO",
-      image: "/images/team/Nitesh.jpg",
     },
   ];
-
-  const [activeTeamMember, setActiveTeamMember] = useState<number | null>(null);
 
   return (
     <div className="min-h-screen bg-[#F5F5FC] flex flex-col">
@@ -168,40 +160,11 @@ export default function AboutPage() {
             {teamMembers.map((member, index) => (
               <div
                 key={index}
-                className="bg-white p-6 rounded-xl shadow-md cursor-pointer transition-all duration-300 hover:shadow-lg"
-                onClick={() =>
-                  setActiveTeamMember(activeTeamMember === index ? null : index)
-                }
+                className="bg-white p-6 rounded-xl shadow-md transition duration-300 hover:shadow-lg"
               >
-                <Image
-                  src={member.image || "/placeholder.svg"}
-                  alt={member.name}
-                  width={160}
-                  height={160}
-                  loading="lazy" // Lazy-load images
-                  quality={80} // Optimize image quality
-                  className="rounded-full object-cover w-40 h-40 mx-auto border-4 border-[#6C5CE7] shadow-md"
-                  onError={({ currentTarget }) => {
-                    currentTarget.src = "/placeholder.svg";
-                  }} // Fallback for missing images
-                />
-                <h3 className="text-xl font-semibold text-[#3E37A1] text-center mt-4">
+                <h3 className="text-xl font-semibold text-[#3E37A1] text-center">
                   {member.name}
                 </h3>
-                <p className="text-gray-600 text-center">{member.role}</p>
-                {/* {activeTeamMember === index && (
-                  <div className="mt-4 text-left text-gray-700 text-sm">
-                    <p className="mb-2">
-                      <strong>Bio:</strong> {member.bio}
-                    </p>
-                    <p className="mb-2">
-                      <strong>Expertise:</strong> {member.expertise}
-                    </p>
-                    <p>
-                      <strong>Fun Fact:</strong> {member.funFact}
-                    </p>
-                  </div>
-                )} */}
               </div>
             ))}
           </div>
