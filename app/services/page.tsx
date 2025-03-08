@@ -181,7 +181,7 @@ export default function ServicesPage() {
                   30 N Gould St Ste R<br />
                   Sheridan, Wyoming, United States, 82801
                 </p>
-                <p className="text-base">Email: info@AccurusBill.com</p>
+                <p className="text-base">Email: contact@accurusbill.com</p>
               </div>
               <div className="mt-4 flex justify-center md:justify-start space-x-4">
                 <Link
