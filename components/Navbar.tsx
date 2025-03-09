@@ -8,7 +8,7 @@ import { useState, useEffect } from "react";
 export function Navbar() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const [dropdownOpen, setDropdownOpen] = useState(false); // New state for dropdown
+  const [dropdownOpen, setDropdownOpen] = useState(false); // State for dropdown
   const pathname = usePathname();
 
   useEffect(() => {
@@ -27,7 +27,6 @@ export function Navbar() {
         } backdrop-blur-md`}
       >
         <div className="container mx-auto flex h-20 items-center justify-between px-2 md:px-4">
-          {/* Logo Section */}
           <div className="flex items-center space-x-4">
             <Link
               href="/"
@@ -48,7 +47,6 @@ export function Navbar() {
             </Link>
           </div>
 
-          {/* Mobile Menu Button */}
           <button
             onClick={() => setOpen(!open)}
             className="md:hidden p-2 text-[#3E37A1] focus:outline-none focus:ring-2 focus:ring-[#6C5CE7] transition-transform duration-300 hover:scale-110"
@@ -57,7 +55,6 @@ export function Navbar() {
             <span className="text-3xl">☰</span>
           </button>
 
-          {/* Navigation Links */}
           <div
             className={`absolute md:static top-20 left-0 w-full md:w-auto bg-white/95 md:bg-transparent shadow-xl md:shadow-none transition-all duration-500 ease-in-out transform ${
               open
@@ -69,14 +66,15 @@ export function Navbar() {
               <NavLink href="/" text="Home" />
               <li className="md:inline-block text-center py-3 md:py-0 relative group">
                 <button
-                  onClick={() => setDropdownOpen(!dropdownOpen)} // Toggle dropdown on click
-                  className={`block px-4 py-2 text-gray-700 hover:text-[#3E37A1] hover:bg-[#F5F5FC]/50 rounded-md transition-all duration-300 ${
+                  onClick={() => setDropdownOpen(!dropdownOpen)}
+                  className={`block px-4 py-2 text-gray-700 hover:text-[#3E37A1] hover:bg-[#F5F5FC]/50 rounded-md transition-all duration-300 flex items-center justify-center md:justify-start ${
                     pathname === "/services" || pathname.startsWith("/services/")
                       ? "font-bold text-[#6C5CE7] border-b-2 border-[#6C5CE7] bg-[#F5F5FC]/70"
                       : ""
                   }`}
                 >
                   Services
+                  <span className="ml-2 text-sm">{dropdownOpen ? "▲" : "▼"}</span>
                 </button>
                 <div
                   className={`md:absolute top-full mt-2 ${
@@ -123,7 +121,6 @@ export function Navbar() {
             </ul>
           </div>
 
-          {/* Free Audit Button */}
           <div className="hidden md:block pr-2">
             <Link
               href="/contact"
