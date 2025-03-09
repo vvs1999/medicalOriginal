@@ -8,6 +8,7 @@ import { useState, useEffect } from "react";
 export function Navbar() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const pathname = usePathname(); // Move usePathname here, unconditionally
 
   // Handle scroll effect
   useEffect(() => {
@@ -69,7 +70,7 @@ export function Navbar() {
               <li className="md:inline-block text-center py-3 md:py-0 relative group">
                 <button
                   className={`block px-4 py-2 text-gray-700 hover:text-[#3E37A1] hover:bg-[#F5F5FC]/50 rounded-md transition-all duration-300 ${
-                    usePathname() === "/services" || usePathname().startsWith("/services/")
+                    pathname === "/services" || pathname.startsWith("/services/")
                       ? "font-bold text-[#6C5CE7] border-b-2 border-[#6C5CE7] bg-[#F5F5FC]/70"
                       : ""
                   }`}
@@ -81,26 +82,32 @@ export function Navbar() {
                     <NavDropdownLink
                       href="/services/medical-billing"
                       text="Medical Billing & Claims Submission"
+                      pathname={pathname}
                     />
                     <NavDropdownLink
                       href="/services/medical-coding"
                       text="Medical Coding (ICD-10-CA & CPT)"
+                      pathname={pathname}
                     />
                     <NavDropdownLink
                       href="/services/prior-authorization"
                       text="Prior Authorization & Insurance Verification"
+                      pathname={pathname}
                     />
                     <NavDropdownLink
                       href="/services/virtual-scribing"
                       text="Virtual Medical Scribing"
+                      pathname={pathname}
                     />
                     <NavDropdownLink
                       href="/services/medical-transcription"
                       text="Medical Transcription Services"
+                      pathname={pathname}
                     />
                     <NavDropdownLink
                       href="/services/physician-credentialing"
                       text="Physician Credentialing"
+                      pathname={pathname}
                     />
                   </ul>
                 </div>
@@ -146,8 +153,15 @@ function NavLink({ href, text }: { href: string; text: string }) {
   );
 }
 
-function NavDropdownLink({ href, text }: { href: string; text: string }) {
-  const pathname = usePathname();
+function NavDropdownLink({
+  href,
+  text,
+  pathname,
+}: {
+  href: string;
+  text: string;
+  pathname: string;
+}) {
   const isActive = pathname === href;
 
   return (
