@@ -60,7 +60,7 @@ export function Navbar() {
               open
                 ? "max-h-[100vh] opacity-100 translate-y-0"
                 : "max-h-0 opacity-0 -translate-y-4"
-            } md:max-h-none md:opacity-100 md:translate-y-0 overflow-hidden md:flex md:items-center md:space-x-8`}
+            } md:max-h-none md:opacity-100 md:translate-y-0 md:overflow-visible overflow-hidden md:flex md:items-center md:space-x-8`}
           >
             <ul className="flex flex-col md:flex-row md:space-x-8 text-center md:text-left p-4 md:p-0">
               <NavLink href="/" text="Home" />
@@ -68,6 +68,7 @@ export function Navbar() {
                 <button
                   onClick={(e) => {
                     e.preventDefault();
+                    console.log("Toggling dropdown:", !dropdownOpen); // Debug log
                     setDropdownOpen(!dropdownOpen);
                   }}
                   className={`block px-4 py-2 text-gray-700 hover:text-[#3E37A1] hover:bg-[#F5F5FC]/50 rounded-md transition-all duration-300 flex items-center justify-center md:justify-start ${
@@ -80,11 +81,11 @@ export function Navbar() {
                   <span className="ml-2 text-sm">{dropdownOpen ? "▲" : "▼"}</span>
                 </button>
                 <div
-                  className={`absolute top-full mt-2 ${
+                  className={`absolute left-0 top-full mt-2 ${
                     dropdownOpen ? "block" : "hidden"
-                  } bg-white/95 shadow-md rounded-md w-full md:w-auto z-50 transition-all duration-300`}
+                  } bg-white/95 shadow-md rounded-md w-full md:w-64 z-50 transition-all duration-300`}
                 >
-                  <ul className="flex flex-col md:flex-row md:space-x-4 py-2">
+                  <ul className="flex flex-col py-2">
                     <NavDropdownLink
                       href="/services/medical-billing"
                       text="Medical Billing & Claims Submission"
