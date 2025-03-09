@@ -66,7 +66,45 @@ export function Navbar() {
           >
             <ul className="flex flex-col md:flex-row md:space-x-8 text-center md:text-left p-4 md:p-0">
               <NavLink href="/" text="Home" />
-              <NavLink href="/services" text="Services" />
+              <li className="md:inline-block text-center py-3 md:py-0 relative group">
+                <button
+                  className={`block px-4 py-2 text-gray-700 hover:text-[#3E37A1] hover:bg-[#F5F5FC]/50 rounded-md transition-all duration-300 ${
+                    usePathname() === "/services" || usePathname().startsWith("/services/")
+                      ? "font-bold text-[#6C5CE7] border-b-2 border-[#6C5CE7] bg-[#F5F5FC]/70"
+                      : ""
+                  }`}
+                >
+                  Services
+                </button>
+                <div className="absolute top-full mt-2 hidden group-hover:block bg-white/95 md:bg-transparent shadow-md md:shadow-none rounded-md md:rounded-none w-full md:w-auto z-10">
+                  <ul className="flex flex-col md:flex-row md:space-x-4 py-2 md:py-0">
+                    <NavDropdownLink
+                      href="/services/medical-billing"
+                      text="Medical Billing & Claims Submission"
+                    />
+                    <NavDropdownLink
+                      href="/services/medical-coding"
+                      text="Medical Coding (ICD-10-CA & CPT)"
+                    />
+                    <NavDropdownLink
+                      href="/services/prior-authorization"
+                      text="Prior Authorization & Insurance Verification"
+                    />
+                    <NavDropdownLink
+                      href="/services/virtual-scribing"
+                      text="Virtual Medical Scribing"
+                    />
+                    <NavDropdownLink
+                      href="/services/medical-transcription"
+                      text="Medical Transcription Services"
+                    />
+                    <NavDropdownLink
+                      href="/services/physician-credentialing"
+                      text="Physician Credentialing"
+                    />
+                  </ul>
+                </div>
+              </li>
               <NavLink href="/pricing" text="Pricing" />
               <NavLink href="/about" text="About" />
               <NavLink href="/contact" text="Contact" />
@@ -94,6 +132,26 @@ function NavLink({ href, text }: { href: string; text: string }) {
 
   return (
     <li className="md:inline-block text-center py-3 md:py-0">
+      <Link
+        href={href}
+        className={`block px-4 py-2 text-gray-700 hover:text-[#3E37A1] hover:bg-[#F5F5FC]/50 rounded-md transition-all duration-300 ${
+          isActive
+            ? "font-bold text-[#6C5CE7] border-b-2 border-[#6C5CE7] bg-[#F5F5FC]/70"
+            : ""
+        }`}
+      >
+        {text}
+      </Link>
+    </li>
+  );
+}
+
+function NavDropdownLink({ href, text }: { href: string; text: string }) {
+  const pathname = usePathname();
+  const isActive = pathname === href;
+
+  return (
+    <li className="md:inline-block text-center">
       <Link
         href={href}
         className={`block px-4 py-2 text-gray-700 hover:text-[#3E37A1] hover:bg-[#F5F5FC]/50 rounded-md transition-all duration-300 ${
