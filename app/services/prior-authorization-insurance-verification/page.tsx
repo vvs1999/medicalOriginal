@@ -407,7 +407,7 @@ export default function PriorAuthorizationPage() {
                             How We Handle It
                           </h5>
                           <p className="text-gray-700 ml-9">
-                            AccurusBill updates you regularly—via quick summaries or weekly reports—highlighting each pending request’s status, next steps, and any payer communication. You remain informed without chasing payers yourself.
+                            AccurusBill updates you regularly—via quick summaries or weekly reports—highlighting each pending request&#39;s status, next steps, and any payer communication. You remain informed without chasing payers yourself.
                           </p>
                         </div>
                       </div>
@@ -480,7 +480,7 @@ export default function PriorAuthorizationPage() {
               Partner with AccurusBill for Seamless Authorizations
             </h2>
             <p className="text-lg md:text-xl text-gray-700 max-w-3xl mx-auto">
-              With AccurusBill’s Prior Authorization & Insurance Verification services, you gain a partner dedicated to eliminating delays and ensuring coverage. Our proactive process—early detection, prompt submissions, and relentless follow-up—keeps your treatments on schedule and your revenue secure, allowing you to prioritize patient care.
+              With AccurusBill&#39;s Prior Authorization & Insurance Verification services, you gain a partner dedicated to eliminating delays and ensuring coverage. Our proactive process—early detection, prompt submissions, and relentless follow-up—keeps your treatments on schedule and your revenue secure, allowing you to prioritize patient care.
             </p>
           </div>
         </section>
