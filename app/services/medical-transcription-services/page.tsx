@@ -4,13 +4,12 @@ import { Button } from "@/components/ui/button";
 import {
   FaCheckCircle,
   FaMicrophone,
-  FaFileAlt,
   FaLock,
-  FaLinkedin, // Added for social media
-  FaTwitter, // Added for social media
-  FaMapMarkerAlt,
   FaUserNurse,
   FaExclamationTriangle,
+  FaMapMarkerAlt,
+  FaLinkedin,
+  FaTwitter,
 } from "react-icons/fa";
 
 export const metadata = {
@@ -51,7 +50,7 @@ export default function MedicalTranscriptionPage() {
               Transform Voice into Actionable Records
             </h2>
             <p className="text-base md:text-lg text-gray-700 max-w-3xl mx-auto">
-              AccurusBill’s medical transcription services deliver fast, accurate, and secure transcriptions directly into your EHR. With a focus on specialty-aligned formatting and compliance, we free up your team to prioritize patient care.
+              AccurusBill's medical transcription services deliver fast, accurate, and secure transcriptions directly into your EHR. With a focus on specialty-aligned formatting and compliance, we free up your team to prioritize patient care.
             </p>
           </div>
         </section>
@@ -128,7 +127,7 @@ export default function MedicalTranscriptionPage() {
                             How We Handle It
                           </h5>
                           <p className="text-gray-700 ml-9">
-                            Our trained transcriptionists turn around most dictations within 4 hours—often sooner—so your documentation remains current and ready for immediate use.
+                            Our trained transcriptionists turn around most dictations within 4 hours-often sooner-so your documentation remains current and ready for immediate use.
                           </p>
                         </div>
                       </div>
@@ -141,7 +140,7 @@ export default function MedicalTranscriptionPage() {
               <div className="flex flex-col md:flex-row items-start bg-[#F5F5FC] rounded-lg shadow-lg p-6 hover:shadow-xl transition-all duration-300">
                 <div className="flex-shrink-0 mb-4 md:mb-0 md:mr-8">
                   <div className="bg-[#6C5CE7]/10 p-4 rounded-full">
-                    <FaFileAlt className="text-3xl text-[#6C5CE7]" />
+                    <FaMicrophone className="text-3xl text-[#6C5CE7]" />
                   </div>
                 </div>
                 <div className="flex-1">
@@ -173,7 +172,7 @@ export default function MedicalTranscriptionPage() {
                             How We Handle It
                           </h5>
                           <p className="text-gray-700 ml-9">
-                            We tailor each transcription to your specialty’s preferred structure, ensuring vital data—like patient history, exam findings, or recommended treatments—appears in the right headings for easy reference.
+                            We tailor each transcription to your specialty's preferred structure, ensuring vital data-like patient history, exam findings, or recommended treatments-appears in the right headings for easy reference.
                           </p>
                         </div>
                       </div>
@@ -215,7 +214,7 @@ export default function MedicalTranscriptionPage() {
               <div className="flex flex-col md:flex-row items-start bg-[#F5F5FC] rounded-lg shadow-lg p-6 hover:shadow-xl transition-all duration-300">
                 <div className="flex-shrink-0 mb-4 md:mb-0 md:mr-8">
                   <div className="bg-[#6C5CE7]/10 p-4 rounded-full">
-                    <FaFileAlt className="text-3xl text-[#6C5CE7]" />
+                    <FaMicrophone className="text-3xl text-[#6C5CE7]" />
                   </div>
                 </div>
                 <div className="flex-1">
@@ -247,7 +246,7 @@ export default function MedicalTranscriptionPage() {
                             How We Handle It
                           </h5>
                           <p className="text-gray-700 ml-9">
-                            Once transcription is complete, we upload documents directly into your EHR—structured as needed and often timestamped for clarity. This eliminates double data entry and ensures quick availability of finalized notes.
+                            Once transcription is complete, we upload documents directly into your EHR-structured as needed and often timestamped for clarity. This eliminates double data entry and ensures quick availability of finalized notes.
                           </p>
                         </div>
                       </div>
@@ -321,7 +320,7 @@ export default function MedicalTranscriptionPage() {
                             How We Handle It
                           </h5>
                           <p className="text-gray-700 ml-9">
-                            Our entire workflow—dictation capture, file storage, transcription, and EHR upload—follows HIPAA guidelines. Access is restricted by role, and all data is encrypted in transit and at rest.
+                            Our entire workflow-dictation capture, file storage, transcription, and EHR upload-follows HIPAA guidelines. Access is restricted by role, and all data is encrypted in transit and at rest.
                           </p>
                         </div>
                       </div>
@@ -442,7 +441,7 @@ export default function MedicalTranscriptionPage() {
                             Challenge
                           </h5>
                           <p className="text-gray-700 ml-9">
-                            If consult notes or discharge summaries aren’t clear, patients might misunderstand follow-up instructions.
+                            If consult notes or discharge summaries aren't clear, patients might misunderstand follow-up instructions.
                           </p>
                         </div>
                         <div>
@@ -480,16 +479,16 @@ export default function MedicalTranscriptionPage() {
                     "Swift transcriptions keep records up to date, supporting timely billing and better continuity of care.",
                 },
                 {
-                  icon: <FaFileAlt className="text-4xl text-[#6C5CE7] mx-auto" />,
+                  icon: <FaMicrophone className="text-4xl text-[#6C5CE7] mx-auto" />,
                   title: "Specialty-Customized Formats",
                   description:
-                    "We adapt each transcript to match your practice’s note structure, from SOAP to operative reports.",
+                    "We adapt each transcript to match your practice's note structure, from SOAP to operative reports.",
                 },
                 {
-                  icon: <FaFileAlt className="text-4xl text-[#6C5CE7] mx-auto" />,
+                  icon: <FaMicrophone className="text-4xl text-[#6C5CE7] mx-auto" />,
                   title: "Seamless EHR Upload",
                   description:
-                    "No more manual copying—notes arrive ready for sign-off and integrated into your digital records.",
+                    "No more manual copying-notes arrive ready for sign-off and integrated into your digital records.",
                 },
                 {
                   icon: <FaLock className="text-4xl text-[#6C5CE7] mx-auto" />,
@@ -526,7 +525,7 @@ export default function MedicalTranscriptionPage() {
               Precision Transcription for Better Care
             </h2>
             <p className="text-lg md:text-xl text-gray-700 max-w-3xl mx-auto">
-              With AccurusBill’s Medical Transcription Services, you turn voice recordings into precise, professionally formatted EHR entries—all while safeguarding patient data and meeting compliance requirements. Our fast turnaround, secure workflow, and specialty-aligned approach ensure that critical details are never lost in translation, letting your providers devote more time to quality patient care and operational efficiency.
+              With AccurusBill's Medical Transcription Services, you turn voice recordings into precise, professionally formatted EHR entries-all while safeguarding patient data and meeting compliance requirements. Our fast turnaround, secure workflow, and specialty-aligned approach ensure that critical details are never lost in translation, letting your providers devote more time to quality patient care and operational efficiency.
             </p>
           </div>
         </section>
@@ -553,83 +552,83 @@ export default function MedicalTranscriptionPage() {
 
       {/* Footer */}
       <footer className="bg-[#3E37A1] text-white py-12">
-              <div className="container mx-auto px-4">
-                <div className="flex flex-col md:flex-row justify-between items-start">
-                  {/* Left Section: Copyright, Email, Address, and Navigation */}
-                  <div className="mb-6 md:mb-0">
-                    <p className="text-base text-center md:text-left">
-                      © 2024 AccurusBill. Empowering Private Clinics with Comprehensive,
-                      Cost-Effective Solutions
-                    </p>
-                    <div className="mt-4 space-y-2 text-center md:text-left">
-                      <p className="text-base flex items-center justify-center md:justify-start">
-                        <FaMapMarkerAlt className="mr-2 text-[#FFC107] text-lg" />
-                        108 W 39th Street Ste 1006PMB2018<br />
-                        New York, NY 10018 United States
-                      </p>
-                      <p className="text-base">Email: contact@accurusbill.com</p>
-                    </div>
-                    <div className="mt-4 flex justify-center md:justify-start space-x-4">
-                      <Link
-                        href="/"
-                        className="text-white hover:text-[#FFC107] transition duration-300"
-                      >
-                        Home
-                      </Link>
-                      <Link
-                        href="/about"
-                        className="text-white hover:text-[#FFC107] transition duration-300"
-                      >
-                        About Us
-                      </Link>
-                      <Link
-                        href="/services"
-                        className="text-white hover:text-[#FFC107] transition duration-300"
-                      >
-                        Services
-                      </Link>
-                      <Link
-                        href="/blog"
-                        className="text-white hover:text-[#FFC107] transition duration-300"
-                      >
-                        Blog
-                      </Link>
-                      <Link
-                        href="/contact"
-                        className="text-white hover:text-[#FFC107] transition duration-300"
-                      >
-                        Contact
-                      </Link>
-                    </div>
-                  </div>
-      
-                  {/* Right Section: Social Media */}
-                  <div className="text-center md:text-right bg-white/10 p-4 rounded-lg">
-                    <h3 className="text-lg font-semibold mb-4">Follow Us</h3>
-                    <div className="flex justify-center md:justify-end space-x-6">
-                      <Link
-                        href="https://www.linkedin.com/company/accurusbill/"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-white hover:text-[#FFC107] transition duration-300 transform hover:scale-110"
-                      >
-                        <FaLinkedin className="text-4xl" />
-                        <span className="sr-only">LinkedIn</span>
-                      </Link>
-                      <Link
-                        href="https://twitter.com/explore"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-white hover:text-[#FFC107] transition duration-300 transform hover:scale-110"
-                      >
-                        <FaTwitter className="text-4xl" />
-                        <span className="sr-only">Twitter</span>
-                      </Link>
-                    </div>
-                  </div>
-                </div>
+        <div className="container mx-auto px-4">
+          <div className="flex flex-col md:flex-row justify-between items-start">
+            {/* Left Section: Copyright, Email, Address, and Navigation */}
+            <div className="mb-6 md:mb-0">
+              <p className="text-base text-center md:text-left">
+                © 2024 AccurusBill. Empowering Private Clinics with Comprehensive,
+                Cost-Effective Solutions
+              </p>
+              <div className="mt-4 space-y-2 text-center md:text-left">
+                <p className="text-base flex items-center justify-center md:justify-start">
+                  <FaMapMarkerAlt className="mr-2 text-[#FFC107] text-lg" />
+                  108 W 39th Street Ste 1006PMB2018<br />
+                  New York, NY 10018 United States
+                </p>
+                <p className="text-base">Email: contact@accurusbill.com</p>
               </div>
-            </footer>
+              <div className="mt-4 flex justify-center md:justify-start space-x-4">
+                <Link
+                  href="/"
+                  className="text-white hover:text-[#FFC107] transition duration-300"
+                >
+                  Home
+                </Link>
+                <Link
+                  href="/about"
+                  className="text-white hover:text-[#FFC107] transition duration-300"
+                >
+                  About Us
+                </Link>
+                <Link
+                  href="/services"
+                  className="text-white hover:text-[#FFC107] transition duration-300"
+                >
+                  Services
+                </Link>
+                <Link
+                  href="/blog"
+                  className="text-white hover:text-[#FFC107] transition duration-300"
+                >
+                  Blog
+                </Link>
+                <Link
+                  href="/contact"
+                  className="text-white hover:text-[#FFC107] transition duration-300"
+                >
+                  Contact
+                </Link>
+              </div>
+            </div>
+
+            {/* Right Section: Social Media */}
+            <div className="text-center md:text-right bg-white/10 p-4 rounded-lg">
+              <h3 className="text-lg font-semibold mb-4">Follow Us</h3>
+              <div className="flex justify-center md:justify-end space-x-6">
+                <Link
+                  href="https://www.linkedin.com/company/accurusbill/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-white hover:text-[#FFC107] transition duration-300 transform hover:scale-110"
+                >
+                  <FaLinkedin className="text-4xl" />
+                  <span className="sr-only">LinkedIn</span>
+                </Link>
+                <Link
+                  href="https://twitter.com/explore"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-white hover:text-[#FFC107] transition duration-300 transform hover:scale-110"
+                >
+                  <FaTwitter className="text-4xl" />
+                  <span className="sr-only">Twitter</span>
+                </Link>
+              </div>
+            </div>
           </div>
-        );
-      }
+        </div>
+      </footer>
+    </div>
+  );
+}
