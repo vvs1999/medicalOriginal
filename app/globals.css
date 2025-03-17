@@ -70,3 +70,10 @@ body {
     @apply bg-background text-foreground;
   }
 }
+
+/* Add custom styles for the dashed line */
+.dashed-line {
+  background-image: linear-gradient(to bottom, #D1D5DB 50%, transparent 50%);
+  background-size: 1px 8px;
+  background-repeat: repeat-y;
+}

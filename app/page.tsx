@@ -170,6 +170,16 @@ export default function HomePage() {
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
               {[
                 {
+                  title: "End-to-End Revenue Cycle Management (RCM)",
+                  description:
+                    "Comprehensive management from encounter to payment for optimal cash flow.",
+                },
+                {
+                  title: "Prior Authorization & Insurance Verification",
+                  description:
+                    "Eliminate delays with seamless insurance approvals.",
+                },
+                {
                   title: "Medical Billing & Claims Submission",
                   description:
                     "Streamline billing processes and reduce claim denials for faster reimbursements.",
@@ -178,11 +188,6 @@ export default function HomePage() {
                   title: "Medical Coding (ICD-10, CPT)",
                   description:
                     "Ensure accurate coding to maximize revenue and avoid compliance risks.",
-                },
-                {
-                  title: "Prior Authorization & Insurance Verification",
-                  description:
-                    "Eliminate delays with seamless insurance approvals.",
                 },
                 {
                   title: "Virtual Medical Scribing",
@@ -215,9 +220,12 @@ export default function HomePage() {
                     {service.description}
                   </p>
                   <Link
-                    href={`/services#${service.title
+                    href={`/services/${service.title
                       .toLowerCase()
-                      .replace(/ /g, "-")}`}
+                      .replace(/ & /g, "-")
+                      .replace(/\(.*?\)/g, "")
+                      .replace(/ /g, "-")
+                      .replace(/-+$/, "")}`}
                     className="text-base font-semibold text-[#FFC107] hover:underline"
                   >
                     Learn more →
@@ -467,7 +475,6 @@ export default function HomePage() {
                   <h3 className="text-lg font-semibold text-[#3E37A1]">
                     {client.name}
                   </h3>
-                  {/* Fixed unescaped double quotes by using single quotes */}
                   <p className="text-base text-[#263238]">{`'${client.feedback}'`}</p>
                 </motion.div>
               ))}
@@ -478,7 +485,6 @@ export default function HomePage() {
         {/* Call to Action */}
         <section className="py-20 bg-gradient-to-r from-[#6C5CE7] to-[#5A50DA] text-white text-center">
           <div className="container mx-auto px-4">
-            {/* Fixed unescaped double quotes by using single quotes */}
             <h2 className="text-4xl font-bold mb-6">
               {'Reclaim Time for Patient Care - Let Us Optimize Your Revenue Cycle'}
             </h2>
@@ -506,8 +512,8 @@ export default function HomePage() {
               <div className="mt-4 space-y-2 text-center md:text-left">
                 <p className="text-base flex items-center justify-center md:justify-start">
                   <FaMapMarkerAlt className="mr-2 text-[#FFC107] text-lg" />
-                  30 N Gould St Ste R<br />
-                  Sheridan, Wyoming, United States, 82801
+                  108 W 39th Street Ste 1006PMB2018<br />
+                  New York, NY 10018 United States
                 </p>
                 <p className="text-base">Email: contact@accurusbill.com</p>
               </div>

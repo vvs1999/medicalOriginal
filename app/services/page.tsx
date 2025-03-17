@@ -19,6 +19,28 @@ import {
 export default function ServicesPage() {
   const services = [
     {
+      id: "end-to-end-rcm",
+      title: "End-to-End Revenue Cycle Management (RCM)",
+      description: "From First Encounter to Final Payment: Seamless Cash Flow",
+      steps: [
+        "Patient registration with verified demographics.",
+        "Claim submission and payment posting within 24 hours.",
+        "Denial management with proactive resolution strategies.",
+      ],
+      icon: <FaFileInvoiceDollar className="text-[#6C5CE7] text-4xl" />,
+    },
+    {
+      id: "prior-authorization",
+      title: "Prior Authorization & Insurance Verification",
+      description: "Stop Delays. Start Treating.",
+      steps: [
+        "Flag treatments needing approval during scheduling.",
+        "Submit prior authorizations with clinical evidence on the same day.",
+        "Escalate stalled requests directly to payer medical directors.",
+      ],
+      icon: <FaUserMd className="text-[#3E37A1] text-4xl" />,
+    },
+    {
       id: "medical-billing",
       title: "Medical Billing & Claims Submission",
       description: "From Charge to Cash: Zero Denials, Zero Stress",
@@ -39,17 +61,6 @@ export default function ServicesPage() {
         "Monthly reports demonstrate the coding impact on your revenue.",
       ],
       icon: <FaClipboardCheck className="text-[#00C4CC] text-4xl" />,
-    },
-    {
-      id: "prior-authorization",
-      title: "Prior Authorization & Insurance Verification",
-      description: "Stop Delays. Start Treating.",
-      steps: [
-        "Flag treatments needing approval during scheduling.",
-        "Submit prior authorizations with clinical evidence on the same day.",
-        "Escalate stalled requests directly to payer medical directors.",
-      ],
-      icon: <FaUserMd className="text-[#3E37A1] text-4xl" />,
     },
     {
       id: "medical-scribing",
@@ -178,8 +189,8 @@ export default function ServicesPage() {
               <div className="mt-4 space-y-2 text-center md:text-left">
                 <p className="text-base flex items-center justify-center md:justify-start">
                   <FaMapMarkerAlt className="mr-2 text-[#FFC107] text-lg" />
-                  30 N Gould St Ste R<br />
-                  Sheridan, Wyoming, United States, 82801
+                  108 W 39th Street Ste 1006PMB2018<br />
+                  New York, NY 10018 United States
                 </p>
                 <p className="text-base">Email: contact@accurusbill.com</p>
               </div>
