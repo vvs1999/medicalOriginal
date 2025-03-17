@@ -3,20 +3,22 @@ import { Navbar } from "@/components/Navbar";
 import { Button } from "@/components/ui/button";
 import {
   FaCheckCircle,
-  FaFileInvoiceDollar,
-  FaExclamationTriangle,
-  FaMapMarkerAlt,
+  FaShieldAlt,
+  FaFileAlt,
+  FaClock,
   FaLinkedin,
   FaTwitter,
+  FaMapMarkerAlt,
+  FaExclamationTriangle,
 } from "react-icons/fa";
 
 export const metadata = {
   title: "Prior Authorization & Insurance Verification - AccurusBill",
   description:
-    "Simplify prior authorizations and insurance verification with AccurusBill. Reduce delays and ensure accurate claims processing.",
+    "Streamline prior authorization and insurance verification with AccurusBill. Minimize delays, ensure coverage, and enhance patient care with our proactive solutions.",
 };
 
-export default function PriorAuthorizationInsuranceVerificationPage() {
+export default function PriorAuthorizationPage() {
   return (
     <div className="min-h-screen bg-[#F5F5FC] flex flex-col">
       <Navbar />
@@ -29,7 +31,7 @@ export default function PriorAuthorizationInsuranceVerificationPage() {
               Prior Authorization & Insurance Verification
             </h1>
             <p className="text-lg md:text-xl max-w-2xl mx-auto mb-8">
-              <span className="font-semibold">"Clear Paths to Payment."</span>
+              <span className="font-semibold">"Stop Delays. Start Treating."</span>
             </p>
             <Button
               asChild
@@ -45,10 +47,10 @@ export default function PriorAuthorizationInsuranceVerificationPage() {
         <section className="py-16 bg-[#F5F5FC]">
           <div className="container mx-auto px-4 text-center">
             <h2 className="text-3xl md:text-4xl font-bold text-[#3E37A1] mb-6">
-              Streamline Authorizations and Verifications
+              Optimize Your Authorization Process
             </h2>
             <p className="text-base md:text-lg text-gray-700 max-w-3xl mx-auto">
-              AccurusBill handles prior authorizations and insurance verification with precision, reducing delays and ensuring your claims are processed smoothly and accurately.
+              AccurusBill ensures seamless prior authorization and insurance verification, reducing treatment delays and claim denials. Our proactive approach lets you focus on patient care while we handle the complexities of payer requirements.
             </p>
           </div>
         </section>
@@ -60,21 +62,21 @@ export default function PriorAuthorizationInsuranceVerificationPage() {
               Our Prior Authorization & Verification Process
             </h2>
             <div className="space-y-12">
-              {/* 1. Efficient Authorization Handling */}
+              {/* 1. Identifying Approval Needs & Verifying Coverage Up Front */}
               <div className="flex flex-col md:flex-row items-start bg-[#F5F5FC] rounded-lg shadow-lg p-6 hover:shadow-xl transition-all duration-300">
                 <div className="flex-shrink-0 mb-4 md:mb-0 md:mr-8">
                   <div className="bg-[#6C5CE7]/10 p-4 rounded-full">
-                    <FaFileInvoiceDollar className="text-3xl text-[#6C5CE7]" />
+                    <FaShieldAlt className="text-3xl text-[#6C5CE7]" />
                   </div>
                 </div>
                 <div className="flex-1">
                   <h3 className="text-2xl font-semibold text-[#3E37A1] mb-6 border-l-4 border-[#6C5CE7]/50 pl-4">
-                    Efficient Authorization Handling
+                    Identifying Approval Needs & Verifying Coverage Up Front
                   </h3>
                   <div className="space-y-8">
                     <div>
                       <h4 className="text-xl font-medium text-[#3E37A1] mb-4 border-l-2 border-[#6C5CE7]/30 pl-3">
-                        Timely Authorization Requests
+                        Early Detection of Prior Auth Requirements
                       </h4>
                       <div className="space-y-4 pl-6">
                         <div>
@@ -85,7 +87,7 @@ export default function PriorAuthorizationInsuranceVerificationPage() {
                             Challenge
                           </h5>
                           <p className="text-gray-700 ml-9">
-                            Delayed authorizations can halt patient treatments.
+                            Missing or late prior authorization requests often lead to treatment delays, unhappy patients, and potential claim denials.
                           </p>
                         </div>
                         <div>
@@ -96,14 +98,14 @@ export default function PriorAuthorizationInsuranceVerificationPage() {
                             How We Handle It
                           </h5>
                           <p className="text-gray-700 ml-9">
-                            We submit authorization requests promptly with all required documentation.
+                            During scheduling or pre-visit confirmation, AccurusBill reviews each procedure or service against known payer rules. By flagging approval needs right away, we help you avoid last-minute surprises and keep your schedule running smoothly.
                           </p>
                         </div>
                       </div>
                     </div>
                     <div>
                       <h4 className="text-xl font-medium text-[#3E37A1] mb-4 border-l-2 border-[#6C5CE7]/30 pl-3">
-                        Follow-Up on Pending Approvals
+                        Accurate Insurance Verification
                       </h4>
                       <div className="space-y-4 pl-6">
                         <div>
@@ -114,7 +116,7 @@ export default function PriorAuthorizationInsuranceVerificationPage() {
                             Challenge
                           </h5>
                           <p className="text-gray-700 ml-9">
-                            Untracked requests can lead to missed opportunities.
+                            Patients may arrive with outdated insurance info, or their plan might have restrictions that staff only discovers at the last minute.
                           </p>
                         </div>
                         <div>
@@ -125,7 +127,7 @@ export default function PriorAuthorizationInsuranceVerificationPage() {
                             How We Handle It
                           </h5>
                           <p className="text-gray-700 ml-9">
-                            We actively follow up on pending authorizations to ensure timely approvals.
+                            Our team verifies insurance details before the appointment date—checking eligibility, plan coverage, and any co-pay/deductible obligations. This front-end clarity helps reduce rejections and speeds up the path to reimbursement.
                           </p>
                         </div>
                       </div>
@@ -134,21 +136,21 @@ export default function PriorAuthorizationInsuranceVerificationPage() {
                 </div>
               </div>
 
-              {/* 2. Insurance Verification */}
+              {/* 2. Prompt Submission of Prior Authorization Requests */}
               <div className="flex flex-col md:flex-row items-start bg-[#F5F5FC] rounded-lg shadow-lg p-6 hover:shadow-xl transition-all duration-300">
                 <div className="flex-shrink-0 mb-4 md:mb-0 md:mr-8">
                   <div className="bg-[#6C5CE7]/10 p-4 rounded-full">
-                    <FaFileInvoiceDollar className="text-3xl text-[#6C5CE7]" />
+                    <FaFileAlt className="text-3xl text-[#6C5CE7]" />
                   </div>
                 </div>
                 <div className="flex-1">
                   <h3 className="text-2xl font-semibold text-[#3E37A1] mb-6 border-l-4 border-[#6C5CE7]/50 pl-4">
-                    Insurance Verification
+                    Prompt Submission of Prior Authorization Requests
                   </h3>
                   <div className="space-y-8">
                     <div>
                       <h4 className="text-xl font-medium text-[#3E37A1] mb-4 border-l-2 border-[#6C5CE7]/30 pl-3">
-                        Pre-Visit Eligibility Checks
+                        Complete Documentation, Same-Day Submission
                       </h4>
                       <div className="space-y-4 pl-6">
                         <div>
@@ -159,7 +161,7 @@ export default function PriorAuthorizationInsuranceVerificationPage() {
                             Challenge
                           </h5>
                           <p className="text-gray-700 ml-9">
-                            Unverified coverage can lead to unpaid claims.
+                            Incomplete clinical evidence or missing diagnosis details can stall approvals, pushing back essential treatments.
                           </p>
                         </div>
                         <div>
@@ -170,14 +172,14 @@ export default function PriorAuthorizationInsuranceVerificationPage() {
                             How We Handle It
                           </h5>
                           <p className="text-gray-700 ml-9">
-                            We verify insurance eligibility before visits to avoid surprises.
+                            Once we confirm that a service requires prior authorization, we compile the necessary clinical data from your EHR (progress notes, imaging reports, etc.) and submit the request the same day whenever possible. Our goal is to provide payers with a clear, accurate narrative of medical necessity to minimize back-and-forth.
                           </p>
                         </div>
                       </div>
                     </div>
                     <div>
                       <h4 className="text-xl font-medium text-[#3E37A1] mb-4 border-l-2 border-[#6C5CE7]/30 pl-3">
-                        Coverage Detail Confirmation
+                        Customized Checklists & Payer Guidelines
                       </h4>
                       <div className="space-y-4 pl-6">
                         <div>
@@ -188,7 +190,7 @@ export default function PriorAuthorizationInsuranceVerificationPage() {
                             Challenge
                           </h5>
                           <p className="text-gray-700 ml-9">
-                            Misunderstanding coverage can delay claims.
+                            Each insurer can have unique forms or medical policy criteria. Submitting a generic request can lead to immediate denials or repeated clarifications.
                           </p>
                         </div>
                         <div>
@@ -199,7 +201,213 @@ export default function PriorAuthorizationInsuranceVerificationPage() {
                             How We Handle It
                           </h5>
                           <p className="text-gray-700 ml-9">
-                            We confirm coverage details, including co-pays and deductibles, with insurers.
+                            AccurusBill maintains checklists aligned with major payers, ensuring we include all required details (e.g., specific CPT codes, ICD-10 diagnoses, prior treatments tried) for each request. This thoroughness reduces re-submissions and shortens approval times.
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* 3. Active Follow-Up & Escalation of Stalled Requests */}
+              <div className="flex flex-col md:flex-row items-start bg-[#F5F5FC] rounded-lg shadow-lg p-6 hover:shadow-xl transition-all duration-300">
+                <div className="flex-shrink-0 mb-4 md:mb-0 md:mr-8">
+                  <div className="bg-[#6C5CE7]/10 p-4 rounded-full">
+                    <FaClock className="text-3xl text-[#6C5CE7]" />
+                  </div>
+                </div>
+                <div className="flex-1">
+                  <h3 className="text-2xl font-semibold text-[#3E37A1] mb-6 border-l-4 border-[#6C5CE7]/50 pl-4">
+                    Active Follow-Up & Escalation of Stalled Requests
+                  </h3>
+                  <div className="space-y-8">
+                    <div>
+                      <h4 className="text-xl font-medium text-[#3E37A1] mb-4 border-l-2 border-[#6C5CE7]/30 pl-3">
+                        Daily Status Tracking
+                      </h4>
+                      <div className="space-y-4 pl-6">
+                        <div>
+                          <h5 className="text-lg font-medium text-[#6C5CE7] flex items-center mb-2">
+                            <span className="mr-3 bg-[#6C5CE7]/20 p-2 rounded-full">
+                              <FaExclamationTriangle className="text-[#6C5CE7]" />
+                            </span>
+                            Challenge
+                          </h5>
+                          <p className="text-gray-700 ml-9">
+                            Payers can delay decisions by requesting additional documentation or simply moving slowly, leaving providers guessing about request status.
+                          </p>
+                        </div>
+                        <div>
+                          <h5 className="text-lg font-medium text-[#3E37A1] flex items-center mb-2">
+                            <span className="mr-3 bg-[#3E37A1]/20 p-2 rounded-full">
+                              <FaCheckCircle className="text-[#3E37A1]" />
+                            </span>
+                            How We Handle It
+                          </h5>
+                          <p className="text-gray-700 ml-9">
+                            Our team monitors all pending prior authorizations daily, checking payer portals or calling insurer reps to ensure no request sits idle. This vigilance lets us respond quickly if payers ask for more information.
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                    <div>
+                      <h4 className="text-xl font-medium text-[#3E37A1] mb-4 border-l-2 border-[#6C5CE7]/30 pl-3">
+                        Direct Communication with Payer Medical Directors
+                      </h4>
+                      <div className="space-y-4 pl-6">
+                        <div>
+                          <h5 className="text-lg font-medium text-[#6C5CE7] flex items-center mb-2">
+                            <span className="mr-3 bg-[#6C5CE7]/20 p-2 rounded-full">
+                              <FaExclamationTriangle className="text-[#6C5CE7]" />
+                            </span>
+                            Challenge
+                          </h5>
+                          <p className="text-gray-700 ml-9">
+                            When requests stall or get denied for questionable reasons, front-line payer reps can’t always expedite the process.
+                          </p>
+                        </div>
+                        <div>
+                          <h5 className="text-lg font-medium text-[#3E37A1] flex items-center mb-2">
+                            <span className="mr-3 bg-[#3E37A1]/20 p-2 rounded-full">
+                              <FaCheckCircle className="text-[#3E37A1]" />
+                            </span>
+                            How We Handle It
+                          </h5>
+                          <p className="text-gray-700 ml-9">
+                            If we see a request languishing or an unfounded denial, we escalate to higher-level payer contacts, including medical directors if necessary. By presenting clear clinical justification and referencing policy guidelines, we push for timely decisions so your patients receive treatments without further delay.
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                    <div>
+                      <h4 className="text-xl font-medium text-[#3E37A1] mb-4 border-l-2 border-[#6C5CE7]/30 pl-3">
+                        Detailed Documentation for Appeals
+                      </h4>
+                      <div className="space-y-4 pl-6">
+                        <div>
+                          <h5 className="text-lg font-medium text-[#6C5CE7] flex items-center mb-2">
+                            <span className="mr-3 bg-[#6C5CE7]/20 p-2 rounded-full">
+                              <FaExclamationTriangle className="text-[#6C5CE7]" />
+                            </span>
+                            Challenge
+                          </h5>
+                          <p className="text-gray-700 ml-9">
+                            Some prior authorizations end up denied despite best efforts, and appeals can be time-consuming.
+                          </p>
+                        </div>
+                        <div>
+                          <h5 className="text-lg font-medium text-[#3E37A1] flex items-center mb-2">
+                            <span className="mr-3 bg-[#3E37A1]/20 p-2 rounded-full">
+                              <FaCheckCircle className="text-[#3E37A1]" />
+                            </span>
+                            How We Handle It
+                          </h5>
+                          <p className="text-gray-700 ml-9">
+                            Should a request be denied, we prepare a structured appeal with the supporting medical evidence. Having tracked every step and payer communication, we’re able to resubmit quickly and advocate effectively for approval.
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* 4. Ensuring Smooth Patient Experience & Reduced Administrative Burden */}
+              <div className="flex flex-col md:flex-row items-start bg-[#F5F5FC] rounded-lg shadow-lg p-6 hover:shadow-xl transition-all duration-300">
+                <div className="flex-shrink-0 mb-4 md:mb-0 md:mr-8">
+                  <div className="bg-[#6C5CE7]/10 p-4 rounded-full">
+                    <FaCheckCircle className="text-3xl text-[#6C5CE7]" />
+                  </div>
+                </div>
+                <div className="flex-1">
+                  <h3 className="text-2xl font-semibold text-[#3E37A1] mb-6 border-l-4 border-[#6C5CE7]/50 pl-4">
+                    Ensuring Smooth Patient Experience & Reduced Administrative Burden
+                  </h3>
+                  <div className="space-y-8">
+                    <div>
+                      <h4 className="text-xl font-medium text-[#3E37A1] mb-4 border-l-2 border-[#6C5CE7]/30 pl-3">
+                        Advance Patient Notifications
+                      </h4>
+                      <div className="space-y-4 pl-6">
+                        <div>
+                          <h5 className="text-lg font-medium text-[#6C5CE7] flex items-center mb-2">
+                            <span className="mr-3 bg-[#6C5CE7]/20 p-2 rounded-full">
+                              <FaExclamationTriangle className="text-[#6C5CE7]" />
+                            </span>
+                            Challenge
+                          </h5>
+                          <p className="text-gray-700 ml-9">
+                            Patients sometimes discover coverage gaps or prior auth issues after arriving for an appointment, leading to confusion and rescheduling.
+                          </p>
+                        </div>
+                        <div>
+                          <h5 className="text-lg font-medium text-[#3E37A1] flex items-center mb-2">
+                            <span className="mr-3 bg-[#3E37A1]/20 p-2 rounded-full">
+                              <FaCheckCircle className="text-[#3E37A1]" />
+                            </span>
+                            How We Handle It
+                          </h5>
+                          <p className="text-gray-700 ml-9">
+                            By verifying insurance coverage and obtaining the necessary authorizations beforehand, we help your front-office staff inform patients of any potential out-of-pocket costs or steps needed—enhancing patient satisfaction.
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                    <div>
+                      <h4 className="text-xl font-medium text-[#3E37A1] mb-4 border-l-2 border-[#6C5CE7]/30 pl-3">
+                        Minimizing Treatment Delays
+                      </h4>
+                      <div className="space-y-4 pl-6">
+                        <div>
+                          <h5 className="text-lg font-medium text-[#6C5CE7] flex items-center mb-2">
+                            <span className="mr-3 bg-[#6C5CE7]/20 p-2 rounded-full">
+                              <FaExclamationTriangle className="text-[#6C5CE7]" />
+                            </span>
+                            Challenge
+                          </h5>
+                          <p className="text-gray-700 ml-9">
+                            Delayed authorizations can push procedures back by days or weeks, risking patient outcomes and clinic revenue.
+                          </p>
+                        </div>
+                        <div>
+                          <h5 className="text-lg font-medium text-[#3E37A1] flex items-center mb-2">
+                            <span className="mr-3 bg-[#3E37A1]/20 p-2 rounded-full">
+                              <FaCheckCircle className="text-[#3E37A1]" />
+                            </span>
+                            How We Handle It
+                          </h5>
+                          <p className="text-gray-700 ml-9">
+                            Our proactive approach—swift submission, daily follow-ups, and escalation—keeps approvals on track so you can proceed with treatments as scheduled.
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                    <div>
+                      <h4 className="text-xl font-medium text-[#3E37A1] mb-4 border-l-2 border-[#6C5CE7]/30 pl-3">
+                        Transparent Reporting & Communication
+                      </h4>
+                      <div className="space-y-4 pl-6">
+                        <div>
+                          <h5 className="text-lg font-medium text-[#6C5CE7] flex items-center mb-2">
+                            <span className="mr-3 bg-[#6C5CE7]/20 p-2 rounded-full">
+                              <FaExclamationTriangle className="text-[#6C5CE7]" />
+                            </span>
+                            Challenge
+                          </h5>
+                          <p className="text-gray-700 ml-9">
+                            Providers often don’t know which requests are still pending, or why certain authorizations take so long.
+                          </p>
+                        </div>
+                        <div>
+                          <h5 className="text-lg font-medium text-[#3E37A1] flex items-center mb-2">
+                            <span className="mr-3 bg-[#3E37A1]/20 p-2 rounded-full">
+                              <FaCheckCircle className="text-[#3E37A1]" />
+                            </span>
+                            How We Handle It
+                          </h5>
+                          <p className="text-gray-700 ml-9">
+                            AccurusBill updates you regularly—via quick summaries or weekly reports—highlighting each pending request’s status, next steps, and any payer communication. You remain informed without chasing payers yourself.
                           </p>
                         </div>
                       </div>
@@ -215,39 +423,39 @@ export default function PriorAuthorizationInsuranceVerificationPage() {
         <section className="py-16 bg-[#EEF0FF]">
           <div className="container mx-auto px-4">
             <h2 className="text-3xl md:text-4xl font-bold text-center text-[#3E37A1] mb-12 border-b-2 border-[#6C5CE7]/20 pb-2">
-              Why Choose AccurusBill for Prior Authorization & Verification?
+              Why Choose AccurusBill for Prior Authorization & Insurance Verification?
             </h2>
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
               {[
                 {
-                  icon: <FaFileInvoiceDollar className="text-4xl text-[#6C5CE7] mx-auto" />,
-                  title: "Timely Authorizations",
+                  icon: <FaShieldAlt className="text-4xl text-[#6C5CE7] mx-auto" />,
+                  title: "Early Detection of Requirements",
                   description:
-                    "We ensure quick approvals to avoid treatment delays.",
+                    "We identify approval needs right when appointments are set, preventing last-minute cancellations or denials.",
                 },
                 {
-                  icon: <FaFileInvoiceDollar className="text-4xl text-[#6C5CE7] mx-auto" />,
-                  title: "Accurate Verification",
+                  icon: <FaFileAlt className="text-4xl text-[#6C5CE7] mx-auto" />,
+                  title: "Same-Day Submission",
                   description:
-                    "Pre-visit checks prevent unpaid claims due to coverage issues.",
+                    "Our team gathers all clinical evidence and dispatches requests promptly, speeding up approvals.",
                 },
                 {
-                  icon: <FaCheckCircle className="text-4xl text-[#6C5CE7] mx-auto" />,
-                  title: "Reduced Delays",
+                  icon: <FaClock className="text-4xl text-[#6C5CE7] mx-auto" />,
+                  title: "Aggressive Follow-Up",
                   description:
-                    "Proactive follow-ups keep your revenue cycle on track.",
-                },
-                {
-                  icon: <FaFileInvoiceDollar className="text-4xl text-[#6C5CE7] mx-auto" />,
-                  title: "Detailed Reporting",
-                  description:
-                    "Stay informed with clear updates on authorization status.",
+                    "We don’t let payer delays drag on. We check daily and escalate issues until you get a final decision.",
                 },
                 {
                   icon: <FaCheckCircle className="text-4xl text-[#6C5CE7] mx-auto" />,
-                  title: "Expert Handling",
+                  title: "Reduced Administrative Stress",
                   description:
-                    "Our team navigates complex insurer requirements effortlessly.",
+                    "By verifying insurance details and obtaining prior authorizations, we free your staff to focus on patient care.",
+                },
+                {
+                  icon: <FaCheckCircle className="text-4xl text-[#6C5CE7] mx-auto" />,
+                  title: "Patient-Centered",
+                  description:
+                    "Timely approvals mean fewer treatment postponements, better patient satisfaction, and a stable revenue flow.",
                 },
               ].map((benefit, index) => (
                 <div
@@ -265,14 +473,26 @@ export default function PriorAuthorizationInsuranceVerificationPage() {
           </div>
         </section>
 
+        {/* Conclusion Section */}
+        <section className="py-16 bg-[#F5F5FC] text-center">
+          <div className="container mx-auto px-4">
+            <h2 className="text-3xl md:text-4xl font-bold text-[#3E37A1] mb-6 border-b-2 border-[#6C5CE7]/20 pb-2">
+              Partner with AccurusBill for Seamless Authorizations
+            </h2>
+            <p className="text-lg md:text-xl text-gray-700 max-w-3xl mx-auto">
+              With AccurusBill’s Prior Authorization & Insurance Verification services, you gain a partner dedicated to eliminating delays and ensuring coverage. Our proactive process—early detection, prompt submissions, and relentless follow-up—keeps your treatments on schedule and your revenue secure, allowing you to prioritize patient care.
+            </p>
+          </div>
+        </section>
+
         {/* Call to Action Section */}
         <section className="py-16 bg-gradient-to-r from-[#6C5CE7] to-[#3E37A1] text-white text-center">
           <div className="container mx-auto px-4">
             <h2 className="text-3xl md:text-4xl font-bold mb-6">
-              Ready to Simplify Authorizations?
+              Ready to Eliminate Authorization Delays?
             </h2>
             <p className="text-lg md:text-xl mb-8 max-w-2xl mx-auto">
-              Partner with AccurusBill for expert prior authorization and verification services.
+              Partner with AccurusBill to streamline your process, verify coverage, and focus on patient care.
             </p>
             <Button
               asChild
@@ -364,3 +584,6 @@ export default function PriorAuthorizationInsuranceVerificationPage() {
           </div>
         </div>
       </footer>
+    </div>
+  );
+}
