@@ -51,7 +51,7 @@ export default function VirtualMedicalScribingPage() {
               Streamline Documentation, Enhance Care
             </h2>
             <p className="text-base md:text-lg text-gray-700 max-w-3xl mx-auto">
-              AccurusBill's virtual medical scribing service captures real-time notes, reducing clinician burnout and improving patient interactions. Our HIPAA-compliant scribes integrate seamlessly with your workflow.
+              AccurusBill's virtual medical scribing service captures real-time notes during patient visits, reducing clinician burnout and improving patient interactions. Our HIPAA-compliant scribes integrate seamlessly with your workflow, allowing you to focus on what matters most—patient care.
             </p>
           </div>
         </section>
@@ -88,7 +88,7 @@ export default function VirtualMedicalScribingPage() {
                             Challenge
                           </h5>
                           <p className="text-gray-700 ml-9">
-                            Clinicians often juggle between direct patient care and heavy documentation, risking missed details or incomplete notes.
+                            Clinicians often juggle patient care and documentation, risking missed details or incomplete notes.
                           </p>
                         </div>
                         <div>
@@ -99,14 +99,14 @@ export default function VirtualMedicalScribingPage() {
                             How We Handle It
                           </h5>
                           <p className="text-gray-700 ml-9">
-                            AccurusBill provides HIPAA-trained scribes who join in-person or virtual patient encounters. They listen carefully, capturing every relevant clinical detail in compliance with privacy regulations, so you stay focused on the patient, not the keyboard.
+                            Our HIPAA-trained scribes join in-person or virtual visits, capturing every clinical detail accurately while you focus on the patient.
                           </p>
                         </div>
                       </div>
                     </div>
                     <div>
                       <h4 className="text-xl font-medium text-[#3E37A1] mb-4 border-l-2 border-[#6C5CE7]/30 pl-3">
-                        Seamless Integration with Your Workflow
+                        Seamless Workflow Integration
                       </h4>
                       <div className="space-y-4 pl-6">
                         <div>
@@ -117,7 +117,7 @@ export default function VirtualMedicalScribingPage() {
                             Challenge
                           </h5>
                           <p className="text-gray-700 ml-9">
-                            Some scribe solutions demand clinicians overhaul their usual approach to charting, adding complexity.
+                            Some scribing solutions disrupt existing workflows, adding complexity.
                           </p>
                         </div>
                         <div>
@@ -128,7 +128,7 @@ export default function VirtualMedicalScribingPage() {
                             How We Handle It
                           </h5>
                           <p className="text-gray-700 ml-9">
-                            Our scribes adapt to your existing visit structure, whether it's a telehealth call or in-office consultation, ensuring minimal disruption while maximizing efficiency.
+                            Our scribes adapt to your visit structure, whether telehealth or in-office, ensuring minimal disruption and maximum efficiency.
                           </p>
                         </div>
                       </div>
@@ -162,7 +162,7 @@ export default function VirtualMedicalScribingPage() {
                             Challenge
                           </h5>
                           <p className="text-gray-700 ml-9">
-                            Scribes might miss nuances or misinterpret clinical terms without immediate clarification.
+                            Scribes might miss nuances or misinterpret terms without immediate feedback.
                           </p>
                         </div>
                         <div>
@@ -173,7 +173,7 @@ export default function VirtualMedicalScribingPage() {
                             How We Handle It
                           </h5>
                           <p className="text-gray-700 ml-9">
-                            Our scribes provide live drafts during or right after the visit, allowing you to review and clarify details in real time, ensuring accuracy before finalization.
+                            We provide live drafts during or after visits, allowing you to clarify details in real time for accuracy.
                           </p>
                         </div>
                       </div>
@@ -191,7 +191,7 @@ export default function VirtualMedicalScribingPage() {
                             Challenge
                           </h5>
                           <p className="text-gray-700 ml-9">
-                            Delays in uploading or signing off on notes can slow down billing or follow-up care.
+                            Delays in uploading or signing off can slow billing or follow-up care.
                           </p>
                         </div>
                         <div>
@@ -202,7 +202,7 @@ export default function VirtualMedicalScribingPage() {
                             How We Handle It
                           </h5>
                           <p className="text-gray-700 ml-9">
-                            We upload finalized notes to your EHR within hours, complete with fields for your electronic sign-off, streamlining the process for billing and compliance.
+                            Finalized notes are uploaded to your EHR within hours, with fields for electronic sign-off, streamlining compliance and billing.
                           </p>
                         </div>
                       </div>
@@ -236,7 +236,7 @@ export default function VirtualMedicalScribingPage() {
                             Challenge
                           </h5>
                           <p className="text-gray-700 ml-9">
-                            Sharing patient data with third-party scribes can expose practices to breaches if not handled securely.
+                            Sharing patient data with scribes can expose practices to breaches if not secure.
                           </p>
                         </div>
                         <div>
@@ -247,7 +247,7 @@ export default function VirtualMedicalScribingPage() {
                             How We Handle It
                           </h5>
                           <p className="text-gray-700 ml-9">
-                            All scribes undergo HIPAA training, and our platform uses end-to-end encryption for data transmission and storage, protecting patient information at every stage.
+                            Our scribes are HIPAA-trained, and we use end-to-end encryption for data transmission and storage.
                           </p>
                         </div>
                       </div>
@@ -265,7 +265,7 @@ export default function VirtualMedicalScribingPage() {
                             Challenge
                           </h5>
                           <p className="text-gray-700 ml-9">
-                            Lack of tracking or improper data retention can complicate audits or legal reviews.
+                            Lack of tracking or improper retention can complicate audits.
                           </p>
                         </div>
                         <div>
@@ -276,7 +276,7 @@ export default function VirtualMedicalScribingPage() {
                             How We Handle It
                           </h5>
                           <p className="text-gray-700 ml-9">
-                            We maintain detailed audit logs of all scribe activity and retain data only as required by law, with options for secure deletion to meet your compliance needs.
+                            We maintain audit logs and retain data only as required, with secure deletion options.
                           </p>
                         </div>
                       </div>
@@ -310,7 +310,7 @@ export default function VirtualMedicalScribingPage() {
                             Challenge
                           </h5>
                           <p className="text-gray-700 ml-9">
-                            After-hours charting or rushed notes during visits contribute to clinician fatigue.
+                            After-hours charting or rushed notes cause clinician fatigue.
                           </p>
                         </div>
                         <div>
@@ -321,7 +321,7 @@ export default function VirtualMedicalScribingPage() {
                             How We Handle It
                           </h5>
                           <p className="text-gray-700 ml-9">
-                            By handling real-time documentation, our scribes cut your charting time by up to 70%, letting you leave the office on time and recharge for the next day.
+                            Our scribes cut charting time by up to 70%, letting you leave on time and recharge.
                           </p>
                         </div>
                       </div>
@@ -339,7 +339,7 @@ export default function VirtualMedicalScribingPage() {
                             Challenge
                           </h5>
                           <p className="text-gray-700 ml-9">
-                            Inconsistent scribe performance can frustrate providers or lead to rework.
+                            Inconsistent scribe performance can lead to rework.
                           </p>
                         </div>
                         <div>
@@ -350,7 +350,7 @@ export default function VirtualMedicalScribingPage() {
                             How We Handle It
                           </h5>
                           <p className="text-gray-700 ml-9">
-                            Our scribes receive ongoing training and incorporate your feedback to refine their skills, ensuring they meet your specific charting preferences over time.
+                            Our scribes receive ongoing training and adapt based on your feedback.
                           </p>
                         </div>
                       </div>
@@ -380,13 +380,13 @@ export default function VirtualMedicalScribingPage() {
                   icon: <FaPenSquare className="text-4xl text-[#6C5CE7] mx-auto" />,
                   title: "Reduced Burnout",
                   description:
-                    "Save up to 70% of charting time, allowing more focus on patient care and personal life.",
+                    "Save up to 70% of charting time, allowing more focus on patient care.",
                 },
                 {
                   icon: <FaLock className="text-4xl text-[#6C5CE7] mx-auto" />,
                   title: "HIPAA-Compliant Security",
                   description:
-                    "End-to-end encryption and trained scribes ensure patient data stays protected.",
+                    "End-to-end encryption and trained scribes protect patient data.",
                 },
                 {
                   icon: <FaUserMd className="text-4xl text-[#6C5CE7] mx-auto" />,
@@ -398,7 +398,7 @@ export default function VirtualMedicalScribingPage() {
                   icon: <FaClock className="text-4xl text-[#6C5CE7] mx-auto" />,
                   title: "Fast EHR Integration",
                   description:
-                    "Notes are uploaded and ready for sign-off within hours, speeding up billing.",
+                    "Notes are uploaded and ready for sign-off within hours.",
                 },
               ].map((benefit, index) => (
                 <div
