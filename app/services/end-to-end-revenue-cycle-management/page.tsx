@@ -3,7 +3,8 @@ import { Navbar } from "@/components/Navbar";
 import { Button } from "@/components/ui/button";
 import {
   FaCheckCircle,
-  FaFileInvoiceDollar,
+  FaChartLine,
+  FaClock,
   FaExclamationTriangle,
   FaMapMarkerAlt,
   FaLinkedin,
@@ -11,12 +12,12 @@ import {
 } from "react-icons/fa";
 
 export const metadata = {
-  title: "Medical Coding - AccurusBill",
+  title: "End-to-End Revenue Cycle Management - AccurusBill",
   description:
-    "Accurate medical coding with AccurusBill ensures compliance and maximizes reimbursements for your practice.",
+    "Optimize your revenue cycle with AccurusBill's end-to-end solutions. From billing to payments, we maximize efficiency and minimize denials.",
 };
 
-export default function MedicalCodingPage() {
+export default function EndToEndRevenueCycleManagementPage() {
   return (
     <div className="min-h-screen bg-[#F5F5FC] flex flex-col">
       <Navbar />
@@ -26,10 +27,10 @@ export default function MedicalCodingPage() {
         <section className="relative py-24 bg-gradient-to-r from-[#3E37A1] to-[#6C5CE7] text-white">
           <div className="container mx-auto px-4 text-center">
             <h1 className="text-4xl md:text-5xl font-extrabold mb-6">
-              Medical Coding
+              End-to-End Revenue Cycle Management
             </h1>
             <p className="text-lg md:text-xl max-w-2xl mx-auto mb-8">
-              <span className="font-semibold">"Precision Coding, Perfect Reimbursements."</span>
+              <span className="font-semibold">"Complete Control, Maximum Revenue."</span>
             </p>
             <Button
               asChild
@@ -45,10 +46,10 @@ export default function MedicalCodingPage() {
         <section className="py-16 bg-[#F5F5FC]">
           <div className="container mx-auto px-4 text-center">
             <h2 className="text-3xl md:text-4xl font-bold text-[#3E37A1] mb-6">
-              Ensure Accurate Medical Coding
+              Optimize Every Step of Your Revenue Cycle
             </h2>
             <p className="text-base md:text-lg text-gray-700 max-w-3xl mx-auto">
-              AccurusBill's medical coding services deliver precise ICD-10, CPT, and HCPCS coding, minimizing denials and optimizing revenue for your practice.
+              AccurusBill provides a comprehensive end-to-end revenue cycle management solution, covering billing, claims submission, payment oversight, and denial management to ensure your practice maximizes revenue and efficiency.
             </p>
           </div>
         </section>
@@ -57,24 +58,24 @@ export default function MedicalCodingPage() {
         <section className="py-16 bg-white">
           <div className="container mx-auto px-4">
             <h2 className="text-3xl md:text-4xl font-bold text-center text-[#3E37A1] mb-12 border-b-2 border-[#6C5CE7]/20 pb-2">
-              Our Medical Coding Process
+              Our End-to-End Revenue Cycle Process
             </h2>
             <div className="space-y-12">
-              {/* 1. Detailed Code Assignment */}
+              {/* 1. Comprehensive Billing & Claims */}
               <div className="flex flex-col md:flex-row items-start bg-[#F5F5FC] rounded-lg shadow-lg p-6 hover:shadow-xl transition-all duration-300">
                 <div className="flex-shrink-0 mb-4 md:mb-0 md:mr-8">
                   <div className="bg-[#6C5CE7]/10 p-4 rounded-full">
-                    <FaFileInvoiceDollar className="text-3xl text-[#6C5CE7]" />
+                    <FaChartLine className="text-3xl text-[#6C5CE7]" />
                   </div>
                 </div>
                 <div className="flex-1">
                   <h3 className="text-2xl font-semibold text-[#3E37A1] mb-6 border-l-4 border-[#6C5CE7]/50 pl-4">
-                    Detailed Code Assignment
+                    Comprehensive Billing & Claims
                   </h3>
                   <div className="space-y-8">
                     <div>
                       <h4 className="text-xl font-medium text-[#3E37A1] mb-4 border-l-2 border-[#6C5CE7]/30 pl-3">
-                        Review of Clinical Documentation
+                        Accurate Charge Capture
                       </h4>
                       <div className="space-y-4 pl-6">
                         <div>
@@ -85,7 +86,7 @@ export default function MedicalCodingPage() {
                             Challenge
                           </h5>
                           <p className="text-gray-700 ml-9">
-                            Inaccurate or incomplete documentation can lead to coding errors.
+                            Missing or incorrect charges can lead to revenue loss.
                           </p>
                         </div>
                         <div>
@@ -96,14 +97,14 @@ export default function MedicalCodingPage() {
                             How We Handle It
                           </h5>
                           <p className="text-gray-700 ml-9">
-                            Our coders thoroughly review clinical notes to assign the correct codes.
+                            We align charges with your EHR/EMR, ensuring all services are captured accurately.
                           </p>
                         </div>
                       </div>
                     </div>
                     <div>
                       <h4 className="text-xl font-medium text-[#3E37A1] mb-4 border-l-2 border-[#6C5CE7]/30 pl-3">
-                        Compliance with Payer Guidelines
+                        Swift Claim Submission
                       </h4>
                       <div className="space-y-4 pl-6">
                         <div>
@@ -114,7 +115,7 @@ export default function MedicalCodingPage() {
                             Challenge
                           </h5>
                           <p className="text-gray-700 ml-9">
-                            Non-compliance with payer rules can result in denials.
+                            Delayed submissions can result in denials.
                           </p>
                         </div>
                         <div>
@@ -125,7 +126,81 @@ export default function MedicalCodingPage() {
                             How We Handle It
                           </h5>
                           <p className="text-gray-700 ml-9">
-                            We stay updated on payer guidelines to ensure codes meet all requirements.
+                            Claims are submitted within 24 hours, adhering to payer rules for timely processing.
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* 2. Payment Oversight & Denial Management */}
+              <div className="flex flex-col md:flex-row items-start bg-[#F5F5FC] rounded-lg shadow-lg p-6 hover:shadow-xl transition-all duration-300">
+                <div className="flex-shrink-0 mb-4 md:mb-0 md:mr-8">
+                  <div className="bg-[#6C5CE7]/10 p-4 rounded-full">
+                    <FaClock className="text-3xl text-[#6C5CE7]" />
+                  </div>
+                </div>
+                <div className="flex-1">
+                  <h3 className="text-2xl font-semibold text-[#3E37A1] mb-6 border-l-4 border-[#6C5CE7]/50 pl-4">
+                    Payment Oversight & Denial Management
+                  </h3>
+                  <div className="space-y-8">
+                    <div>
+                      <h4 className="text-xl font-medium text-[#3E37A1] mb-4 border-l-2 border-[#6C5CE7]/30 pl-3">
+                        Daily Payment Reconciliation
+                      </h4>
+                      <div className="space-y-4 pl-6">
+                        <div>
+                          <h5 className="text-lg font-medium text-[#6C5CE7] flex items-center mb-2">
+                            <span className="mr-3 bg-[#6C5CE7]/20 p-2 rounded-full">
+                              <FaExclamationTriangle className="text-[#6C5CE7]" />
+                            </span>
+                            Challenge
+                          </h5>
+                          <p className="text-gray-700 ml-9">
+                            Unnoticed underpayments can erode revenue.
+                          </p>
+                        </div>
+                        <div>
+                          <h5 className="text-lg font-medium text-[#3E37A1] flex items-center mb-2">
+                            <span className="mr-3 bg-[#3E37A1]/20 p-2 rounded-full">
+                              <FaCheckCircle className="text-[#3E37A1]" />
+                            </span>
+                            How We Handle It
+                          </h5>
+                          <p className="text-gray-700 ml-9">
+                            We reconcile payments daily against remittance details, flagging discrepancies.
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                    <div>
+                      <h4 className="text-xl font-medium text-[#3E37A1] mb-4 border-l-2 border-[#6C5CE7]/30 pl-3">
+                        Effective Denial Appeals
+                      </h4>
+                      <div className="space-y-4 pl-6">
+                        <div>
+                          <h5 className="text-lg font-medium text-[#6C5CE7] flex items-center mb-2">
+                            <span className="mr-3 bg-[#6C5CE7]/20 p-2 rounded-full">
+                              <FaExclamationTriangle className="text-[#6C5CE7]" />
+                            </span>
+                            Challenge
+                          </h5>
+                          <p className="text-gray-700 ml-9">
+                            Mishandled denials can lead to lost revenue.
+                          </p>
+                        </div>
+                        <div>
+                          <h5 className="text-lg font-medium text-[#3E37A1] flex items-center mb-2">
+                            <span className="mr-3 bg-[#3E37A1]/20 p-2 rounded-full">
+                              <FaCheckCircle className="text-[#3E37A1]" />
+                            </span>
+                            How We Handle It
+                          </h5>
+                          <p className="text-gray-700 ml-9">
+                            Our team appeals denials with detailed documentation, following payer protocols.
                           </p>
                         </div>
                       </div>
@@ -141,39 +216,39 @@ export default function MedicalCodingPage() {
         <section className="py-16 bg-[#EEF0FF]">
           <div className="container mx-auto px-4">
             <h2 className="text-3xl md:text-4xl font-bold text-center text-[#3E37A1] mb-12 border-b-2 border-[#6C5CE7]/20 pb-2">
-              Why Choose AccurusBill for Medical Coding?
+              Why Choose AccurusBill for Revenue Cycle Management?
             </h2>
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
               {[
                 {
-                  icon: <FaFileInvoiceDollar className="text-4xl text-[#6C5CE7] mx-auto" />,
-                  title: "Accurate Coding",
+                  icon: <FaChartLine className="text-4xl text-[#6C5CE7] mx-auto" />,
+                  title: "End-to-End Efficiency",
                   description:
-                    "Precision in ICD-10, CPT, and HCPCS coding minimizes denials.",
+                    "We manage every stage from billing to payment, reducing administrative burden.",
                 },
                 {
-                  icon: <FaFileInvoiceDollar className="text-4xl text-[#6C5CE7] mx-auto" />,
-                  title: "Compliance Assurance",
+                  icon: <FaChartLine className="text-4xl text-[#6C5CE7] mx-auto" />,
+                  title: "Minimized Denials",
                   description:
-                    "We ensure adherence to all payer and regulatory standards.",
+                    "Accurate claims and proactive appeals ensure higher first-pass approval rates.",
                 },
                 {
-                  icon: <FaCheckCircle className="text-4xl text-[#6C5CE7] mx-auto" />,
-                  title: "Maximized Reimbursements",
+                  icon: <FaClock className="text-4xl text-[#6C5CE7] mx-auto" />,
+                  title: "Faster Payments",
                   description:
-                    "Optimized coding increases your revenue potential.",
-                },
-                {
-                  icon: <FaFileInvoiceDollar className="text-4xl text-[#6C5CE7] mx-auto" />,
-                  title: "Timely Submission",
-                  description:
-                    "Coded claims are ready for quick submission to payers.",
+                    "Swift submissions and oversight accelerate your cash flow.",
                 },
                 {
                   icon: <FaCheckCircle className="text-4xl text-[#6C5CE7] mx-auto" />,
-                  title: "Expert Oversight",
+                  title: "Transparent Reporting",
                   description:
-                    "Certified coders provide professional review and support.",
+                    "Regular updates keep you informed on your revenue status.",
+                },
+                {
+                  icon: <FaChartLine className="text-4xl text-[#6C5CE7] mx-auto" />,
+                  title: "Customized Solutions",
+                  description:
+                    "Tailored to your practice's needs for optimal results.",
                 },
               ].map((benefit, index) => (
                 <div
@@ -195,10 +270,10 @@ export default function MedicalCodingPage() {
         <section className="py-16 bg-gradient-to-r from-[#6C5CE7] to-[#3E37A1] text-white text-center">
           <div className="container mx-auto px-4">
             <h2 className="text-3xl md:text-4xl font-bold mb-6">
-              Ready to Improve Your Coding Accuracy?
+              Ready to Optimize Your Revenue?
             </h2>
             <p className="text-lg md:text-xl mb-8 max-w-2xl mx-auto">
-              Partner with AccurusBill for expert medical coding that boosts your revenue.
+              Partner with AccurusBill for end-to-end revenue cycle management that drives success.
             </p>
             <Button
               asChild
