@@ -28,6 +28,7 @@ export default function ServicesPage() {
         "Denial management with proactive resolution strategies.",
       ],
       icon: <FaFileInvoiceDollar className="text-[#6C5CE7] text-4xl" />,
+      path: "end-to-end-revenue-cycle-management", // Updated path
     },
     {
       id: "prior-authorization",
@@ -39,6 +40,7 @@ export default function ServicesPage() {
         "Escalate stalled requests directly to payer medical directors.",
       ],
       icon: <FaUserMd className="text-[#3E37A1] text-4xl" />,
+      path: "prior-authorization-insurance-verification", // Updated path
     },
     {
       id: "medical-billing",
@@ -50,6 +52,7 @@ export default function ServicesPage() {
         "Track payments daily, appeal denials on your behalf, and resolve underpayments.",
       ],
       icon: <FaFileInvoiceDollar className="text-[#6C5CE7] text-4xl" />,
+      path: "medical-billing-claims-submission", // Updated path
     },
     {
       id: "medical-coding",
@@ -61,6 +64,7 @@ export default function ServicesPage() {
         "Monthly reports demonstrate the coding impact on your revenue.",
       ],
       icon: <FaClipboardCheck className="text-[#00C4CC] text-4xl" />,
+      path: "medical-coding", // Matches
     },
     {
       id: "medical-scribing",
@@ -72,6 +76,7 @@ export default function ServicesPage() {
         "Notes are ready for your review and sign-off within 1 hour.",
       ],
       icon: <FaLaptopMedical className="text-[#FFC107] text-4xl" />,
+      path: "virtual-medical-scribing", // Updated path
     },
     {
       id: "medical-transcription",
@@ -83,6 +88,7 @@ export default function ServicesPage() {
         "Upload documents to your EHR with timestamps and provider signatures.",
       ],
       icon: <FaDatabase className="text-[#5A50DA] text-4xl" />,
+      path: "medical-transcription-services", // Updated path
     },
     {
       id: "physician-credentialing",
@@ -94,6 +100,7 @@ export default function ServicesPage() {
         "Automate revalidation to ensure you never lapse.",
       ],
       icon: <FaIdCard className="text-[#FF6B6B] text-4xl" />,
+      path: "physician-credentialing", // Matches
     },
   ];
 
@@ -150,7 +157,7 @@ export default function ServicesPage() {
 
                   {/* Learn More Link */}
                   <Link
-                    href={`/services/${service.id}`}
+                    href={`/services/${service.path}`} // Updated to use path
                     className="text-[#FFC107] font-medium hover:underline flex items-center"
                   >
                     Learn more <span className="ml-1">→</span>
