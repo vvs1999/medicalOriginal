@@ -39,7 +39,7 @@ export default function EndToEndRCMPage() {
               End-to-End Revenue Cycle Management
             </h1>
             <p className="text-lg md:text-xl max-w-2xl mx-auto mb-8">
-              "From First Encounter to Final Payment—Seamless, Efficient, and Patient-Centric."
+              &quot;From First Encounter to Final Payment—Seamless, Efficient, and Patient-Centric.&quot;
             </p>
             <Button
               asChild
