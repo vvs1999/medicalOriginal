@@ -127,7 +127,7 @@ export default function MedicalBillingPage() {
                             Our Approach
                           </h5>
                           <p className="text-gray-700 ml-9">
-                            We employ robust validation steps to identify issues early. Whether it's a typo or payer-specific requirement, we flag and correct potential discrepancies long before submission, minimizing rework and delays.
+                            We employ robust validation steps to identify issues early. Whether it'&#39;s a typo or payer-specific requirement, we flag and correct potential discrepancies long before submission, minimizing rework and delays.
                           </p>
                         </div>
                       </div>
@@ -172,7 +172,7 @@ export default function MedicalBillingPage() {
                             Our Approach
                           </h5>
                           <p className="text-gray-700 ml-9">
-                            Once your charges are finalized, AccurusBill submits claims promptly-often on the same or next business day-so you're never left waiting to start the reimbursement clock.
+                            Once your charges are finalized, AccurusBill submits claims promptly-often on the same or next business day-so you&#39;re never left waiting to start the reimbursement clock.
                           </p>
                         </div>
                       </div>
@@ -201,7 +201,7 @@ export default function MedicalBillingPage() {
                             Our Approach
                           </h5>
                           <p className="text-gray-700 ml-9">
-                            Our specialists maintain current payer guidelines to ensure each claim matches what insurers need. We tailor claim details so they're correct and compliant upon submission, giving you the best chance for first-pass approval.
+                            Our specialists maintain current payer guidelines to ensure each claim matches what insurers need. We tailor claim details so they&#39;re correct and compliant upon submission, giving you the best chance for first-pass approval.
                           </p>
                         </div>
                       </div>
@@ -275,7 +275,7 @@ export default function MedicalBillingPage() {
                             Our Approach
                           </h5>
                           <p className="text-gray-700 ml-9">
-                            We regularly reconcile payments with remittance details (ERA/EOB) and immediately flag any underpayment or non-covered portion. If rates don't match what's contractually owed, we follow up without delay.
+                            We regularly reconcile payments with remittance details (ERA/EOB) and immediately flag any underpayment or non-covered portion. If rates don'&#39;t match what'&#39;s contractually owed, we follow up without delay.
                           </p>
                         </div>
                       </div>
@@ -304,7 +304,7 @@ export default function MedicalBillingPage() {
                             Our Approach
                           </h5>
                           <p className="text-gray-700 ml-9">
-                            Whenever a claim is denied or short-paid, AccurusBill's specialists jump into action. We examine denial reasons, gather any necessary documentation, and submit appeals following each payer's specific protocols-ensuring no legitimate revenue is left behind.
+                            Whenever a claim is denied or short-paid, AccurusBill'&#39;s specialists jump into action. We examine denial reasons, gather any necessary documentation, and submit appeals following each payer'&#39;s specific protocols-ensuring no legitimate revenue is left behind.
                           </p>
                         </div>
                       </div>
@@ -322,7 +322,7 @@ export default function MedicalBillingPage() {
                             Potential Problem
                           </h5>
                           <p className="text-gray-700 ml-9">
-                            Some payers systematically under-reimburse, hoping providers won't notice.
+                            Some payers systematically under-reimburse, hoping providers won'&#39;t notice.
                           </p>
                         </div>
                         <div>
@@ -333,7 +333,7 @@ export default function MedicalBillingPage() {
                             Our Approach
                           </h5>
                           <p className="text-gray-700 ml-9">
-                            We track actual payments against your contracted rates. Discrepancies prompt immediate follow-up to recover any rightful difference. You never have to worry about missing out on the revenue you've earned.
+                            We track actual payments against your contracted rates. Discrepancies prompt immediate follow-up to recover any rightful difference. You never have to worry about missing out on the revenue you'&#39;ve earned.
                           </p>
                         </div>
                       </div>
@@ -378,7 +378,7 @@ export default function MedicalBillingPage() {
                             Our Approach
                           </h5>
                           <p className="text-gray-700 ml-9">
-                            AccurusBill provides routine, clear updates-weekly or monthly-highlighting claims in process, paid claims, and any unsettled denials. You always know how much revenue is on its way.
+                            AccurusBill provides routine, clear updates-weekly or monthly-highlighting claims in process, paid claims, and any unsettled denials. You&#39;ll always know how much revenue is on its way.
                           </p>
                         </div>
                       </div>
@@ -478,13 +478,13 @@ export default function MedicalBillingPage() {
                   icon: <FaChartLine className="text-4xl text-[#6C5CE7] mx-auto" />,
                   title: "Clear Reporting & Coordination",
                   description:
-                    "With consistent updates and a single point of contact, you'll never feel left in the dark.",
+                    "With consistent updates and a single point of contact, you'&#39;ll never feel left in the dark.",
                 },
                 {
                   icon: <FaCheckCircle className="text-4xl text-[#6C5CE7] mx-auto" />,
                   title: "Client-Centric Approach",
                   description:
-                    "We tailor our processes to your practice's needs, rather than forcing a one-size-fits-all system.",
+                    "We tailor our processes to your practice'&#39;s needs, rather than forcing a one-size-fits-all system.",
                 },
               ].map((benefit, index) => (
                 <div
