@@ -32,7 +32,7 @@ export default function MedicalBillingPage() {
             </h1>
             {/* Line 34: Local build error 34:47 and 34:100 */}
             <p className="text-lg md:text-xl max-w-2xl mx-auto mb-8">
-              <span className="font-semibold">"From Charge to Cash: Fewer Denials, Faster Payments."</span>
+              <span className="font-semibold">From Charge to Cash: Fewer Denials, Faster Payments.</span>
             </p>
             <Button
               asChild
