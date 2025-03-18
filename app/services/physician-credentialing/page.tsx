@@ -13,13 +13,22 @@ export default function PhysicianCredentialingPage() {
     <div className="min-h-screen bg-gradient-to-b from-[#F5F5FC] to-white flex flex-col">
       <Navbar />
       <main className="flex-grow container mx-auto px-4 py-12 lg:py-20">
-        <section className="text-center mb-12 lg:mb-20">
-          <h1 className="text-4xl lg:text-5xl font-bold text-[#3E37A1] mb-4">
+        {/* Hero Section with Gradient Background */}
+        <section className="relative py-24 bg-gradient-to-r from-[#3E37A1] to-[#6C5CE7] text-white text-center mb-12 lg:mb-20">
+          <h1 className="text-4xl lg:text-5xl font-bold mb-4">
             Physician Credentialing
           </h1>
-          <p className="text-lg lg:text-xl text-gray-600 max-w-3xl mx-auto">
+          <p className="text-lg lg:text-xl max-w-3xl mx-auto mb-8">
             Streamline credentialing to get your physicians practice-ready.
           </p>
+          <Link href="/contact">
+            <Button
+              size="lg"
+              className="bg-[#FFC107] text-[#3E37A1] font-bold hover:bg-[#FFD700] transition-all duration-300 rounded-lg shadow-lg"
+            >
+              Get Started Today
+            </Button>
+          </Link>
         </section>
 
         <section className="mb-12 lg:mb-20">
@@ -81,7 +90,7 @@ export default function PhysicianCredentialingPage() {
           </p>
           <Link href="/contact">
             <Button
-              size="lg" // Removed variant="custom" and rely on className for styling
+              size="lg"
               className="bg-[#3E37A1] text-white font-semibold hover:bg-[#4C45C2] transition duration-300 px-8 py-3"
             >
               Get Started
@@ -102,8 +111,8 @@ export default function PhysicianCredentialingPage() {
               <div className="mt-4 space-y-2 text-center md:text-left">
                 <p className="text-base flex items-center justify-center md:justify-start">
                   <FaMapMarkerAlt className="mr-2 text-[#FFC107] text-lg" />
-                  108 W 39th Street Ste 1006PMB2018<br />
-                  New York, NY 10018 United States
+                  AccurusBill 108 W 39th Street Ste 1006PMB2018
+                  New York, NY 10018, United States
                 </p>
                 <p className="text-base">Email: contact@accurusbill.com</p>
               </div>
