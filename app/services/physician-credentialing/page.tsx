@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { Navbar } from "@/components/Navbar";
 import { Button } from "@/components/ui/button";
-import { FaMapMarkerAlt, FaLinkedin, FaTwitter } from "react-icons/fa"; // Added missing imports
+import { FaMapMarkerAlt, FaLinkedin, FaTwitter } from "react-icons/fa";
 
 export const metadata = {
   title: "Physician Credentialing - AccurusBill",
@@ -81,8 +81,7 @@ export default function PhysicianCredentialingPage() {
           </p>
           <Link href="/contact">
             <Button
-              variant="custom"
-              size="lg"
+              size="lg" // Removed variant="custom" and rely on className for styling
               className="bg-[#3E37A1] text-white font-semibold hover:bg-[#4C45C2] transition duration-300 px-8 py-3"
             >
               Get Started
