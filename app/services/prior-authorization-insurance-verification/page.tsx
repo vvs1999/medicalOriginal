@@ -13,7 +13,7 @@ import {
 } from "react-icons/fa";
 
 export const metadata = {
-  title: "Prior Authorization & Insurance Verification - AccurusBill",
+  title: Prior Authorization & Insurance Verification - AccurusBill,
   description:
     "Streamline prior authorization and insurance verification with AccurusBill. Minimize delays, ensure coverage, and enhance patient care with our proactive solutions.",
 };
