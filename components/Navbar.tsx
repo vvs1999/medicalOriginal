@@ -160,7 +160,6 @@ export function Navbar() {
               <NavLink href="/contact" text="Contact" />
             </ul>
             <Button
-              variant="custom"
               className="ml-6 px-6 py-3 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 bg-[#6C5CE7] text-white hover:bg-[#3E37A1]"
               asChild
             >
@@ -245,7 +244,6 @@ export function Navbar() {
               <NavLink href="/about" text="About" />
               <NavLink href="/contact" text="Contact" />
               <Button
-                variant="custom"
                 className="w-full mt-4 px-6 py-3 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 bg-[#6C5CE7] text-white hover:bg-[#3E37A1]"
                 asChild
               >
