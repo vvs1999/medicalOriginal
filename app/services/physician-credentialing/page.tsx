@@ -15,10 +15,10 @@ export default function PhysicianCredentialingPage() {
       <main className="flex-grow container mx-auto px-4 py-12 lg:py-20">
         {/* Hero Section with Gradient Background */}
         <section className="relative py-24 bg-gradient-to-r from-[#3E37A1] to-[#6C5CE7] text-white text-center mb-12 lg:mb-20">
-          <h1 className="text-4xl lg:text-5xl font-bold mb-4">
+          <h1 className="text-5xl font-extrabold mb-4">
             Physician Credentialing
           </h1>
-          <p className="text-lg lg:text-xl max-w-3xl mx-auto mb-8">
+          <p className="text-lg lg:text-xl max-w-3xl mx-auto mb-6">
             Streamline credentialing to get your physicians practice-ready.
           </p>
           <Link href="/contact">
@@ -111,8 +111,8 @@ export default function PhysicianCredentialingPage() {
               <div className="mt-4 space-y-2 text-center md:text-left">
                 <p className="text-base flex items-center justify-center md:justify-start">
                   <FaMapMarkerAlt className="mr-2 text-[#FFC107] text-lg" />
-                  AccurusBill 108 W 39th Street Ste 1006PMB2018
-                  New York, NY 10018, United States
+                  AccurusBill 108 W 39th Street Ste 1006 #2018 <br />
+                  New York, NY 10018 United States
                 </p>
                 <p className="text-base">Email: contact@accurusbill.com</p>
               </div>
