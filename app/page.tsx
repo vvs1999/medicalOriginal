@@ -512,8 +512,8 @@ export default function HomePage() {
               <div className="mt-4 space-y-2 text-center md:text-left">
                 <p className="text-base flex items-center justify-center md:justify-start">
                   <FaMapMarkerAlt className="mr-2 text-[#FFC107] text-lg" />
-                  108 W 39th Street Ste 1006PMB2018<br />
-                  New York, NY 10018 United States
+                  AccurusBill 108 W 39th Street Ste 1006 #2018 <br />
+                  New York, NY 10018 United States.
                 </p>
                 <p className="text-base">Email: contact@accurusbill.com</p>
               </div>
