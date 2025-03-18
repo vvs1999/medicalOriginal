@@ -30,7 +30,7 @@ export default function MedicalBillingPage() {
             <h1 className="text-4xl md:text-5xl font-extrabold mb-6">
               Medical Billing & Claims Submission
             </h1>
-            {/* Line 34: Build log error 34:47 and 34:100 */}
+            {/* Line 35: Build log error 35:47 and 35:100 */}
             <p className="text-lg md:text-xl max-w-2xl mx-auto mb-8">
               <span className="font-semibold">"From Charge to Cash: Fewer Denials, Faster Payments."</span>
             </p>
@@ -127,7 +127,7 @@ export default function MedicalBillingPage() {
                             </span>
                             Our Approach
                           </h5>
-                          {/* Line 130: Build log error 130:99 and 130:100 */}
+                          {/* Line 132: Build log error 132:99 and 132:100 */}
                           <p className="text-gray-700 ml-9">
                             We employ robust validation steps to identify issues early. Whether it''s a typo or payer-specific requirement, we flag and correct potential discrepancies long before submission, minimizing rework and delays.
                           </p>
@@ -173,7 +173,7 @@ export default function MedicalBillingPage() {
                             </span>
                             Our Approach
                           </h5>
-                          {/* Line 175: Build log error 175:143 and 175:144 */}
+                          {/* Line 178: Build log error 178:143 and 178:144 */}
                           <p className="text-gray-700 ml-9">
                             Once your charges are finalized, AccurusBill submits claims promptly-often on the same or next business day-so you''re never left waiting to start the reimbursement clock.
                           </p>
@@ -203,7 +203,7 @@ export default function MedicalBillingPage() {
                             </span>
                             Our Approach
                           </h5>
-                          {/* Line 204: Build log error 204:159 and 204:160 */}
+                          {/* Line 208: Build log error 208:159 and 208:160 */}
                           <p className="text-gray-700 ml-9">
                             Our specialists maintain current payer guidelines to ensure each claim matches what insurers need. We tailor claim details so they''re correct and compliant upon submission, giving you the best chance for first-pass approval.
                           </p>
@@ -307,7 +307,7 @@ export default function MedicalBillingPage() {
                             </span>
                             Our Approach
                           </h5>
-                          {/* Line 278: Build log error 278:169, 278:170, 278:183, 278:184 */}
+                          {/* Line 282: Build log error 282:169, 282:170, 282:183, 282:184 */}
                           <p className="text-gray-700 ml-9">
                             Whenever a claim is denied or short-paid, AccurusBill''s specialists jump into action. We examine denial reasons, gather any necessary documentation, and submit appeals following each payer''s specific protocols-ensuring no legitimate revenue is left behind.
                           </p>
@@ -382,7 +382,7 @@ export default function MedicalBillingPage() {
                             </span>
                             Our Approach
                           </h5>
-                          {/* Line 307: Build log error 307:82, 307:83, 307:218, 307:219 */}
+                          {/* Line 312: Build log error 312:82, 312:83, 312:218, 312:219 */}
                           <p className="text-gray-700 ml-9">
                             AccurusBill provides routine, clear updates-weekly or monthly-highlighting claims in process, paid claims, and any unsettled denials. You''ll always know how much revenue is on its way.
                           </p>
@@ -412,7 +412,8 @@ export default function MedicalBillingPage() {
                             </span>
                             Our Approach
                           </h5>
-                          {/* Line 325: Build log error 325:93 and 325:94 (should be nearby) */}
+                          {/* Line 330: Build log error 330:93 and 330:94 - Marker for debugging */}
+                          {/* LINE 330 MARKER */}
                           <p className="text-gray-700 ml-9">
                             We assign you a single, knowledgeable point of contact who understands your specialty, payers, and billing patterns. This person coordinates everything from claim submission to denial appeals.
                           </p>
@@ -442,7 +443,8 @@ export default function MedicalBillingPage() {
                             </span>
                             Our Approach
                           </h5>
-                          {/* Line 336: Build log error 336:222 and 336:223 (should be nearby) */}
+                          {/* Line 341: Build log error 341:222 and 341:223 - Marker for debugging */}
+                          {/* LINE 341 MARKER */}
                           <p className="text-gray-700 ml-9">
                             We routinely update our methods and keep an eye on regulatory changes, so our approach to claims submission remains effective. This ongoing improvement safeguards your reimbursements in a changing environment.
                           </p>
@@ -491,7 +493,7 @@ export default function MedicalBillingPage() {
                 {
                   icon: <FaCheckCircle className="text-4xl text-[#6C5CE7] mx-auto" />,
                   title: "Client-Centric Approach",
-                  /* Line 381: Build log error 381:166 and 381:167 */
+                  /* Line 387: Build log error 387:166 and 387:167 */
                   description:
                     "We tailor our processes to your practice''s needs, rather than forcing a one-size-fits-all system.",
                 },
