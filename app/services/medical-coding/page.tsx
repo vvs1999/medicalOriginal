@@ -31,7 +31,7 @@ export default function MedicalCodingPage() {
               Medical Coding (ICD-10, CPT)
             </h1>
             <p className="text-lg md:text-xl max-w-2xl mx-auto mb-8">
-              <span className="font-semibold">"Audit-Proof Coding, Revenue Maximized."</span>
+              <span className="font-semibold">Audit-Proof Coding, Revenue Maximized.</span>
             </p>
             <Button
               asChild
