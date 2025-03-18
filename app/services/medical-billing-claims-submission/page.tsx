@@ -12,7 +12,7 @@ import {
   FaTwitter,
 } from "react-icons/fa";
 
-export const metadata = {
+export const metadata = { 
   title: "Medical Billing & Claims Submission - AccurusBill",
   description:
     "Streamline medical billing and claims submission with AccurusBill. Reduce denials and accelerate payments with expert, tailored solutions.",
