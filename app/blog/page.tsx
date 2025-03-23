@@ -16,12 +16,12 @@ export default function BlogPage() {
       description: "Learn more about how AccurusBill empowers private clinics with comprehensive, cost-effective solutions.",
       poster: "/images/TN1.jpg", // Updated path with leading slash
     },
-    {
-      src: "/videos/MedicalBilling.mp4",
-      title: "Our Mission",
-      description: "See how AccurusBill is transforming revenue cycle management for independent physicians.",
-      poster: "/images/TN1.jpg", // Updated path with leading slash
-    },
+    // {
+    //   src: "/videos/MedicalBilling.mp4",
+    //   title: "Our Mission",
+    //   description: "See how AccurusBill is transforming revenue cycle management for independent physicians.",
+    //   poster: "/images/TN1.jpg", // Updated path with leading slash
+    // },
   ];
 
   return (
