@@ -12,7 +12,7 @@ export default function BlogPage() {
   const videos = [
     {
       src: "/videos/MedicalBilling.mp4",
-      title: "Discover AccurusBill",
+      title: "Transform Your Billing, Transform Your Revenue",
       description: "Check out this video to discover how to streamline your billing process and boost your practice’s revenue.",
       poster: "/images/TN1.jpg", // Updated path with leading slash
     },
