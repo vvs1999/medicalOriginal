@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Navbar } from "@/components/Navbar";
-import { FaMapMarkerAlt, FaLinkedin, FaTwitter } from "react-icons/fa";
+import { FaMapMarkerAlt, FaLinkedin, FaTwitter, FaCheck } from "react-icons/fa";
 
 export default function AboutPage() {
   const teamMembers = [
