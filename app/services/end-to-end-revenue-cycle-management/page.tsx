@@ -11,6 +11,7 @@ import {
   FaShieldAlt,
   FaClock,
   FaCode,
+  FaCheck,
   FaPaperPlane,
   FaExclamationTriangle,
   FaMoneyBillWave,
