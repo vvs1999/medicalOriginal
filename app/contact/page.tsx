@@ -8,7 +8,7 @@ import { useEffect, useState, Suspense, ChangeEvent } from "react";
 import { Navbar } from "@/components/Navbar";
 import emailjs from "@emailjs/browser";
 import Link from "next/link";
-import { FaMapMarkerAlt, FaLinkedin, FaTwitter } from "react-icons/fa";
+import { FaMapMarkerAlt, FaLinkedin, FaTwitter, FaCheck } from "react-icons/fa";
 
 // Define form data type
 interface FormData {
