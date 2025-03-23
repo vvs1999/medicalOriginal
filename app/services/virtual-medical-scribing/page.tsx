@@ -6,6 +6,7 @@ import {
   FaPenSquare,
   FaClock,
   FaLock,
+  FaCheck,
   FaUserMd,
   FaLinkedin, // Added for social media
   FaTwitter, // Added for social media
@@ -541,83 +542,100 @@ export default function VirtualMedicalScribingPage() {
 
       {/* Footer */}
       <footer className="bg-[#3E37A1] text-white py-12">
-              <div className="container mx-auto px-4">
-                <div className="flex flex-col md:flex-row justify-between items-start">
-                  {/* Left Section: Copyright, Email, Address, and Navigation */}
-                  <div className="mb-6 md:mb-0">
-                    <p className="text-base text-center md:text-left">
-                      © 2024 AccurusBill. Empowering Private Clinics with Comprehensive,
-                      Cost-Effective Solutions
-                    </p>
-                    <div className="mt-4 space-y-2 text-center md:text-left">
-                      <p className="text-base flex items-center justify-center md:justify-start">
-                        <FaMapMarkerAlt className="mr-2 text-[#FFC107] text-lg" />
-                        AccurusBill 108 W 39th Street Ste 1006 #2018 <br />
-                        New York, NY 10018 United States.
-                      </p>
-                      <p className="text-base">Email: contact@accurusbill.com</p>
-                    </div>
-                    <div className="mt-4 flex justify-center md:justify-start space-x-4">
-                      <Link
-                        href="/"
-                        className="text-white hover:text-[#FFC107] transition duration-300"
-                      >
-                        Home
-                      </Link>
-                      <Link
-                        href="/about"
-                        className="text-white hover:text-[#FFC107] transition duration-300"
-                      >
-                        About Us
-                      </Link>
-                      <Link
-                        href="/services"
-                        className="text-white hover:text-[#FFC107] transition duration-300"
-                      >
-                        Services
-                      </Link>
-                      <Link
-                        href="/blog"
-                        className="text-white hover:text-[#FFC107] transition duration-300"
-                      >
-                        Blog
-                      </Link>
-                      <Link
-                        href="/contact"
-                        className="text-white hover:text-[#FFC107] transition duration-300"
-                      >
-                        Contact
-                      </Link>
-                    </div>
+        <div className="container mx-auto px-4">
+          <div className="flex flex-col md:flex-row justify-between items-start">
+            {/* Left Section: Copyright, Email, Address, and Navigation */}
+            <div className="mb-6 md:mb-0">
+              <p className="text-base text-center md:text-left">
+                © 2024 AccurusBill. Empowering Private Clinics with
+                Comprehensive, Cost-Effective Solutions
+              </p>
+              <div className="mt-4 space-y-2 text-center md:text-left">
+                <p className="text-base flex items-center justify-center md:justify-start">
+                  <FaMapMarkerAlt className="mr-2 text-[#FFC107] text-lg" />
+                  AccurusBill 108 W 39th Street Ste 1006 #2018 <br />
+                  New York, NY 10018 United States
+                </p>
+                <p className="text-base">Email: contact@accurusbill.com</p>
+              </div>
+              <div className="mt-4 flex justify-center md:justify-start space-x-4">
+                <Link
+                  href="/"
+                  className="text-white hover:text-[#FFC107] transition duration-300"
+                >
+                  Home
+                </Link>
+                <Link
+                  href="/about"
+                  className="text-white hover:text-[#FFC107] transition duration-300"
+                >
+                  About Us
+                </Link>
+                <Link
+                  href="/services"
+                  className="text-white hover:text-[#FFC107] transition duration-300"
+                >
+                  Services
+                </Link>
+                <Link
+                  href="/blog"
+                  className="text-white hover:text-[#FFC107] transition duration-300"
+                >
+                  Blog
+                </Link>
+                <Link
+                  href="/contact"
+                  className="text-white hover:text-[#FFC107] transition duration-300"
+                >
+                  Contact
+                </Link>
+              </div>
+            </div>
+
+            {/* Right Section: Social Media and HIPAA Badge */}
+            <div className="flex flex-col items-center md:items-end space-y-4">
+              {/* Social Media */}
+              <div className="text-center md:text-right bg-white/5 p-4 rounded-lg">
+                <h3 className="text-lg font-semibold mb-4">Follow Us</h3>
+                <div className="flex justify-center md:justify-end space-x-6">
+                  <Link
+                    href="https://www.linkedin.com/company/accurusbill/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-white hover:text-[#FFC107] transition duration-300 transform hover:scale-110"
+                  >
+                    <FaLinkedin className="text-4xl" />
+                    <span className="sr-only">LinkedIn</span>
+                  </Link>
+                  <Link
+                    href="https://twitter.com/explore"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-white hover:text-[#FFC107] transition duration-300 transform hover:scale-110"
+                  >
+                    <FaTwitter className="text-4xl" />
+                    <span className="sr-only">Twitter</span>
+                  </Link>
+                </div>
+              </div>
+
+              {/* HIPAA Badge */}
+              <div className="flex justify-center md:justify-end group">
+                <div className="relative flex items-center">
+                  <div className="bg-gradient-to-r from-[#4B5EAA] to-[#3E4A8A] rounded px-4 py-2 border-2 border-[#4B5EAA] shadow-xl group-hover:border-[#FFC107] transition duration-300">
+                    <span className="text-base font-extrabold text-white group-hover:text-[#FFC107] transition duration-300 tracking-wide">
+                      HIPAA COMPLIANT
+                    </span>
                   </div>
-      
-                  {/* Right Section: Social Media */}
-                  <div className="text-center md:text-right bg-white/10 p-4 rounded-lg">
-                    <h3 className="text-lg font-semibold mb-4">Follow Us</h3>
-                    <div className="flex justify-center md:justify-end space-x-6">
-                      <Link
-                        href="https://www.linkedin.com/company/accurusbill/"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-white hover:text-[#FFC107] transition duration-300 transform hover:scale-110"
-                      >
-                        <FaLinkedin className="text-4xl" />
-                        <span className="sr-only">LinkedIn</span>
-                      </Link>
-                      <Link
-                        href="https://twitter.com/explore"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-white hover:text-[#FFC107] transition duration-300 transform hover:scale-110"
-                      >
-                        <FaTwitter className="text-4xl" />
-                        <span className="sr-only">Twitter</span>
-                      </Link>
-                    </div>
+                  <div className="absolute right-[-14px] w-8 h-8 bg-white/90 rounded-full flex items-center justify-center border-2 border-[#4B5EAA] shadow-md group-hover:bg-[#FFC107] group-hover:border-[#FFC107] transition duration-300">
+                    <FaCheck className="text-[#4B5EAA] text-lg group-hover:text-white transition duration-300" />
                   </div>
                 </div>
               </div>
-            </footer>
+            </div>
+          </div>
+        </div>
+      </footer>
           </div>
         );
       }
