@@ -14,13 +14,13 @@ export default function BlogPage() {
       src: "/videos/MedicalBilling.mp4",
       title: "Transform Your Billing, Transform Your Revenue",
       description: "Check out this video to discover how to streamline your billing process and boost your practice’s revenue.",
-      poster: "/images/TN1.jpg", // Updated path with leading slash
+      poster: "/images/TN1.jpg",
     },
     // {
     //   src: "/videos/MedicalBilling.mp4",
     //   title: "Our Mission",
     //   description: "See how AccurusBill is transforming revenue cycle management for independent physicians.",
-    //   poster: "/images/TN1.jpg", // Updated path with leading slash
+    //   poster: "/images/TN1.jpg",
     // },
   ];
 
@@ -184,6 +184,11 @@ function VideoCard({ video, index }: { video: { src: string; title: string; desc
     }
   };
 
+  // Prevent right-click context menu on the video
+  const handleContextMenu = (e: React.MouseEvent<HTMLVideoElement>) => {
+    e.preventDefault();
+  };
+
   return (
     <motion.div
       initial={{ opacity: 0, scale: 0.95 }}
@@ -197,6 +202,8 @@ function VideoCard({ video, index }: { video: { src: string; title: string; desc
         <video
           ref={videoRef}
           controls={isPlaying}
+          controlsList="nodownload" // Disable download option in controls
+          onContextMenu={handleContextMenu} // Disable right-click context menu
           className="w-full h-auto aspect-video"
           poster={video.poster}
         >
