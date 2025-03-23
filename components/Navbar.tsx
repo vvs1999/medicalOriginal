@@ -157,6 +157,7 @@ export function Navbar() {
               </li>
               <NavLink href="/pricing" text="Pricing" />
               <NavLink href="/about" text="About" />
+              <NavLink href="/blog" text="Blog" /> {/* Added Blog Link */}
               <NavLink href="/contact" text="Contact" />
             </ul>
             <Button
@@ -242,6 +243,7 @@ export function Navbar() {
               </li>
               <NavLink href="/pricing" text="Pricing" />
               <NavLink href="/about" text="About" />
+              <NavLink href="/blog" text="Blog" /> {/* Added Blog Link */}
               <NavLink href="/contact" text="Contact" />
               <Button
                 className="w-full mt-4 px-6 py-3 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 bg-[#6C5CE7] text-white hover:bg-[#3E37A1]"
