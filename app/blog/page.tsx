@@ -67,9 +67,9 @@ export default function BlogPage() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto">
               {featuredContent.map((item, index) =>
                 item.type === "video" ? (
-                  <VideoCard key={index} video={item} index={index} />
+                  <VideoCard key={index} video={item} />
                 ) : (
-                  <BlogCard key={index} blog={item} index={index} />
+                  <BlogCard key={index} blog={item} />
                 )
               )}
             </div>
@@ -210,7 +210,7 @@ export default function BlogPage() {
 }
 
 // VideoCard Component to handle thumbnail and play interaction
-function VideoCard({ video, index }: { video: VideoPost; index: number }) {
+function VideoCard({ video }: { video: VideoPost }) {
   const [isPlaying, setIsPlaying] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
 
@@ -269,7 +269,7 @@ function VideoCard({ video, index }: { video: VideoPost; index: number }) {
 }
 
 // BlogCard Component for featured blog post
-function BlogCard({ blog, index }: { blog: BlogPost; index: number }) {
+function BlogCard({ blog }: { blog: BlogPost }) {
   return (
     <div className="flex flex-col items-center">
       <div className="relative w-full rounded-lg overflow-hidden shadow-2xl group">
