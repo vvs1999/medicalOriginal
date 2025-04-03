@@ -157,8 +157,9 @@ export function Navbar() {
               </li>
               <NavLink href="/pricing" text="Pricing" />
               <NavLink href="/about" text="About" />
-              <NavLink href="/blog" text="Blog" /> {/* Added Blog Link */}
+              <NavLink href="/blog" text="Blog" />
               <NavLink href="/contact" text="Contact" />
+              <NavLink href="/efficiency-calculator" text="Efficiency Calculator" /> {/* Added Revenue Calculator Link */}
             </ul>
             <Button
               className="ml-6 px-6 py-3 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 bg-[#6C5CE7] text-white hover:bg-[#3E37A1]"
@@ -243,8 +244,9 @@ export function Navbar() {
               </li>
               <NavLink href="/pricing" text="Pricing" />
               <NavLink href="/about" text="About" />
-              <NavLink href="/blog" text="Blog" /> {/* Added Blog Link */}
+              <NavLink href="/blog" text="Blog" />
               <NavLink href="/contact" text="Contact" />
+              <NavLink href="/efficiency-calculator" text="Efficiency Calculator" /> {/* Added Revenue Calculator Link */}
               <Button
                 className="w-full mt-4 px-6 py-3 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 bg-[#6C5CE7] text-white hover:bg-[#3E37A1]"
                 asChild
