@@ -154,8 +154,9 @@ const blogPosts = {
         <p className="text-gray-700 leading-relaxed mt-2">
           Improve your billing workflow and oversight to catch duplicates or errors before claims go out. Utilize your practice management system’s safeguards: for instance, many systems will warn you if you attempt to enter a charge for the same procedure on the same date that’s already been entered. Ensure those warning flags are not ignored. Establish clear internal communication: if multiple people handle billing, define who is responsible for final claim submission for each account to avoid overlapping efforts. It helps to have a single source of truth – for example, charges should be entered only once in the EHR or billing system, and any rebill should reference that original record rather than creating a new one from scratch. Conduct a quick pre-submission audit each day or week: have a biller or supervisor review the claims ready to send out, scanning for obvious duplicates or anomalies (like two identical high-value claims for the same patient, same date). If a claim needs to be resubmitted (perhaps due to a correction), make sure to flag the original claim appropriately (using frequency codes or notes) so that the resubmission is properly marked as such and not seen as a duplicate by the payer. On the data entry side, implementing standard operating procedures such as double data entry checks or automated field validations can reduce simple mistakes. For instance, some systems can be configured to validate that a service date isn’t in the future or flag if the same service/code is entered twice for one encounter. Regular staff training is also useful: emphasize attention to detail and teach staff how to interpret remittance advice codes – if they see a duplicate denial, they should investigate why the duplicate was sent in the first place and correct the process. Technology can assist here as well: advanced claim management platforms use algorithms to detect potential duplicates before submission, and automating portions of the billing process can minimize human keystroke errors. Ultimately, vigilance and good software are your best defense against duplicate claim denials. By ensuring each claim is unique and accurate, you’ll maintain a higher first-pass acceptance rate and save your team the frustration of unnecessary rework.
         </p>
-                {/* Conclusion */}
-                <h2 className="text-2xl font-semibold text-[#3E37A1] mt-8 mb-4">Conclusion: Strengthening RCM Processes to Reduce Denials</h2>
+
+        {/* Conclusion */}
+        <h2 className="text-2xl font-semibold text-[#3E37A1] mt-8 mb-4">Conclusion: Strengthening RCM Processes to Reduce Denials</h2>
         <p className="text-gray-700 leading-relaxed mt-2">
           Every denied claim tells a story about a process gap or oversight. By addressing these seven areas – from front-end patient data capture to back-end billing edits – healthcare organizations can dramatically improve their reimbursement outcomes. The goal of RCM optimization is not just to chase denials after they happen, but to prevent them from happening in the first place. Considering that industry averages show as many as 60% of denied claims are never resubmitted (and thus become lost revenue), the payoff for proactive denial prevention is enormous. Start by analyzing your own denial trends: identify which of these mistakes are contributing most to your organization’s denials and target them systematically. Small process improvements, like implementing an insurance verification checklist or a pre-submission coding audit, can yield significant reductions in denials.
         </p>
@@ -183,7 +184,13 @@ const blogPosts = {
   },
 };
 
-export default function BlogPostPage({ params }: { params: { slug: string } }) {
+// Define the props type to match Next.js PageProps
+type BlogPostPageProps = {
+  params: { slug: string };
+  searchParams: { [key: string]: string | string[] | undefined };
+};
+
+export default function BlogPostPage({ params }: BlogPostPageProps) {
   const post = blogPosts[params.slug as keyof typeof blogPosts];
 
   if (!post) {
