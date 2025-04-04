@@ -122,8 +122,8 @@ export default function BlogPostPage({ params }: BlogPostPageProps) {
                   return (
                     <div key={index} className="mb-12">
                       <p className="text-lg leading-relaxed text-gray-700">{paragraph}</p>
-                      <div className="mt-6 p-4 bg-[#6C5CE7]/10 rounded-lg text-center">
-                        <span className="text-2xl font-bold text-[#6C5CE7]">$19.7 Billion</span>
+                      <div className="mt-6 p-4 bg-[#6C5CE7]/10 rounded-lg border-l-4 border-[#6C5CE7] shadow-md">
+                        <span className="text-2xl font-bold text-[#3E37A1]">$19.7 Billion</span>
                         <p className="text-gray-600 mt-1">Annual cost of denials for hospitals—don’t let your practice contribute to this statistic.</p>
                       </div>
                     </div>
@@ -133,8 +133,21 @@ export default function BlogPostPage({ params }: BlogPostPageProps) {
                 // Mistake sections
                 if (paragraph.startsWith("Mistake")) {
                   const mistakeNumber = paragraph.match(/Mistake (\d+)/)?.[1];
-                  const problemText = paragraphs[index + 1];
-                  const fixText = paragraphs[index + 3]?.startsWith("The Fix:") ? paragraphs[index + 3].replace("The Fix: ", "") : "";
+                  const problemText = paragraphs[index + 1]; // Problem text is directly after the Mistake heading
+
+                  // Find the "The Fix" paragraph dynamically
+                  let fixText = "";
+                  for (let i = index + 1; i < paragraphs.length; i++) {
+                    if (paragraphs[i].startsWith("The Fix:")) {
+                      fixText = paragraphs[i].replace("The Fix: ", "");
+                      break;
+                    }
+                    // Stop searching if we hit the next "Mistake" or "Conclusion"
+                    if (paragraphs[i].startsWith("Mistake") || paragraphs[i].startsWith("Conclusion")) {
+                      break;
+                    }
+                  }
+
                   const fixes = fixText.split(". ").filter(fix => fix.trim()).map(fix => fix + (fix.endsWith(".") ? "" : "."));
 
                   return (
@@ -153,20 +166,20 @@ export default function BlogPostPage({ params }: BlogPostPageProps) {
                       <h4 className="text-xl font-medium text-gray-800 mb-2">The Problem</h4>
                       <p className="leading-relaxed mb-4 text-gray-700">{problemText}</p>
                       {problemText.includes("45%") && (
-                        <div className="my-4 p-4 bg-[#6C5CE7]/10 rounded-lg text-center">
-                          <span className="text-2xl font-bold text-[#6C5CE7]">45%</span>
+                        <div className="my-4 p-4 bg-[#6C5CE7]/10 rounded-lg border-l-4 border-[#6C5CE7] shadow-md">
+                          <span className="text-2xl font-bold text-[#3E37A1]">45%</span>
                           <p className="text-gray-600 mt-1">of healthcare leaders report denials due to data errors.</p>
                         </div>
                       )}
                       {problemText.includes("40%") && (
-                        <div className="my-4 p-4 bg-[#6C5CE7]/10 rounded-lg text-center">
-                          <span className="text-2xl font-bold text-[#6C5CE7]">40%</span>
+                        <div className="my-4 p-4 bg-[#6C5CE7]/10 rounded-lg border-l-4 border-[#6C5CE7] shadow-md">
+                          <span className="text-2xl font-bold text-[#3E37A1]">40%</span>
                           <p className="text-gray-600 mt-1">of denials are linked to prior auth issues.</p>
                         </div>
                       )}
                       {problemText.includes("56%") && (
-                        <div className="my-4 p-4 bg-[#6C5CE7]/10 rounded-lg text-center">
-                          <span className="text-2xl font-bold text-[#6C5CE7]">56%</span>
+                        <div className="my-4 p-4 bg-[#6C5CE7]/10 rounded-lg border-l-4 border-[#6C5CE7] shadow-md">
+                          <span className="text-2xl font-bold text-[#3E37A1]">56%</span>
                           <p className="text-gray-600 mt-1">of coding audits uncover errors.</p>
                         </div>
                       )}
