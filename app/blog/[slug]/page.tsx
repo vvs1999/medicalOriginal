@@ -5,7 +5,6 @@ import { FaArrowLeft, FaMapMarkerAlt, FaLinkedin, FaTwitter, FaCheck, FaUser, Fa
 import Link from "next/link";
 import Image from "next/image";
 import { notFound } from "next/navigation";
-import { JSX, use } from "react";
 
 // Define types for blog post data
 type BlogPost = {
