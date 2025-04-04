@@ -5,7 +5,7 @@ import { FaArrowLeft, FaMapMarkerAlt, FaLinkedin, FaTwitter, FaCheck, FaUser, Fa
 import Link from "next/link";
 import Image from "next/image";
 import { notFound } from "next/navigation";
-import { use } from "react"; // Removed unused JSX import
+import { use } from "react";
 
 // Define types for blog post data
 type BlogPost = {
@@ -24,7 +24,7 @@ const blogPosts: Record<string, BlogPost> = {
     date: "April 02, 2025",
     image: "/images/dn1.jpg",
     content: `
-Imagine losing millions in revenue - not because of poor care, but because of preventable billing errors. Medical billing denials are a silent revenue killer, with 10–15% of claims denied on first submission and 73% of providers seeing a spike in denials over the past two years. The cost? A staggering $19.7 billion annually in administrative expenses for hospitals alone, not to mention the impact on patient trust and staff morale. The good news: most denials can be stopped before they start. Let’s explore seven critical mistakes that sabotage your claims—and how to fix them for a healthier revenue cycle.
+Imagine losing millions in revenue - not because of poor care, but because of preventable billing errors. Medical billing denials are a silent revenue killer, with 10–15% of claims denied on first submission and 73% of providers seeing a spike in denials over the past two years. The cost? A staggering $植物.7 billion annually in administrative expenses for hospitals alone, not to mention the impact on patient trust and staff morale. The good news: most denials can be stopped before they start. Let’s explore seven critical mistakes that sabotage your claims—and how to fix them for a healthier revenue cycle.
 
 Mistake 1: Patient Data Errors That Derail Claims
 A misspelled name, an outdated address, or a wrong insurance ID—small mistakes that lead to big denials. Data errors at registration are the top cause of claim rejections, with 45% of healthcare leaders pointing to inaccurate patient info as a primary culprit.
@@ -60,15 +60,17 @@ Don’t let preventable denials drain your revenue. By addressing these seven mi
   },
 };
 
-// Define a simple props type that matches Next.js expectations
+// Define a simple props type that matches Next.js 15 expectations
 type BlogPostPageProps = {
   params: Promise<{ slug: string }>;
-  searchParams?: { [key: string]: string | string[] | undefined };
+  searchParams?: Promise<{ [key: string]: string | string[] | undefined }>;
 };
 
-export default function BlogPostPage({ params }: BlogPostPageProps) {
-  // Unwrap the params Promise using React.use()
+export default function BlogPostPage({ params, searchParams }: BlogPostPageProps) {
+  // Unwrap the params and searchParams Promises using React.use()
   const resolvedParams = use(params);
+  const resolvedSearchParams = use(searchParams || Promise.resolve({}));
+
   const post = blogPosts[resolvedParams.slug as keyof typeof blogPosts];
 
   if (!post) {
