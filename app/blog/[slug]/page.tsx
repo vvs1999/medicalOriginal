@@ -5,7 +5,7 @@ import { FaArrowLeft, FaMapMarkerAlt, FaLinkedin, FaTwitter, FaCheck, FaUser, Fa
 import Link from "next/link";
 import Image from "next/image";
 import { notFound } from "next/navigation";
-import { use, useState, useEffect } from "react";
+import { use, useState } from "react"; // Removed useEffect
 import emailjs from "@emailjs/browser";
 
 // Define types for blog post data
