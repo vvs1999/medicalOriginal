@@ -302,33 +302,25 @@ export default function EfficiencyCalculatorPage() {
       return {
         status: "within",
         color: "bg-green-500",
-        message: `Great job! Your A/R Days = ${arDaysState.arDays.toFixed(1)}, which is within the standard range (${lower}–${upper}) for ${
-          arDaysState.specialty === "Other" ? arDaysState.customSpecialty : arDaysState.specialty
-        }.`,
+        message: `Great job! Your A/R Days = ${arDaysState.arDays.toFixed(1)}, which is within the standard range (${lower}–${upper}) for ${arDaysState.specialty === "Other" ? arDaysState.customSpecialty : arDaysState.specialty}.`,
       };
     } else if (arDaysState.arDays < lower) {
       return {
         status: "below",
         color: "bg-blue-500",
-        message: `Your A/R Days = ${arDaysState.arDays.toFixed(1)}, which is below the typical range (${lower}–${upper}) for ${
-          arDaysState.specialty === "Other" ? arDaysState.customSpecialty : arDaysState.specialty
-        }.`,
+        message: `Your A/R Days = ${arDaysState.arDays.toFixed(1)}, which is below the typical range (${lower}–${upper}) for ${arDaysState.specialty === "Other" ? arDaysState.customSpecialty : arDaysState.specialty}.`,
       };
     } else if (arDaysState.arDays <= upper + 10) {
       return {
         status: "slightly-above",
         color: "bg-yellow-500",
-        message: `Your A/R Days = ${arDaysState.arDays.toFixed(1)}, which is slightly above the typical range (${lower}–${upper}) for ${
-          arDaysState.specialty === "Other" ? arDaysState.customSpecialty : arDaysState.specialty
-        }.`,
+        message: `Your A/R Days = ${arDaysState.arDays.toFixed(1)}, which is slightly above the typical range (${lower}–${upper}) for ${arDaysState.specialty === "Other" ? arDaysState.customSpecialty : arDaysState.specialty}.`,
       };
     } else {
       return {
         status: "much-higher",
         color: "bg-red-500",
-        message: `Your A/R Days = ${arDaysState.arDays.toFixed(1)}, which is above the typical range (${lower}–${upper}) for ${
-          arDaysState.specialty === "Other" ? arDaysState.customSpecialty : arDaysState.specialty
-        }.`,
+        message: `Your A/R Days = ${arDaysState.arDays.toFixed(1)}, which is above the typical range (${lower}–${upper}) for ${arDaysState.specialty === "Other" ? arDaysState.customSpecialty : arDaysState.specialty}.`,
       };
     }
   };
@@ -771,6 +763,7 @@ export default function EfficiencyCalculatorPage() {
                           <p className="text-gray-700"><strong>Current Collection Rate:</strong> {billingEfficiencyState.result.currentCollectionRate.toFixed(2)}%</p>
                         </div>
                         <div className="p-4 bg-white rounded-lg shadow-md">
+                          <h3 className="text-lg font-semibold text-[#6C5CE7] mb-2">AccurusBill Achievable Targets</h3>
                           <p className="text-gray-700"><strong>Target Monthly Collections (98%):</strong> ${billingEfficiencyState.result.targetCollections.toFixed(2)}</p>
                           <p className="text-gray-700"><strong>Additional Monthly Revenue:</strong> ${billingEfficiencyState.result.additionalRevenue.toFixed(2)}</p>
                           <p className="text-gray-700"><strong>Monthly ROI:</strong> {billingEfficiencyState.result.monthlyROI.toFixed(2)}%</p>
@@ -785,15 +778,19 @@ export default function EfficiencyCalculatorPage() {
                       </div>
                     </div>
 
-                    <div>
-                      <h3 className="text-lg font-semibold text-[#6C5CE7] mb-2">Annual Figures</h3>
+                    <div className="mt-8 p-6 bg-gradient-to-r from-[#F5F5FC] to-[#EEF0FF] rounded-xl shadow-lg border border-[#6C5CE7]/20">
+                      <h2 className="text-2xl font-semibold text-[#6C5CE7] mb-4 text-center">Annual Figures</h2>
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        {/* Current Annual Figures */}
                         <div className="p-4 bg-white rounded-lg shadow-md">
+                          <h3 className="text-lg font-semibold text-gray-900 mb-2">Current Annual Results</h3>
                           <p className="text-gray-700"><strong>Annual Collections (Current):</strong> ${(billingEfficiencyState.result.annualCollections).toFixed(2)}</p>
+                        </div>
+                        {/* AccurusBill Achievable Targets */}
+                        <div className="p-4 bg-white rounded-lg shadow-md">
+                          <h3 className="text-lg font-semibold text-[#6C5CE7] mb-2">AccurusBill Achievable Targets</h3>
                           <p className="text-gray-700"><strong>Target Annual Collections (98%):</strong> ${(billingEfficiencyState.result.targetCollections * 12).toFixed(2)}</p>
                           <p className="text-gray-700"><strong>Additional Annual Revenue:</strong> ${billingEfficiencyState.result.annualAdditionalRevenue.toFixed(2)}</p>
-                        </div>
-                        <div className="p-4 bg-white rounded-lg shadow-md">
                           <p className="text-gray-700"><strong>Annual Billing Cost Savings:</strong> ${billingEfficiencyState.result.annualBillingCostSavings.toFixed(2)}</p>
                           <p className="text-gray-700"><strong>Overall Annual ROI:</strong> {billingEfficiencyState.result.annualROI.toFixed(2)}%</p>
                         </div>
@@ -827,6 +824,16 @@ export default function EfficiencyCalculatorPage() {
                       </Link>{" "}
                       to learn how AccurusBill can help optimize your billing process and boost your revenue.
                     </p>
+                  </div>
+
+                  {/* CTA Button for Billing Efficiency */}
+                  <div className="mt-6">
+                    <Button
+                      onClick={() => window.location.href = '/contact'}
+                      className="w-full bg-[#6C5CE7] text-white font-bold py-2 px-4 rounded hover:bg-[#3E37A1] transition duration-300 ease-in-out"
+                    >
+                      Boost Your Billing Efficiency & ROI
+                    </Button>
                   </div>
                 </div>
               )}
@@ -1005,9 +1012,7 @@ export default function EfficiencyCalculatorPage() {
                     <p className="mt-2">
                       <strong>Average Reimbursement:</strong> Typical range: $150–$250. Your input: ${claimDenialState.avgReimbursement}.
                     </p>
-                    <p className="mt-2">
-                      <strong>Rework Cost:</strong> Benchmark: $25. Your cost: $27.
-                    </p>
+                    
                     {parseFloat(claimDenialState.reworkCost) > 25 && (
                       <p className="mt-2">
                         <strong>Recommendation:</strong> Your rework cost is higher than the benchmark. Streamline workflows or{" "}
@@ -1017,15 +1022,7 @@ export default function EfficiencyCalculatorPage() {
                         for support.
                       </p>
                     )}
-                    {claimDenialState.result.lostRevenue > 10000 && (
-                      <p className="mt-2">
-                        <strong>Recommendation:</strong> Your lost revenue is substantial. Explore outsourcing RCM with{" "}
-                        <Link href="/contact" className="text-[#6C5CE7] hover:underline">
-                          AccurusBill
-                        </Link>{" "}
-                        to reduce denials.
-                      </p>
-                    )}
+                
                     {(parseInt(claimDenialState.claimDenials) / parseInt(claimDenialState.totalMonthlyClaims) <= 0.07 &&
                       parseFloat(claimDenialState.reworkCost) <= 25 &&
                       claimDenialState.result.lostRevenue <= 10000) && (
@@ -1037,6 +1034,16 @@ export default function EfficiencyCalculatorPage() {
                         for a free consultation.
                       </p>
                     )}
+                  </div>
+
+                  {/* CTA Button for Claim Denial */}
+                  <div className="mt-6">
+                    <Button
+                      onClick={() => window.location.href = '/contact'}
+                      className="w-full bg-[#6C5CE7] text-white font-bold py-2 px-4 rounded hover:bg-[#3E37A1] transition duration-300 ease-in-out"
+                    >
+                      Eliminate Denials & Reclaim Revenue with AccurusBill
+                    </Button>
                   </div>
                 </div>
               )}
@@ -1171,7 +1178,7 @@ export default function EfficiencyCalculatorPage() {
                   </div>
                 )}
 
-{arDaysState.error && (
+                {arDaysState.error && (
                   <div className="p-3 bg-red-100 text-red-700 rounded-lg">
                     {arDaysState.error}
                   </div>
@@ -1219,6 +1226,16 @@ export default function EfficiencyCalculatorPage() {
                       </Link>{" "}
                       to learn how our subscription plans can help your practice thrive.
                     </p>
+                  </div>
+
+                  {/* CTA Button for A/R Days */}
+                  <div className="mt-6">
+                    <Button
+                      onClick={() => window.location.href = '/contact'}
+                      className="w-full bg-[#6C5CE7] text-white font-bold py-2 px-4 rounded hover:bg-[#3E37A1] transition duration-300 ease-in-out"
+                    >
+                      Get Expert A/R Support Now!
+                    </Button>
                   </div>
                 </div>
               )}
@@ -1420,6 +1437,16 @@ export default function EfficiencyCalculatorPage() {
                     <p className="mt-2">
                       <strong>Tip:</strong> Try adjusting your enrollment % to see how small changes can significantly increase revenue.
                     </p>
+                  </div>
+
+                  {/* CTA Button for CCM/RPM Revenue */}
+                  <div className="mt-6">
+                    <Button
+                      onClick={() => window.location.href = '/contact'}
+                      className="w-full bg-[#6C5CE7] text-white font-bold py-2 px-4 rounded hover:bg-[#3E37A1] transition duration-300 ease-in-out"
+                    >
+                      Unlock CCM/RPM Growth – Contact Accurusbill Now
+                    </Button>
                   </div>
                 </div>
               )}
