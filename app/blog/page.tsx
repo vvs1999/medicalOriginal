@@ -1,132 +1,398 @@
 "use client";
 
 import { Navbar } from "@/components/Navbar";
-import { FaMapMarkerAlt, FaLinkedin, FaTwitter, FaCheck, FaPlay, FaArrowRight } from "react-icons/fa";
+import { FaArrowLeft, FaMapMarkerAlt, FaLinkedin, FaTwitter, FaCheck, FaUser, FaFileAlt, FaClock, FaCode, FaShieldAlt, FaNetworkWired, FaCopy, FaEnvelope, FaPhone, FaComment } from "react-icons/fa";
 import Link from "next/link";
 import Image from "next/image";
-import { useState, useRef } from "react";
+import { notFound } from "next/navigation";
+import { use, useState, useEffect } from "react";
+import emailjs from "@emailjs/browser";
 
-// Define types for featured content
-type VideoPost = {
-  type: "video";
-  src: string;
-  title: string;
-  description: string;
-  poster: string;
-};
-
+// Define types for blog post data
 type BlogPost = {
-  type: "blog";
-  slug: string;
   title: string;
   description: string;
-  image: string;
   date: string;
+  image: string;
+  content: string;
 };
 
-type Post = VideoPost | BlogPost;
+// Blog post data (in a real app, this would come from a CMS or database)
+const blogPosts: Record<string, BlogPost> = {
+  "7-overlooked-mistakes-medical-billing-denials": {
+    title: "7 Overlooked Mistakes That Lead to Medical Billing Denials",
+    description: "Discover 7 commonly overlooked billing errors that lead to costly claim denials—and learn how to prevent them to boost cash flow and clean claim rates.",
+    date: "April 02, 2025",
+    image: "/images/dn1.jpg",
+    content: `
+Imagine losing millions in revenue - not because of poor care, but because of preventable billing errors. Medical billing denials are a silent revenue killer, with 10–15% of claims denied on first submission and 73% of providers seeing a spike in denials over the past two years. The cost? A staggering $19.7 billion annually in administrative expenses for hospitals alone, not to mention the impact on patient trust and staff morale. The good news: most denials can be stopped before they start. Let’s explore seven critical mistakes that sabotage your claims—and how to fix them for a healthier revenue cycle.
 
-export default function BlogPage() {
-  // Array of featured content: one video and one blog post
-  const featuredContent: Post[] = [
-    {
-      type: "video",
-      src: "/videos/MedicalBilling.mp4",
-      title: "Discover AccurusBill",
-      description: "Learn more about how AccurusBill empowers private clinics with comprehensive, cost-effective solutions.",
-      poster: "/images/TN1.jpg",
-    },
-    {
-      type: "blog",
-      slug: "7-overlooked-mistakes-medical-billing-denials",
-      title: "7 Overlooked Mistakes That Lead to Medical Billing Denials",
-      description: "Discover 7 commonly overlooked billing errors that lead to costly claim denials—and learn how to prevent them to boost cash flow and clean claim rates.",
-      image: "/images/denial.webp",
-      date: "April 02, 2025",
-    },
-  ];
+Mistake 1: Patient Data Errors That Derail Claims
+A misspelled name, an outdated address, or a wrong insurance ID—small mistakes that lead to big denials. Data errors at registration are the top cause of claim rejections, with 45% of healthcare leaders pointing to inaccurate patient info as a primary culprit.
+The Fix: Verify patient details at every visit using real-time eligibility tools. Train staff to double-check demographics with a standardized checklist. Empower patients to confirm their info via digital check-in portals.
 
-  // Array of blog posts for the "Latest Blog Posts" section (can be empty for now)
-  const blogPosts: BlogPost[] = [
-    // Add more blog posts here in the future
-  ];
+Mistake 2: Missing Documentation and Prior Authorizations
+A claim for an MRI gets denied because the prior authorization was never secured. Or clinical notes are missing, failing to prove medical necessity. Over 40% of denials stem from prior auth issues, according to MGMA.
+The Fix: Build a payer-specific documentation checklist for every claim. Automate prior auth checks within your scheduling system. Ensure clinical staff and billers collaborate to include all required records.
+
+Mistake 3: Missing the Filing Deadline
+A claim sits in a backlog and misses the payer’s 90-day filing window, resulting in a denial you can’t appeal. Timely filing denials are 100% preventable, yet they cost practices millions each year.
+The Fix: Submit claims within 48 hours of service—make it a non-negotiable goal. Use your practice management system to flag unbilled claims daily. Set automated alerts for claims nearing their filing deadline.
+
+Mistake 4: Coding Errors That Trigger Rejections
+An outdated CPT code or a mismatched diagnosis code leads to a denial for “invalid procedure.” Coding errors are a top technical reason for denials, with 56% of audits finding mistakes.
+The Fix: Keep coders updated with annual training on ICD-10 and CPT changes. Use claim scrubbing software to catch errors before submission. Encourage coders to query providers when documentation is unclear.
+
+Mistake 5: Ignoring Coverage Limits and Eligibility
+A patient exceeds their 20-session therapy limit, and the 21st claim is denied. Or their policy lapsed, but no one checked. Eligibility issues are a growing cause of denials as plans become more restrictive.
+The Fix: Verify coverage limits and active status before every encounter. Use real-time eligibility APIs to flag benefit caps or lapsed policies. Communicate with patients about potential out-of-pocket costs early.
+
+Mistake 6: Skipping Prior Authorizations and Out-of-Network Checks
+A procedure requires prior auth, but it’s missed, leading to a denial. Or a patient is sent to an out-of-network lab, and the claim is rejected. These errors account for over 40% of denials in 2023.
+The Fix: Embed prior auth checks into your scheduling workflow. Verify network status for all referrals and inform patients of risks. Seek pre-approvals or network gap exceptions when needed.
+
+Mistake 7: Duplicate Claims and Data Entry Mishaps
+A claim is submitted twice by mistake, flagged as a duplicate (CO-18), and denied. Or a typo in the service date creates confusion. These clerical errors are small but costly in high-volume settings.
+The Fix: Enable duplicate detection in your billing software. Standardize data entry with automated validations for key fields. Train staff to spot and correct errors before claims are sent.
+
+Conclusion: Take Control of Your Revenue Cycle
+Don’t let preventable denials drain your revenue. By addressing these seven mistakes, you can boost your clean claim rate, speed up reimbursements, and reduce administrative headaches. Start today: audit your denial trends, implement these fixes, and watch your RCM performance soar. Ready to make denials a thing of the past?
+`,
+  },
+};
+
+// Define a simple props type that matches Next.js 15 expectations
+type BlogPostPageProps = {
+  params: Promise<{ slug: string }>;
+  searchParams?: Promise<{ [key: string]: string | string[] | undefined }>;
+};
+
+export default function BlogPostPage({ params }: BlogPostPageProps) {
+  // Unwrap the params Promise using React.use()
+  const resolvedParams = use(params);
+
+  const post = blogPosts[resolvedParams.slug as keyof typeof blogPosts];
+
+  if (!post) {
+    notFound();
+  }
+
+  // Form state for handling input
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    message: "",
+  });
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    // Define EmailJS credentials
+    const SERVICE_ID = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID;
+    const TEMPLATE_ID = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID; // Consider using a different Template ID if needed
+    const PUBLIC_KEY = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY;
+
+    // Check if credentials are missing
+    if (!SERVICE_ID || !TEMPLATE_ID || !PUBLIC_KEY) {
+      console.error("🚨 Missing EmailJS credentials:", {
+        SERVICE_ID,
+        TEMPLATE_ID,
+        PUBLIC_KEY,
+      });
+      alert("❌ Configuration error. Please contact support.");
+      return;
+    }
+
+    // Log credentials for debugging
+    console.log("Service ID:", SERVICE_ID);
+    console.log("Template ID:", TEMPLATE_ID);
+    console.log("Public Key:", PUBLIC_KEY);
+
+    // Send the form data using EmailJS
+    emailjs.sendForm(SERVICE_ID, TEMPLATE_ID, e.currentTarget, PUBLIC_KEY).then(
+      (response) => {
+        console.log("✅ Email successfully sent:", response.status, response.text);
+        alert("🎉 Submission received successfully! We'll get back to you soon.");
+        setFormData({ name: "", email: "", phone: "", message: "" });
+      },
+      (error) => {
+        console.error("🚨 Error sending email:", error);
+        alert("❌ Failed to send the submission. Please try again.");
+      }
+    );
+  };
 
   return (
     <div className="min-h-screen flex flex-col bg-[#F5F5FC]">
       <Navbar />
 
       <main className="flex-grow">
-        {/* Hero Section with Featured Content */}
-        <section className="relative bg-gradient-to-b from-[#3E37A1] to-[#5A50DA] py-16 md:py-24 text-white">
-          <div className="container mx-auto px-4 text-center">
-            <h1 className="text-4xl md:text-5xl font-bold mb-12 md:mb-16">
-              Featured Content
-            </h1>
-
-            {/* Grid Layout for Featured Content */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto">
-              {featuredContent.map((item, index) =>
-                item.type === "video" ? (
-                  <VideoCard key={index} video={item} />
-                ) : (
-                  <BlogCard key={index} blog={item} />
-                )
-              )}
+        {/* Hero Section */}
+        <section className="relative bg-gradient-to-b from-[#3E37A1] to-[#5A50DA] py-16 text-white">
+          <div className="absolute inset-0 bg-black/20 z-0"></div> {/* Subtle overlay */}
+          <div className="container mx-auto px-4 relative z-10">
+            <Link
+              href="/blog"
+              className="inline-flex items-center text-[#FFC107] hover:text-white transition duration-300 mb-6"
+            >
+              <FaArrowLeft className="mr-2" /> Back to Blog
+            </Link>
+            <div className="text-center">
+              <h1 className="text-4xl md:text-5xl font-bold mb-4 leading-tight drop-shadow-lg">{post.title}</h1>
+              <p className="text-lg md:text-xl opacity-90 max-w-3xl mx-auto leading-relaxed">{post.description}</p>
+              <p className="text-sm mt-4 text-gray-200 italic">{post.date}</p>
             </div>
           </div>
         </section>
 
-        {/* Blog Posts Section */}
-        <section className="py-20 bg-[#F5F5FC]">
+        {/* Blog Content Section with Form */}
+        <section className="py-16 bg-[#F5F5FC]">
           <div className="container mx-auto px-4">
-            <h2 className="text-4xl font-bold text-center mb-6 text-[#3E37A1] relative">
-              Latest Blog Posts
-              <span className="block w-24 h-1 bg-[#6C5CE7] mx-auto mt-2 rounded-full"></span>
-            </h2>
-            {blogPosts.length > 0 ? (
-              <>
-                <p className="text-center text-lg text-gray-700 mb-12">
-                  Explore insights, updates, and tips to optimize your practice’s financial performance.
-                </p>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
-                  {blogPosts.map((post, index) => (
-                    <div
-                      key={index}
-                      className="bg-white rounded-lg shadow-lg overflow-hidden transform hover:scale-105 transition duration-300"
-                    >
-                      <Image
-                        src={post.image}
-                        alt={post.title}
-                        width={400}
-                        height={250}
-                        className="w-full h-48 object-cover"
-                      />
-                      <div className="p-6">
-                        <p className="text-sm text-gray-500 mb-2">{post.date}</p>
-                        <h3 className="text-xl font-semibold text-[#3E37A1] mb-2">{post.title}</h3>
-                        <p className="text-gray-700 mb-4">{post.description}</p>
-                        <Link
-                          href={`/blog/${post.slug}`}
-                          className="inline-flex items-center text-[#6C5CE7] hover:text-[#FFC107] font-semibold transition duration-300"
-                        >
-                          Read More <FaArrowRight className="ml-2" />
-                        </Link>
+            <div className="flex flex-col lg:flex-row gap-8">
+              {/* Blog Content (Left Side) */}
+              <div className="lg:w-2/3">
+                <div className="relative mb-12">
+                  <Image
+                    src={post.image}
+                    alt={post.title}
+                    width={800}
+                    height={400}
+                    className="w-full h-64 md:h-96 object-cover rounded-lg shadow-xl"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent rounded-lg"></div>
+                </div>
+
+                <div className="prose prose-lg max-w-none text-gray-700">
+                  {post.content.split("\n").map((paragraph, index, paragraphs) => {
+                    if (!paragraph.trim()) return null;
+
+                    // Introduction (first paragraph)
+                    if (index === 0) {
+                      return (
+                        <div key={index} className="mb-12">
+                          <p className="text-lg leading-relaxed text-gray-700">{paragraph}</p>
+                          <div className="mt-6 p-4 bg-[#6C5CE7]/10 rounded-lg border-l-4 border-[#6C5CE7] shadow-md">
+                            <span className="text-2xl font-bold text-[#3E37A1]">$19.7 Billion</span>
+                            <p className="text-gray-600 mt-1">Annual cost of denials for hospitals—don’t let your practice contribute to this statistic.</p>
+                          </div>
+                        </div>
+                      );
+                    }
+
+                    // Mistake sections
+                    if (paragraph.startsWith("Mistake")) {
+                      const mistakeNumber = paragraph.match(/Mistake (\d+)/)?.[1];
+                      const problemText = paragraphs[index + 1]; // Problem text is directly after the Mistake heading
+
+                      // Find the "The Fix" paragraph dynamically
+                      let fixText = "";
+                      for (let i = index + 1; i < paragraphs.length; i++) {
+                        if (paragraphs[i].startsWith("The Fix:")) {
+                          fixText = paragraphs[i].replace("The Fix: ", "");
+                          break;
+                        }
+                        // Stop searching if we hit the next "Mistake" or "Conclusion"
+                        if (paragraphs[i].startsWith("Mistake") || paragraphs[i].startsWith("Conclusion")) {
+                          break;
+                        }
+                      }
+
+                      const fixes = fixText.split(". ").filter(fix => fix.trim()).map(fix => fix + (fix.endsWith(".") ? "" : "."));
+
+                      return (
+                        <div key={index} className="mt-12 relative group">
+                          <div className="flex items-center mb-4">
+                            {mistakeNumber === "1" && <FaUser className="text-[#6C5CE7] text-3xl mr-4 group-hover:scale-110 transition-transform duration-300" />}
+                            {mistakeNumber === "2" && <FaFileAlt className="text-[#6C5CE7] text-3xl mr-4 group-hover:scale-110 transition-transform duration-300" />}
+                            {mistakeNumber === "3" && <FaClock className="text-[#6C5CE7] text-3xl mr-4 group-hover:scale-110 transition-transform duration-300" />}
+                            {mistakeNumber === "4" && <FaCode className="text-[#6C5CE7] text-3xl mr-4 group-hover:scale-110 transition-transform duration-300" />}
+                            {mistakeNumber === "5" && <FaShieldAlt className="text-[#6C5CE7] text-3xl mr-4 group-hover:scale-110 transition-transform duration-300" />}
+                            {mistakeNumber === "6" && <FaNetworkWired className="text-[#6C5CE7] text-3xl mr-4 group-hover:scale-110 transition-transform duration-300" />}
+                            {mistakeNumber === "7" && <FaCopy className="text-[#6C5CE7] text-3xl mr-4 group-hover:scale-110 transition-transform duration-300" />}
+                            <h3 className="text-2xl md:text-3xl font-semibold text-[#3E37A1]">{paragraph}</h3>
+                          </div>
+                          <div className="h-1 w-24 bg-gradient-to-r from-[#3E37A1] to-[#6C5CE7] mb-6"></div>
+                          <h4 className="text-xl font-medium text-gray-800 mb-2">The Scenario</h4>
+                          <p className="leading-relaxed mb-4 text-gray-700">{problemText}</p>
+                          {problemText?.includes("45%") && (
+                            <div className="my-4 p-4 bg-[#6C5CE7]/10 rounded-lg border-l-4 border-[#6C5CE7] shadow-md">
+                              <span className="text-2xl font-bold text-[#3E37A1]">45%</span>
+                              <p className="text-gray-600 mt-1">of healthcare leaders report denials due to data errors.</p>
+                            </div>
+                          )}
+                          {problemText?.includes("40%") && (
+                            <div className="my-4 p-4 bg-[#6C5CE7]/10 rounded-lg border-l-4 border-[#6C5CE7] shadow-md">
+                              <span className="text-2xl font-bold text-[#3E37A1]">40%</span>
+                              <p className="text-gray-600 mt-1">of denials are linked to prior auth issues.</p>
+                            </div>
+                          )}
+                          {problemText?.includes("56%") && (
+                            <div className="my-4 p-4 bg-[#6C5CE7]/10 rounded-lg border-l-4 border-[#6C5CE7] shadow-md">
+                              <span className="text-2xl font-bold text-[#3E37A1]">56%</span>
+                              <p className="text-gray-600 mt-1">of coding audits uncover errors.</p>
+                            </div>
+                          )}
+                          <h4 className="text-xl font-medium text-[#6C5CE7] mt-6 mb-4">The Fix</h4>
+                          <div className="p-6 bg-white border-l-4 border-[#6C5CE7] rounded-lg shadow-md transition-all duration-300 group-hover:shadow-lg group-hover:bg-[#6C5CE7]/5">
+                            <ul className="list-disc list-inside text-gray-700 leading-relaxed space-y-2">
+                              {fixes.map((fix, fixIndex) => (
+                                <li key={fixIndex}>{fix}</li>
+                              ))}
+                            </ul>
+                          </div>
+                        </div>
+                      );
+                    }
+
+                    // Conclusion
+                    if (paragraph.startsWith("Conclusion")) {
+                      return (
+                        <div key={index} className="mt-16">
+                          <h3 className="text-2xl md:text-3xl font-bold text-[#3E37A1] flex items-center">
+                            <FaCheck className="text-[#6C5CE7] text-3xl mr-4" />
+                            {paragraph}
+                          </h3>
+                          <div className="h-1 w-32 bg-gradient-to-r from-[#3E37A1] to-[#6C5CE7] mt-2 mb-6"></div>
+                          <p className="leading-relaxed text-gray-700">{paragraphs[index + 1]}</p>
+                        </div>
+                      );
+                    }
+
+                    // Skip paragraphs that are already handled (e.g., problem text, fix text)
+                    if (
+                      paragraphs[index - 1]?.startsWith("Mistake") ||
+                      paragraphs[index - 1]?.startsWith("The Fix:") ||
+                      paragraphs[index - 2]?.startsWith("Mistake") ||
+                      paragraphs[index - 1]?.startsWith("Conclusion")
+                    ) {
+                      return null;
+                    }
+
+                    return (
+                      <p key={index} className="leading-relaxed mb-4 text-gray-700">
+                        {paragraph}
+                      </p>
+                    );
+                  })}
+                </div>
+
+                {/* Call to Action */}
+                <div className="mt-16 text-center">
+                  <h4 className="text-2xl font-semibold text-[#3E37A1] mb-4">Ready to Optimize Your RCM?</h4>
+                  <p className="text-gray-700 mb-6 max-w-2xl mx-auto">
+                    Take the first step towards reducing claim denials and improving your revenue cycle. Contact us today to learn how AccurusBill can help!
+                  </p>
+                  <Link
+                    href="/contact"
+                    className="inline-block bg-[#6C5CE7] text-white px-8 py-3 rounded-full font-semibold hover:bg-[#5A50DA] transition duration-300 shadow-lg"
+                  >
+                    Get in Touch
+                  </Link>
+                </div>
+              </div>
+
+              {/* Form (Right Side) */}
+              <div className="lg:w-1/3">
+                <div className="sticky top-8 bg-white p-6 rounded-lg shadow-xl border-t-4 border-[#6C5CE7]">
+                  <h3 className="text-2xl font-semibold text-[#3E37A1] mb-4 text-center">Let’s Connect</h3>
+                  <p className="text-gray-600 mb-6 text-center">
+                    Have questions or need assistance with your billing? Fill out the form below, and we’ll get back to you!
+                  </p>
+                  <form onSubmit={handleSubmit} className="space-y-4">
+                    <div>
+                      <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
+                        Name
+                      </label>
+                      <div className="relative">
+                        <FaUser className="absolute left-3 top-1/2 transform -translate-y-1/2 text-[#6C5CE7]" />
+                        <input
+                          type="text"
+                          id="name"
+                          name="name"
+                          value={formData.name}
+                          onChange={handleChange}
+                          required
+                          className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#6C5CE7] focus:border-[#6C5CE7] transition duration-300"
+                          placeholder="Your Name"
+                        />
                       </div>
                     </div>
-                  ))}
+                    <div>
+                      <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
+                        Email
+                      </label>
+                      <div className="relative">
+                        <FaEnvelope className="absolute left-3 top-1/2 transform -translate-y-1/2 text-[#6C5CE7]" />
+                        <input
+                          type="email"
+                          id="email"
+                          name="email"
+                          value={formData.email}
+                          onChange={handleChange}
+                          required
+                          className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#6C5CE7] focus:border-[#6C5CE7] transition duration-300"
+                          placeholder="Your Email"
+                        />
+                      </div>
+                    </div>
+                    <div>
+                      <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-1">
+                        Phone Number
+                      </label>
+                      <div className="relative">
+                        <FaPhone className="absolute left-3 top-1/2 transform -translate-y-1/2 text-[#6C5CE7]" />
+                        <input
+                          type="tel"
+                          id="phone"
+                          name="phone"
+                          value={formData.phone}
+                          onChange={handleChange}
+                          required
+                          className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#6C5CE7] focus:border-[#6C5CE7] transition duration-300"
+                          placeholder="Your Phone Number"
+                        />
+                      </div>
+                    </div>
+                    <div>
+                      <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-1">
+                        Message
+                      </label>
+                      <div className="relative">
+                        <FaComment className="absolute left-3 top-4 text-[#6C5CE7]" />
+                        <textarea
+                          id="message"
+                          name="message"
+                          value={formData.message}
+                          onChange={handleChange}
+                          required
+                          className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#6C5CE7] focus:border-[#6C5CE7] transition duration-300"
+                          placeholder="Your Message"
+                          rows={4}
+                        />
+                      </div>
+                    </div>
+                    <button
+                      type="submit"
+                      className="w-full bg-[#6C5CE7] text-white py-3 rounded-lg font-semibold hover:bg-[#5A50DA] transition duration-300 shadow-md hover:shadow-lg"
+                    >
+                      Submit
+                    </button>
+                  </form>
                 </div>
-              </>
-            ) : (
-              <p className="text-center text-lg text-gray-700">
-                Stay tuned! We’re working on bringing you more insightful articles, updates, and tips for your practice. Check back soon for our latest blog posts.
-              </p>
-            )}
+              </div>
+            </div>
           </div>
         </section>
       </main>
 
       {/* Footer */}
-      <footer className="bg-[#3E37A1] text-white py-12">
+      <footer className="bg-[#3E37A1] text-white py-8">
         <div className="container mx-auto px-4">
           <div className="flex flex-col md:flex-row justify-between items-start">
             {/* Left Section: Copyright, Email, Address, and Navigation */}
@@ -173,7 +439,7 @@ export default function BlogPage() {
                     rel="noopener noreferrer"
                     className="text-white hover:text-[#FFC107] transition duration-300 transform hover:scale-110"
                   >
-                    <FaLinkedin className="text-4xl" />
+                    <FaLinkedin className="text-3xl" />
                     <span className="sr-only">LinkedIn</span>
                   </Link>
                   <Link
@@ -182,7 +448,7 @@ export default function BlogPage() {
                     rel="noopener noreferrer"
                     className="text-white hover:text-[#FFC107] transition duration-300 transform hover:scale-110"
                   >
-                    <FaTwitter className="text-4xl" />
+                    <FaTwitter className="text-3xl" />
                     <span className="sr-only">Twitter</span>
                   </Link>
                 </div>
@@ -205,97 +471,6 @@ export default function BlogPage() {
           </div>
         </div>
       </footer>
-    </div>
-  );
-}
-
-// VideoCard Component to handle thumbnail and play interaction
-function VideoCard({ video }: { video: VideoPost }) {
-  const [isPlaying, setIsPlaying] = useState(false);
-  const videoRef = useRef<HTMLVideoElement>(null);
-
-  const handlePlay = () => {
-    if (videoRef.current) {
-      videoRef.current.play();
-      setIsPlaying(true);
-    }
-  };
-
-  return (
-    <div className="flex flex-col items-center">
-      <div className="relative w-full rounded-lg overflow-hidden shadow-2xl">
-        {/* Video Element */}
-        <video
-          ref={videoRef}
-          controls={isPlaying}
-          className="w-full h-auto aspect-video"
-          poster={video.poster}
-        >
-          <source src={video.src} type="video/mp4" />
-          Your browser does not support the video tag.
-        </video>
-
-        {/* Thumbnail Overlay */}
-        {!isPlaying && (
-          <div
-            className="absolute inset-0 flex items-center justify-center cursor-pointer group"
-            onClick={handlePlay}
-          >
-            {/* Thumbnail Image */}
-            <Image
-              src={video.poster}
-              alt={`${video.title} thumbnail`}
-              layout="fill"
-              objectFit="cover"
-              className="rounded-lg"
-            />
-            {/* Overlay for Contrast */}
-            <div className="absolute inset-0 bg-black/30 group-hover:bg-black/40 transition duration-300 rounded-lg"></div>
-            {/* Play Button */}
-            <div className="relative w-16 h-16 bg-[#6C5CE7] rounded-full flex items-center justify-center group-hover:bg-[#FFC107] transition duration-300 transform group-hover:scale-110">
-              <FaPlay className="text-white text-2xl ml-1" />
-            </div>
-          </div>
-        )}
-      </div>
-      <h2 className="mt-4 text-xl md:text-2xl font-semibold text-white">
-        {video.title}
-      </h2>
-      <p className="mt-2 text-base opacity-90 max-w-md mx-auto">
-        {video.description}
-      </p>
-    </div>
-  );
-}
-
-// BlogCard Component for featured blog post
-function BlogCard({ blog }: { blog: BlogPost }) {
-  return (
-    <div className="flex flex-col items-center">
-      <Link href={`/blog/${blog.slug}`} className="group w-full">
-        <div className="relative w-full rounded-lg overflow-hidden shadow-2xl cursor-pointer">
-          <Image
-            src={blog.image}
-            alt={blog.title}
-            width={600}
-            height={400}
-            className="w-full h-auto aspect-video object-cover group-hover:scale-105 transition duration-300"
-          />
-          <div className="absolute inset-0 bg-black/30 group-hover:bg-black/40 transition duration-300 rounded-lg"></div>
-        </div>
-      </Link>
-      <h2 className="mt-4 text-xl md:text-2xl font-semibold text-white">
-        {blog.title}
-      </h2>
-      <p className="mt-2 text-base opacity-90 max-w-md mx-auto">
-        {blog.description}
-      </p>
-      <Link
-        href={`/blog/${blog.slug}`}
-        className="mt-4 inline-flex items-center text-[#FFC107] hover:text-white font-semibold transition duration-300"
-      >
-        Read More <FaArrowRight className="ml-2" />
-      </Link>
     </div>
   );
 }
