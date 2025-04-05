@@ -1,11 +1,12 @@
 "use client";
 
 import { Navbar } from "@/components/Navbar";
-import { FaArrowLeft, FaMapMarkerAlt, FaLinkedin, FaTwitter, FaCheck, FaUser, FaFileAlt, FaClock, FaCode, FaShieldAlt, FaNetworkWired, FaCopy } from "react-icons/fa";
+import { FaArrowLeft, FaMapMarkerAlt, FaLinkedin, FaTwitter, FaCheck, FaUser, FaFileAlt, FaClock, FaCode, FaShieldAlt, FaNetworkWired, FaCopy, FaEnvelope, FaPhone, FaComment } from "react-icons/fa";
 import Link from "next/link";
 import Image from "next/image";
 import { notFound } from "next/navigation";
-import { use } from "react";
+import { use, useState, useEffect } from "react";
+import emailjs from "@emailjs/browser";
 
 // Define types for blog post data
 type BlogPost = {
@@ -76,6 +77,57 @@ export default function BlogPostPage({ params }: BlogPostPageProps) {
     notFound();
   }
 
+  // Form state for handling input
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    message: "",
+  });
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    // Define EmailJS credentials
+    const SERVICE_ID = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID;
+    const TEMPLATE_ID = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID; // Consider using a different Template ID if needed
+    const PUBLIC_KEY = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY;
+
+    // Check if credentials are missing
+    if (!SERVICE_ID || !TEMPLATE_ID || !PUBLIC_KEY) {
+      console.error("🚨 Missing EmailJS credentials:", {
+        SERVICE_ID,
+        TEMPLATE_ID,
+        PUBLIC_KEY,
+      });
+      alert("❌ Configuration error. Please contact support.");
+      return;
+    }
+
+    // Log credentials for debugging
+    console.log("Service ID:", SERVICE_ID);
+    console.log("Template ID:", TEMPLATE_ID);
+    console.log("Public Key:", PUBLIC_KEY);
+
+    // Send the form data using EmailJS
+    emailjs.sendForm(SERVICE_ID, TEMPLATE_ID, e.currentTarget, PUBLIC_KEY).then(
+      (response) => {
+        console.log("✅ Email successfully sent:", response.status, response.text);
+        alert("🎉 Submission received successfully! We'll get back to you soon.");
+        setFormData({ name: "", email: "", phone: "", message: "" });
+      },
+      (error) => {
+        console.error("🚨 Error sending email:", error);
+        alert("❌ Failed to send the submission. Please try again.");
+      }
+    );
+  };
+
   return (
     <div className="min-h-screen flex flex-col bg-[#F5F5FC]">
       <Navbar />
@@ -99,146 +151,241 @@ export default function BlogPostPage({ params }: BlogPostPageProps) {
           </div>
         </section>
 
-        {/* Blog Content Section */}
+        {/* Blog Content Section with Form */}
         <section className="py-16 bg-[#F5F5FC]">
-          <div className="container mx-auto px-4 max-w-4xl">
-            <div className="relative mb-12">
-              <Image
-                src={post.image}
-                alt={post.title}
-                width={800}
-                height={400}
-                className="w-full h-64 md:h-96 object-cover rounded-lg shadow-xl"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent rounded-lg"></div>
-            </div>
+          <div className="container mx-auto px-4">
+            <div className="flex flex-col lg:flex-row gap-8">
+              {/* Blog Content (Left Side) */}
+              <div className="lg:w-2/3">
+                <div className="relative mb-12">
+                  <Image
+                    src={post.image}
+                    alt={post.title}
+                    width={800}
+                    height={400}
+                    className="w-full h-64 md:h-96 object-cover rounded-lg shadow-xl"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent rounded-lg"></div>
+                </div>
 
-            <div className="prose prose-lg max-w-none text-gray-700">
-              {post.content.split("\n").map((paragraph, index, paragraphs) => {
-                if (!paragraph.trim()) return null;
+                <div className="prose prose-lg max-w-none text-gray-700">
+                  {post.content.split("\n").map((paragraph, index, paragraphs) => {
+                    if (!paragraph.trim()) return null;
 
-                // Introduction (first paragraph)
-                if (index === 0) {
-                  return (
-                    <div key={index} className="mb-12">
-                      <p className="text-lg leading-relaxed text-gray-700">{paragraph}</p>
-                      <div className="mt-6 p-4 bg-[#6C5CE7]/10 rounded-lg border-l-4 border-[#6C5CE7] shadow-md">
-                        <span className="text-2xl font-bold text-[#3E37A1]">$19.7 Billion</span>
-                        <p className="text-gray-600 mt-1">Annual cost of denials for hospitals—don’t let your practice contribute to this statistic.</p>
-                      </div>
-                    </div>
-                  );
-                }
-
-                // Mistake sections
-                if (paragraph.startsWith("Mistake")) {
-                  const mistakeNumber = paragraph.match(/Mistake (\d+)/)?.[1];
-                  const problemText = paragraphs[index + 1]; // Problem text is directly after the Mistake heading
-
-                  // Find the "The Fix" paragraph dynamically
-                  let fixText = "";
-                  for (let i = index + 1; i < paragraphs.length; i++) {
-                    if (paragraphs[i].startsWith("The Fix:")) {
-                      fixText = paragraphs[i].replace("The Fix: ", "");
-                      break;
+                    // Introduction (first paragraph)
+                    if (index === 0) {
+                      return (
+                        <div key={index} className="mb-12">
+                          <p className="text-lg leading-relaxed text-gray-700">{paragraph}</p>
+                          <div className="mt-6 p-4 bg-[#6C5CE7]/10 rounded-lg border-l-4 border-[#6C5CE7] shadow-md">
+                            <span className="text-2xl font-bold text-[#3E37A1]">$19.7 Billion</span>
+                            <p className="text-gray-600 mt-1">Annual cost of denials for hospitals—don’t let your practice contribute to this statistic.</p>
+                          </div>
+                        </div>
+                      );
                     }
-                    // Stop searching if we hit the next "Mistake" or "Conclusion"
-                    if (paragraphs[i].startsWith("Mistake") || paragraphs[i].startsWith("Conclusion")) {
-                      break;
+
+                    // Mistake sections
+                    if (paragraph.startsWith("Mistake")) {
+                      const mistakeNumber = paragraph.match(/Mistake (\d+)/)?.[1];
+                      const problemText = paragraphs[index + 1]; // Problem text is directly after the Mistake heading
+
+                      // Find the "The Fix" paragraph dynamically
+                      let fixText = "";
+                      for (let i = index + 1; i < paragraphs.length; i++) {
+                        if (paragraphs[i].startsWith("The Fix:")) {
+                          fixText = paragraphs[i].replace("The Fix: ", "");
+                          break;
+                        }
+                        // Stop searching if we hit the next "Mistake" or "Conclusion"
+                        if (paragraphs[i].startsWith("Mistake") || paragraphs[i].startsWith("Conclusion")) {
+                          break;
+                        }
+                      }
+
+                      const fixes = fixText.split(". ").filter(fix => fix.trim()).map(fix => fix + (fix.endsWith(".") ? "" : "."));
+
+                      return (
+                        <div key={index} className="mt-12 relative group">
+                          <div className="flex items-center mb-4">
+                            {mistakeNumber === "1" && <FaUser className="text-[#6C5CE7] text-3xl mr-4 group-hover:scale-110 transition-transform duration-300" />}
+                            {mistakeNumber === "2" && <FaFileAlt className="text-[#6C5CE7] text-3xl mr-4 group-hover:scale-110 transition-transform duration-300" />}
+                            {mistakeNumber === "3" && <FaClock className="text-[#6C5CE7] text-3xl mr-4 group-hover:scale-110 transition-transform duration-300" />}
+                            {mistakeNumber === "4" && <FaCode className="text-[#6C5CE7] text-3xl mr-4 group-hover:scale-110 transition-transform duration-300" />}
+                            {mistakeNumber === "5" && <FaShieldAlt className="text-[#6C5CE7] text-3xl mr-4 group-hover:scale-110 transition-transform duration-300" />}
+                            {mistakeNumber === "6" && <FaNetworkWired className="text-[#6C5CE7] text-3xl mr-4 group-hover:scale-110 transition-transform duration-300" />}
+                            {mistakeNumber === "7" && <FaCopy className="text-[#6C5CE7] text-3xl mr-4 group-hover:scale-110 transition-transform duration-300" />}
+                            <h3 className="text-2xl md:text-3xl font-semibold text-[#3E37A1]">{paragraph}</h3>
+                          </div>
+                          <div className="h-1 w-24 bg-gradient-to-r from-[#3E37A1] to-[#6C5CE7] mb-6"></div>
+                          <h4 className="text-xl font-medium text-gray-800 mb-2">The Scenario</h4>
+                          <p className="leading-relaxed mb-4 text-gray-700">{problemText}</p>
+                          {problemText?.includes("45%") && (
+                            <div className="my-4 p-4 bg-[#6C5CE7]/10 rounded-lg border-l-4 border-[#6C5CE7] shadow-md">
+                              <span className="text-2xl font-bold text-[#3E37A1]">45%</span>
+                              <p className="text-gray-600 mt-1">of healthcare leaders report denials due to data errors.</p>
+                            </div>
+                          )}
+                          {problemText?.includes("40%") && (
+                            <div className="my-4 p-4 bg-[#6C5CE7]/10 rounded-lg border-l-4 border-[#6C5CE7] shadow-md">
+                              <span className="text-2xl font-bold text-[#3E37A1]">40%</span>
+                              <p className="text-gray-600 mt-1">of denials are linked to prior auth issues.</p>
+                            </div>
+                          )}
+                          {problemText?.includes("56%") && (
+                            <div className="my-4 p-4 bg-[#6C5CE7]/10 rounded-lg border-l-4 border-[#6C5CE7] shadow-md">
+                              <span className="text-2xl font-bold text-[#3E37A1]">56%</span>
+                              <p className="text-gray-600 mt-1">of coding audits uncover errors.</p>
+                            </div>
+                          )}
+                          <h4 className="text-xl font-medium text-[#6C5CE7] mt-6 mb-4">The Fix</h4>
+                          <div className="p-6 bg-white border-l-4 border-[#6C5CE7] rounded-lg shadow-md transition-all duration-300 group-hover:shadow-lg group-hover:bg-[#6C5CE7]/5">
+                            <ul className="list-disc list-inside text-gray-700 leading-relaxed space-y-2">
+                              {fixes.map((fix, fixIndex) => (
+                                <li key={fixIndex}>{fix}</li>
+                              ))}
+                            </ul>
+                          </div>
+                        </div>
+                      );
                     }
-                  }
 
-                  const fixes = fixText.split(". ").filter(fix => fix.trim()).map(fix => fix + (fix.endsWith(".") ? "" : "."));
+                    // Conclusion
+                    if (paragraph.startsWith("Conclusion")) {
+                      return (
+                        <div key={index} className="mt-16">
+                          <h3 className="text-2xl md:text-3xl font-bold text-[#3E37A1] flex items-center">
+                            <FaCheck className="text-[#6C5CE7] text-3xl mr-4" />
+                            {paragraph}
+                          </h3>
+                          <div className="h-1 w-32 bg-gradient-to-r from-[#3E37A1] to-[#6C5CE7] mt-2 mb-6"></div>
+                          <p className="leading-relaxed text-gray-700">{paragraphs[index + 1]}</p>
+                        </div>
+                      );
+                    }
 
-                  return (
-                    <div key={index} className="mt-12 relative group">
-                      <div className="flex items-center mb-4">
-                        {mistakeNumber === "1" && <FaUser className="text-[#6C5CE7] text-3xl mr-4 group-hover:scale-110 transition-transform duration-300" />}
-                        {mistakeNumber === "2" && <FaFileAlt className="text-[#6C5CE7] text-3xl mr-4 group-hover:scale-110 transition-transform duration-300" />}
-                        {mistakeNumber === "3" && <FaClock className="text-[#6C5CE7] text-3xl mr-4 group-hover:scale-110 transition-transform duration-300" />}
-                        {mistakeNumber === "4" && <FaCode className="text-[#6C5CE7] text-3xl mr-4 group-hover:scale-110 transition-transform duration-300" />}
-                        {mistakeNumber === "5" && <FaShieldAlt className="text-[#6C5CE7] text-3xl mr-4 group-hover:scale-110 transition-transform duration-300" />}
-                        {mistakeNumber === "6" && <FaNetworkWired className="text-[#6C5CE7] text-3xl mr-4 group-hover:scale-110 transition-transform duration-300" />}
-                        {mistakeNumber === "7" && <FaCopy className="text-[#6C5CE7] text-3xl mr-4 group-hover:scale-110 transition-transform duration-300" />}
-                        <h3 className="text-2xl md:text-3xl font-semibold text-[#3E37A1]">{paragraph}</h3>
-                      </div>
-                      <div className="h-1 w-24 bg-gradient-to-r from-[#3E37A1] to-[#6C5CE7] mb-6"></div>
-                      <h4 className="text-xl font-medium text-gray-800 mb-2">The Problem</h4>
-                      <p className="leading-relaxed mb-4 text-gray-700">{problemText}</p>
-                      {problemText.includes("45%") && (
-                        <div className="my-4 p-4 bg-[#6C5CE7]/10 rounded-lg border-l-4 border-[#6C5CE7] shadow-md">
-                          <span className="text-2xl font-bold text-[#3E37A1]">45%</span>
-                          <p className="text-gray-600 mt-1">of healthcare leaders report denials due to data errors.</p>
-                        </div>
-                      )}
-                      {problemText.includes("40%") && (
-                        <div className="my-4 p-4 bg-[#6C5CE7]/10 rounded-lg border-l-4 border-[#6C5CE7] shadow-md">
-                          <span className="text-2xl font-bold text-[#3E37A1]">40%</span>
-                          <p className="text-gray-600 mt-1">of denials are linked to prior auth issues.</p>
-                        </div>
-                      )}
-                      {problemText.includes("56%") && (
-                        <div className="my-4 p-4 bg-[#6C5CE7]/10 rounded-lg border-l-4 border-[#6C5CE7] shadow-md">
-                          <span className="text-2xl font-bold text-[#3E37A1]">56%</span>
-                          <p className="text-gray-600 mt-1">of coding audits uncover errors.</p>
-                        </div>
-                      )}
-                      <h4 className="text-xl font-medium text-[#6C5CE7] mt-6 mb-4">The Fix</h4>
-                      <div className="p-6 bg-white border-l-4 border-[#6C5CE7] rounded-lg shadow-md transition-all duration-300 group-hover:shadow-lg group-hover:bg-[#6C5CE7]/5">
-                        <ul className="list-disc list-inside text-gray-700 leading-relaxed space-y-2">
-                          {fixes.map((fix, fixIndex) => (
-                            <li key={fixIndex}>{fix}</li>
-                          ))}
-                        </ul>
-                      </div>
-                    </div>
-                  );
-                }
+                    // Skip paragraphs that are already handled (e.g., problem text, fix text)
+                    if (
+                      paragraphs[index - 1]?.startsWith("Mistake") ||
+                      paragraphs[index - 1]?.startsWith("The Fix:") ||
+                      paragraphs[index - 2]?.startsWith("Mistake") ||
+                      paragraphs[index - 1]?.startsWith("Conclusion")
+                    ) {
+                      return null;
+                    }
 
-                // Conclusion
-                if (paragraph.startsWith("Conclusion")) {
-                  return (
-                    <div key={index} className="mt-16">
-                      <h3 className="text-2xl md:text-3xl font-bold text-[#3E37A1] flex items-center">
-                        <FaCheck className="text-[#6C5CE7] text-3xl mr-4" />
+                    return (
+                      <p key={index} className="leading-relaxed mb-4 text-gray-700">
                         {paragraph}
-                      </h3>
-                      <div className="h-1 w-32 bg-gradient-to-r from-[#3E37A1] to-[#6C5CE7] mt-2 mb-6"></div>
-                      <p className="leading-relaxed text-gray-700">{paragraphs[index + 1]}</p>
-                    </div>
-                  );
-                }
+                      </p>
+                    );
+                  })}
+                </div>
 
-                // Skip paragraphs that are already handled (e.g., problem text, fix text)
-                if (
-                  paragraphs[index - 1]?.startsWith("Mistake") ||
-                  paragraphs[index - 1]?.startsWith("The Fix:") ||
-                  paragraphs[index - 2]?.startsWith("Mistake") ||
-                  paragraphs[index - 1]?.startsWith("Conclusion")
-                ) {
-                  return null;
-                }
-
-                return (
-                  <p key={index} className="leading-relaxed mb-4 text-gray-700">
-                    {paragraph}
+                {/* Call to Action */}
+                <div className="mt-16 text-center">
+                  <h4 className="text-2xl font-semibold text-[#3E37A1] mb-4">Ready to Optimize Your RCM?</h4>
+                  <p className="text-gray-700 mb-6 max-w-2xl mx-auto">
+                    Take the first step towards reducing claim denials and improving your revenue cycle. Contact us today to learn how AccurusBill can help!
                   </p>
-                );
-              })}
-            </div>
+                  <Link
+                    href="/contact"
+                    className="inline-block bg-[#6C5CE7] text-white px-8 py-3 rounded-full font-semibold hover:bg-[#5A50DA] transition duration-300 shadow-lg"
+                  >
+                    Get in Touch
+                  </Link>
+                </div>
+              </div>
 
-            {/* Call to Action */}
-            <div className="mt-16 text-center">
-              <h4 className="text-2xl font-semibold text-[#3E37A1] mb-4">Ready to Optimize Your RCM?</h4>
-              <p className="text-gray-700 mb-6 max-w-2xl mx-auto">
-                Take the first step towards reducing claim denials and improving your revenue cycle. Contact us today to learn how AccurusBill can help!
-              </p>
-              <Link
-                href="/contact"
-                className="inline-block bg-[#6C5CE7] text-white px-8 py-3 rounded-full font-semibold hover:bg-[#5A50DA] transition duration-300 shadow-lg"
-              >
-                Get in Touch
-              </Link>
+              {/* Form (Right Side) */}
+              <div className="lg:w-1/3">
+                <div className="sticky top-8 bg-white p-6 rounded-lg shadow-xl border-t-4 border-[#6C5CE7]">
+                  <h3 className="text-2xl font-semibold text-[#3E37A1] mb-4 text-center">Let’s Connect</h3>
+                  <p className="text-gray-600 mb-6 text-center">
+                    Have questions or need assistance with your billing? Fill out the form below, and we’ll get back to you!
+                  </p>
+                  <form onSubmit={handleSubmit} className="space-y-4">
+                    <div>
+                      <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
+                        Name
+                      </label>
+                      <div className="relative">
+                        <FaUser className="absolute left-3 top-1/2 transform -translate-y-1/2 text-[#6C5CE7]" />
+                        <input
+                          type="text"
+                          id="name"
+                          name="name"
+                          value={formData.name}
+                          onChange={handleChange}
+                          required
+                          className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#6C5CE7] focus:border-[#6C5CE7] transition duration-300"
+                          placeholder="Your Name"
+                        />
+                      </div>
+                    </div>
+                    <div>
+                      <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
+                        Email
+                      </label>
+                      <div className="relative">
+                        <FaEnvelope className="absolute left-3 top-1/2 transform -translate-y-1/2 text-[#6C5CE7]" />
+                        <input
+                          type="email"
+                          id="email"
+                          name="email"
+                          value={formData.email}
+                          onChange={handleChange}
+                          required
+                          className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#6C5CE7] focus:border-[#6C5CE7] transition duration-300"
+                          placeholder="Your Email"
+                        />
+                      </div>
+                    </div>
+                    <div>
+                      <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-1">
+                        Phone Number
+                      </label>
+                      <div className="relative">
+                        <FaPhone className="absolute left-3 top-1/2 transform -translate-y-1/2 text-[#6C5CE7]" />
+                        <input
+                          type="tel"
+                          id="phone"
+                          name="phone"
+                          value={formData.phone}
+                          onChange={handleChange}
+                          required
+                          className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#6C5CE7] focus:border-[#6C5CE7] transition duration-300"
+                          placeholder="Your Phone Number"
+                        />
+                      </div>
+                    </div>
+                    <div>
+                      <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-1">
+                        Message
+                      </label>
+                      <div className="relative">
+                        <FaComment className="absolute left-3 top-4 text-[#6C5CE7]" />
+                        <textarea
+                          id="message"
+                          name="message"
+                          value={formData.message}
+                          onChange={handleChange}
+                          required
+                          className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#6C5CE7] focus:border-[#6C5CE7] transition duration-300"
+                          placeholder="Your Message"
+                          rows={4}
+                        />
+                      </div>
+                    </div>
+                    <button
+                      type="submit"
+                      className="w-full bg-[#6C5CE7] text-white py-3 rounded-lg font-semibold hover:bg-[#5A50DA] transition duration-300 shadow-md hover:shadow-lg"
+                    >
+                      Submit
+                    </button>
+                  </form>
+                </div>
+              </div>
             </div>
           </div>
         </section>
