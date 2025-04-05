@@ -27,17 +27,6 @@ type BlogPost = {
 type Post = VideoPost | BlogPost;
 
 export default function BlogPage() {
-  // Array of featured content: keeping only the video for now
-  const featuredContent: Post[] = [
-    {
-      type: "video",
-      src: "/videos/MedicalBilling.mp4",
-      title: "Discover AccurusBill",
-      description: "Learn more about how AccurusBill empowers private clinics with comprehensive, cost-effective solutions.",
-      poster: "/images/TN1.jpg",
-    },
-  ];
-
   // Array of blog posts for the "Latest Blog Posts" section
   const blogPosts: BlogPost[] = [
     {
@@ -58,33 +47,24 @@ export default function BlogPage() {
     },
   ];
 
+  // Array of featured content: keeping only the video for now
+  const featuredContent: Post[] = [
+    {
+      type: "video",
+      src: "/videos/MedicalBilling.mp4",
+      title: "Discover AccurusBill",
+      description: "Learn more about how AccurusBill empowers private clinics with comprehensive, cost-effective solutions.",
+      poster: "/images/TN1.jpg",
+    },
+  ];
+
   return (
     <div className="min-h-screen flex flex-col bg-[#F5F5FC]">
       <Navbar />
 
       <main className="flex-grow">
-        {/* Hero Section with Featured Content */}
-        <section className="relative bg-gradient-to-b from-[#3E37A1] to-[#5A50DA] py-16 md:py-24 text-white">
-          <div className="container mx-auto px-4 text-center">
-            <h1 className="text-4xl md:text-5xl font-bold mb-12 md:mb-16">
-              Featured Content
-            </h1>
-
-            {/* Grid Layout for Featured Content */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto">
-              {featuredContent.map((item, index) =>
-                item.type === "video" ? (
-                  <VideoCard key={index} video={item} />
-                ) : (
-                  <BlogCard key={index} blog={item} />
-                )
-              )}
-            </div>
-          </div>
-        </section>
-
-        {/* Blog Posts Section */}
-        <section className="py-20 bg-[#F5F5FC]">
+        {/* Latest Blog Posts Section (with extra top padding) */}
+        <section className="pt-32 pb-20 bg-[#F5F5FC]">
           <div className="container mx-auto px-4">
             <h2 className="text-4xl font-bold text-center mb-6 text-[#3E37A1] relative">
               Latest Blog Posts
@@ -130,6 +110,25 @@ export default function BlogPage() {
                 Stay tuned! We’re working on bringing you more insightful articles, updates, and tips for your practice. Check back soon for our latest blog posts.
               </p>
             )}
+          </div>
+        </section>
+
+        {/* Featured Content Section (Below Blog Posts) */}
+        <section className="relative bg-gradient-to-b from-[#3E37A1] to-[#5A50DA] py-16 md:py-24 text-white">
+          <div className="container mx-auto px-4 text-center">
+            <h1 className="text-4xl md:text-5xl font-bold mb-12 md:mb-16">
+              Featured Content
+            </h1>
+            {/* Grid Layout for Featured Content */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto">
+              {featuredContent.map((item, index) =>
+                item.type === "video" ? (
+                  <VideoCard key={index} video={item} />
+                ) : (
+                  <BlogCard key={index} blog={item} />
+                )
+              )}
+            </div>
           </div>
         </section>
       </main>
@@ -196,7 +195,6 @@ export default function BlogPage() {
                   </Link>
                 </div>
               </div>
-
               {/* HIPAA Badge */}
               <div className="flex justify-center md:justify-end group">
                 <div className="relative flex items-center">
@@ -250,7 +248,6 @@ function VideoCard({ video }: { video: VideoPost }) {
             className="absolute inset-0 flex items-center justify-center cursor-pointer group"
             onClick={handlePlay}
           >
-            {/* Thumbnail Image */}
             <Image
               src={video.poster}
               alt={`${video.title} thumbnail`}
@@ -258,9 +255,7 @@ function VideoCard({ video }: { video: VideoPost }) {
               objectFit="cover"
               className="rounded-lg"
             />
-            {/* Overlay for Contrast */}
             <div className="absolute inset-0 bg-black/30 group-hover:bg-black/40 transition duration-300 rounded-lg"></div>
-            {/* Play Button */}
             <div className="relative w-16 h-16 bg-[#6C5CE7] rounded-full flex items-center justify-center group-hover:bg-[#FFC107] transition duration-300 transform group-hover:scale-110">
               <FaPlay className="text-white text-2xl ml-1" />
             </div>
