@@ -27,7 +27,7 @@ type BlogPost = {
 type Post = VideoPost | BlogPost;
 
 export default function BlogPage() {
-  // Array of featured content: one video and one blog post
+  // Array of featured content: keeping only the video for now
   const featuredContent: Post[] = [
     {
       type: "video",
@@ -36,6 +36,10 @@ export default function BlogPage() {
       description: "Learn more about how AccurusBill empowers private clinics with comprehensive, cost-effective solutions.",
       poster: "/images/TN1.jpg",
     },
+  ];
+
+  // Array of blog posts for the "Latest Blog Posts" section
+  const blogPosts: BlogPost[] = [
     {
       type: "blog",
       slug: "7-overlooked-mistakes-medical-billing-denials",
@@ -44,11 +48,14 @@ export default function BlogPage() {
       image: "/images/denial.webp",
       date: "April 02, 2025",
     },
-  ];
-
-  // Array of blog posts for the "Latest Blog Posts" section (can be empty for now)
-  const blogPosts: BlogPost[] = [
-    // Add more blog posts here in the future
+    {
+      type: "blog",
+      slug: "unlocking-the-opportunity-in-chronic-care-management-ccm-and-remote-patient-monitoring-rpm",
+      title: "Unlocking the Opportunity in Chronic Care Management (CCM) and Remote Patient Monitoring (RPM)",
+      description: "Chronic Care Management (CCM) and Remote Patient Monitoring (RPM) use technology to keep patients connected with their care teams between visits, focusing on medication management and early issue detection.",
+      image: "/images/ccm.webp",
+      date: "April 02, 2025",
+    },
   ];
 
   return (
@@ -94,13 +101,15 @@ export default function BlogPage() {
                       key={index}
                       className="bg-white rounded-lg shadow-lg overflow-hidden transform hover:scale-105 transition duration-300"
                     >
-                      <Image
-                        src={post.image}
-                        alt={post.title}
-                        width={400}
-                        height={250}
-                        className="w-full h-48 object-cover"
-                      />
+                      <Link href={`/blog/${post.slug}`} className="block">
+                        <Image
+                          src={post.image}
+                          alt={post.title}
+                          width={400}
+                          height={250}
+                          className="w-full h-48 object-cover hover:opacity-90 transition duration-300"
+                        />
+                      </Link>
                       <div className="p-6">
                         <p className="text-sm text-gray-500 mb-2">{post.date}</p>
                         <h3 className="text-xl font-semibold text-[#3E37A1] mb-2">{post.title}</h3>
