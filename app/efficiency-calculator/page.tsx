@@ -6,6 +6,8 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, PieChart, Pie, Cell } from "recharts";
 import Link from "next/link";
+import Image from "next/image";
+import { FaArrowRight } from "react-icons/fa";
 
 export default function EfficiencyCalculatorPage() {
   // State for calculator selection
@@ -44,7 +46,7 @@ export default function EfficiencyCalculatorPage() {
 
   // State for Claim Denial Impact Calculator
   const [claimDenialState, setClaimDenialState] = useState({
-    totalMonthlyClaims: "1000", // Added new field
+    totalMonthlyClaims: "1000",
     claimDenials: "100",
     avgReimbursement: "200",
     reworkCost: "27",
@@ -99,6 +101,35 @@ export default function EfficiencyCalculatorPage() {
     { name: "Skilled Nursing Facilities (SNFs)", range: [45, 60] },
     { name: "Home Health / Hospice", range: [40, 50] },
     { name: "Other", range: null },
+  ];
+
+  // Blog posts data (extracted from app/blog/page.tsx)
+  type BlogPost = {
+    type: "blog";
+    slug: string;
+    title: string;
+    description: string;
+    image: string;
+    date: string;
+  };
+
+  const blogPosts: BlogPost[] = [
+    {
+      type: "blog",
+      slug: "7-overlooked-mistakes-medical-billing-denials",
+      title: "7 Overlooked Mistakes That Lead to Medical Billing Denials",
+      description: "Discover 7 commonly overlooked billing errors that lead to costly claim denials—and learn how to prevent them to boost cash flow and clean claim rates.",
+      image: "/images/denial.webp",
+      date: "April 02, 2025",
+    },
+    {
+      type: "blog",
+      slug: "unlocking-the-opportunity-in-chronic-care-management-ccm-and-remote-patient-monitoring-rpm",
+      title: "Unlocking the Opportunity in Chronic Care Management (CCM) and Remote Patient Monitoring (RPM)",
+      description: "Chronic Care Management (CCM) and Remote Patient Monitoring (RPM) use technology to keep patients connected with their care teams between visits, focusing on medication management and early issue detection.",
+      image: "/images/ccm.webp",
+      date: "April 02, 2025",
+    },
   ];
 
   // CCM/RPM Revenue Calculator Handlers
@@ -504,6 +535,13 @@ export default function EfficiencyCalculatorPage() {
         { name: "Additional Revenue", value: billingEfficiencyState.result.annualAdditionalRevenue, fill: "#A29BFE" },
       ]
     : [];
+
+  // Determine if results are available to show the blog section
+  const hasResults =
+    (activeCalculator === "billingEfficiency" && billingEfficiencyState.result) ||
+    (activeCalculator === "claimDenial" && claimDenialState.result) ||
+    (activeCalculator === "arDays" && arDaysState.arDays !== null) ||
+    (activeCalculator === "ccmRpmRevenue" && ccmRpmState.result);
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#F5F5FC] to-[#EEF0FF]">
@@ -1131,11 +1169,9 @@ export default function EfficiencyCalculatorPage() {
                       </div>
                     </div>
                   </div>
-
-
                 )}
 
-                {arDaysState.error && (
+{arDaysState.error && (
                   <div className="p-3 bg-red-100 text-red-700 rounded-lg">
                     {arDaysState.error}
                   </div>
@@ -1390,6 +1426,58 @@ export default function EfficiencyCalculatorPage() {
             </>
           )}
         </div>
+
+        {/* Blog Posts Section (Appears after results) */}
+        {hasResults && (
+          <section className="py-20 bg-[#F5F5FC]">
+            <div className="container mx-auto px-4">
+              <h2 className="text-4xl font-bold text-center mb-6 text-[#3E37A1] relative">
+                Latest Blog Posts
+                <span className="block w-24 h-1 bg-[#6C5CE7] mx-auto mt-2 rounded-full"></span>
+              </h2>
+              {blogPosts.length > 0 ? (
+                <>
+                  <p className="text-center text-lg text-gray-700 mb-12">
+                    Explore insights, updates, and tips to optimize your practice’s financial performance.
+                  </p>
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                    {blogPosts.map((post, index) => (
+                      <div
+                        key={index}
+                        className="bg-white rounded-lg shadow-lg overflow-hidden transform hover:scale-105 transition duration-300"
+                      >
+                        <Link href={`/blog/${post.slug}`} className="block">
+                          <Image
+                            src={post.image}
+                            alt={post.title}
+                            width={400}
+                            height={250}
+                            className="w-full h-48 object-cover hover:opacity-90 transition duration-300"
+                          />
+                        </Link>
+                        <div className="p-6">
+                          <p className="text-sm text-gray-500 mb-2">{post.date}</p>
+                          <h3 className="text-xl font-semibold text-[#3E37A1] mb-2">{post.title}</h3>
+                          <p className="text-gray-700 mb-4">{post.description}</p>
+                          <Link
+                            href={`/blog/${post.slug}`}
+                            className="inline-flex items-center text-[#6C5CE7] hover:text-[#FFC107] font-semibold transition duration-300"
+                          >
+                            Read More <FaArrowRight className="ml-2" />
+                          </Link>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </>
+              ) : (
+                <p className="text-center text-lg text-gray-700">
+                  Stay tuned! We’re working on bringing you more insightful articles, updates, and tips for your practice. Check back soon for our latest blog posts.
+                </p>
+              )}
+            </div>
+          </section>
+        )}
       </div>
     </div>
   );
