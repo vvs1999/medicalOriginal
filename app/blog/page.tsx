@@ -272,16 +272,18 @@ function VideoCard({ video }: { video: VideoPost }) {
 function BlogCard({ blog }: { blog: BlogPost }) {
   return (
     <div className="flex flex-col items-center">
-      <div className="relative w-full rounded-lg overflow-hidden shadow-2xl group">
-        <Image
-          src={blog.image}
-          alt={blog.title}
-          width={600}
-          height={400}
-          className="w-full h-auto aspect-video object-cover group-hover:scale-105 transition duration-300"
-        />
-        <div className="absolute inset-0 bg-black/30 group-hover:bg-black/40 transition duration-300 rounded-lg"></div>
-      </div>
+      <Link href={`/blog/${blog.slug}`} className="group w-full">
+        <div className="relative w-full rounded-lg overflow-hidden shadow-2xl cursor-pointer">
+          <Image
+            src={blog.image}
+            alt={blog.title}
+            width={600}
+            height={400}
+            className="w-full h-auto aspect-video object-cover group-hover:scale-105 transition duration-300"
+          />
+          <div className="absolute inset-0 bg-black/30 group-hover:bg-black/40 transition duration-300 rounded-lg"></div>
+        </div>
+      </Link>
       <h2 className="mt-4 text-xl md:text-2xl font-semibold text-white">
         {blog.title}
       </h2>
