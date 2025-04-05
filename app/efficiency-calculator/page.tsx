@@ -952,7 +952,7 @@ export default function EfficiencyCalculatorPage() {
                   <div className="mt-6 text-sm text-gray-600">
                     <h3 className="font-semibold text-[#3E37A1] mb-2">Benchmarks & Recommendations</h3>
                     <p>
-                      <strong>Claim Denial Rate:</strong> Ideal: 5%, Common: 5–10%. Your rate is approximately{" "}
+                      <strong>Claim Denial Rate:</strong> Ideal: &lt;5%, Common: 5–10%. Your rate is approximately{" "}
                       {((parseInt(claimDenialState.claimDenials) / parseInt(claimDenialState.totalMonthlyClaims)) * 100).toFixed(2)}% (based on {claimDenialState.totalMonthlyClaims} claims/month).
                     </p>
                     {parseInt(claimDenialState.claimDenials) / parseInt(claimDenialState.totalMonthlyClaims) > 0.07 && (
