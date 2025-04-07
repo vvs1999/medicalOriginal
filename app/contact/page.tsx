@@ -207,7 +207,7 @@ function ContactFormContent() {
         "We transcribe dictated notes via a secure app or call in under 4 hours. The transcriptions are then formatted to meet your specialty requirements (such as SOAP notes, H&Ps, or procedure summaries) and uploaded to your EHR with timestamps and provider signatures.",
     },
     {
-      starkey: "How do you manage Physician Credentialing?",
+      question: "How do you manage Physician Credentialing?",
       answer:
         "We simplify the credentialing process by collecting all necessary documentation—licenses, malpractice history, and practice details—filing applications, tracking progress, and resolving any payer roadblocks. We also automate revalidation to ensure your providers remain continuously enrolled.",
     },
@@ -371,7 +371,7 @@ function ContactFormContent() {
                       {/* Custom Placeholder */}
                       {!selectedDate && (
                         <span className="absolute inset-y-0 left-0 pl-3 flex items-center text-gray-400 pointer-events-none">
-                          
+                          2025/mm/dd
                         </span>
                       )}
                     </div>
