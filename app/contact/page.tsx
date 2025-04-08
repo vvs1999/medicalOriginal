@@ -19,13 +19,17 @@ interface FormData {
   phone: string;
   contactMethod: string;
   message: string;
+  selectedDate?: string; // Add for validation errors
+  selectedTime?: string; // Add for validation errors
 }
 
 // A separate component to handle the dynamic search params logic
 function ContactFormContent() {
   const searchParams = useSearchParams();
   const [selectedService, setSelectedService] = useState<string>("");
-  const [selectedDate, setSelectedDate] = useState<string>("");
+  const [selectedDate, setSelectedDate] = useState<string>(
+    new Date().toISOString().split("T")[0] // Set default to current date
+  );
   const [selectedTime, setSelectedTime] = useState<string>("");
   const [formData, setFormData] = useState<FormData>({
     clinicName: "",
@@ -92,6 +96,8 @@ function ContactFormContent() {
     if (!formData.email) newErrors.email = "Email is required";
     if (!formData.phone) newErrors.phone = "Phone is required";
     if (!formData.contactMethod) newErrors.contactMethod = "Preferred Contact Method is required";
+    if (!selectedDate) newErrors.selectedDate = "Date is required";
+    if (!selectedTime) newErrors.selectedTime = "Time is required";
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
@@ -172,7 +178,7 @@ function ContactFormContent() {
       message: "",
     });
     setSelectedService("");
-    setSelectedDate("");
+    setSelectedDate(currentDate.toISOString().split("T")[0]); // Reset to current date
     setSelectedTime("");
     setErrors({});
   };
@@ -401,7 +407,7 @@ function ContactFormContent() {
                   htmlFor="date"
                   className="block text-base font-medium text-gray-800 mb-2"
                 >
-                  Select Date
+                  Select Date <span className="text-red-500">*</span>
                 </label>
                 <input
                   id="date"
@@ -414,12 +420,13 @@ function ContactFormContent() {
                   onClick={handleDateClick}
                   min={currentDate.toISOString().split("T")[0]}
                   max={threeMonthsLater.toISOString().split("T")[0]}
-                  className="w-full appearance-none border-[#6C5CE7]/30 rounded-lg border-2 bg-white shadow-sm focus:border-[#6C5CE7] focus:ring-[#6C5CE7]/50 p-3 text-gray-700 placeholder:text-sm text-base md:text-base"
+                  required
+                  className={`w-full appearance-none border-[#6C5CE7]/30 rounded-lg border-2 bg-white shadow-sm focus:border-[#6C5CE7] focus:ring-[#6C5CE7]/50 p-3 text-gray-700 placeholder:text-sm text-base md:text-base ${
+                    errors.selectedDate ? "border-red-500" : ""
+                  }`}
                 />
-                {!selectedDate && (
-                  <span className="absolute left-4 top-[50%] text-gray-500 pointer-events-none translate-y-[10%] text-sm">
-                    yyyy-mm-dd
-                  </span>
+                {errors.selectedDate && (
+                  <p className="text-red-500 text-sm mt-1">{errors.selectedDate}</p>
                 )}
               </div>
 
@@ -428,7 +435,7 @@ function ContactFormContent() {
                   htmlFor="time"
                   className="block text-base font-medium text-gray-800 mb-2"
                 >
-                  Select Time
+                  Select Time <span className="text-red-500">*</span>
                 </label>
                 <select
                   id="time"
@@ -437,7 +444,10 @@ function ContactFormContent() {
                   onChange={(e: ChangeEvent<HTMLSelectElement>) =>
                     setSelectedTime(e.target.value)
                   }
-                  className="w-full border-[#6C5CE7]/30 rounded-lg border-2 bg-white shadow-sm focus:border-[#6C5CE7] focus:ring-[#6C5CE7]/50 p-3 text-gray-700 placeholder:text-sm text-base md:text-base"
+                  required
+                  className={`w-full border-[#6C5CE7]/30 rounded-lg border-2 bg-white shadow-sm focus:border-[#6C5CE7] focus:ring-[#6C5CE7]/50 p-3 text-gray-700 placeholder:text-sm text-base md:text-base ${
+                    errors.selectedTime ? "border-red-500" : ""
+                  }`}
                 >
                   <option value="">Select Time</option>
                   {timeSlots.map((slot, index) => (
@@ -446,6 +456,9 @@ function ContactFormContent() {
                     </option>
                   ))}
                 </select>
+                {errors.selectedTime && (
+                  <p className="text-red-500 text-sm mt-1">{errors.selectedTime}</p>
+                )}
               </div>
 
               <div>
