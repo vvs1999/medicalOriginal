@@ -71,12 +71,13 @@ export default function EfficiencyCalculatorPage() {
       currentCollectionRate: number;
       annualCollections: number;
       currentBillingCostPercentage: number;
+      currentBillingCost: number;
       targetCollections: number;
       targetBillingCost: number;
       additionalRevenue: number;
       annualAdditionalRevenue: number;
-      monthlyBillingCostSavings: number;
-      annualBillingCostSavings: number;
+      monthlyBillingCostChange: number;
+      annualBillingCostChange: number;
       monthlyROI: number;
       annualROI: number;
     } | null,
@@ -423,6 +424,7 @@ export default function EfficiencyCalculatorPage() {
         ? parseFloat(billingEfficiencyState.currentBillingCost)
         : (parseFloat(billingEfficiencyState.collectionPercentage) / 100) * totalCollections;
 
+    // Validation
     if (isNaN(monthlyClaims) || monthlyClaims < 0) {
       setBillingEfficiencyState((prev) => ({
         ...prev,
@@ -466,8 +468,19 @@ export default function EfficiencyCalculatorPage() {
       }
     }
 
-    // Step 1: Compute Key Values
+    // Compute monthlyBilled for validation
     const monthlyBilled = monthlyClaims * avgChargePerClaim;
+
+    // Validate totalCollections against monthlyBilled
+    if (totalCollections > monthlyBilled) {
+      setBillingEfficiencyState((prev) => ({
+        ...prev,
+        error: "Total monthly collections cannot exceed the monthly billed amount ($" + monthlyBilled.toFixed(2) + ").",
+      }));
+      return;
+    }
+
+    // Step 1: Compute Key Values
     const currentCollectionRate = (totalCollections / monthlyBilled) * 100;
     const annualCollections = totalCollections * 12;
     const currentBillingCostPercentage = (currentBillingCost / totalCollections) * 100;
@@ -481,11 +494,12 @@ export default function EfficiencyCalculatorPage() {
     // Step 3: Determine Efficiency Gains
     const additionalRevenue = targetCollections - totalCollections;
     const annualAdditionalRevenue = additionalRevenue * 12;
-    const monthlyBillingCostSavings = currentBillingCost - targetBillingCost;
-    const annualBillingCostSavings = monthlyBillingCostSavings * 12;
+    const monthlyBillingCostChange = currentBillingCost - targetBillingCost;
+    const annualBillingCostChange = monthlyBillingCostChange * 12;
 
-    const monthlyROI = ((additionalRevenue + monthlyBillingCostSavings) / currentBillingCost) * 100;
-    const annualROI = monthlyROI; // Since the formula scales linearly
+    // Step 4: Calculate ROI
+    const monthlyROI = ((additionalRevenue + (monthlyBillingCostChange > 0 ? monthlyBillingCostChange : 0)) / currentBillingCost) * 100;
+    const annualROI = ((annualAdditionalRevenue + (annualBillingCostChange > 0 ? annualBillingCostChange : 0)) / (currentBillingCost * 12)) * 100;
 
     setBillingEfficiencyState((prev) => ({
       ...prev,
@@ -494,12 +508,13 @@ export default function EfficiencyCalculatorPage() {
         currentCollectionRate,
         annualCollections,
         currentBillingCostPercentage,
+        currentBillingCost,
         targetCollections,
         targetBillingCost,
         additionalRevenue,
         annualAdditionalRevenue,
-        monthlyBillingCostSavings,
-        annualBillingCostSavings,
+        monthlyBillingCostChange,
+        annualBillingCostChange,
         monthlyROI,
         annualROI,
       },
@@ -642,6 +657,9 @@ export default function EfficiencyCalculatorPage() {
                 </div>
 
                 <div>
+                  <label htmlFor="totalCollections" className="block text-sm font-medium text-gray-700">
+                    Total Monthly Collections ($)
+                  </label>
                   <Input
                     id="totalCollections"
                     type="number"
@@ -765,11 +783,16 @@ export default function EfficiencyCalculatorPage() {
                           <p className="text-gray-700"><strong>Monthly ROI:</strong> {billingEfficiencyState.result.monthlyROI.toFixed(2)}%</p>
                         </div>
                         <div className="p-4 bg-white rounded-lg shadow-md">
-                          <p className="text-gray-700"><strong>Current Monthly Billing Cost:</strong> ${(billingEfficiencyState.billingMethod === "inHouse"
-                            ? parseFloat(billingEfficiencyState.currentBillingCost)
-                            : (parseFloat(billingEfficiencyState.collectionPercentage) / 100) * parseFloat(billingEfficiencyState.totalCollections)).toFixed(2)}</p>
+                          <p className="text-gray-700"><strong>Current Monthly Billing Cost:</strong> ${billingEfficiencyState.result.currentBillingCost.toFixed(2)}</p>
                           <p className="text-gray-700"><strong>Target Monthly Billing Cost (6%):</strong> ${billingEfficiencyState.result.targetBillingCost.toFixed(2)}</p>
-                          <p className="text-gray-700"><strong>Monthly Billing Cost Savings:</strong> ${billingEfficiencyState.result.monthlyBillingCostSavings.toFixed(2)}</p>
+                          <p className="text-gray-700">
+                            <strong>Change in Monthly Billing Cost:</strong>{" "}
+                            {billingEfficiencyState.result.monthlyBillingCostChange >= 0 ? (
+                              <span className="text-green-600">+${billingEfficiencyState.result.monthlyBillingCostChange.toFixed(2)}</span>
+                            ) : (
+                              <span className="text-red-600">-${Math.abs(billingEfficiencyState.result.monthlyBillingCostChange).toFixed(2)}</span>
+                            )}
+                          </p>
                         </div>
                       </div>
                     </div>
@@ -777,17 +800,22 @@ export default function EfficiencyCalculatorPage() {
                     <div className="mt-8 p-6 bg-gradient-to-r from-[#F5F5FC] to-[#EEF0FF] rounded-xl shadow-lg border border-[#6C5CE7]/20">
                       <h2 className="text-2xl font-semibold text-[#6C5CE7] mb-4 text-center">Annual Figures</h2>
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        {/* Current Annual Figures */}
                         <div className="p-4 bg-white rounded-lg shadow-md">
                           <h3 className="text-lg font-semibold text-gray-900 mb-2">Current Annual Results</h3>
                           <p className="text-gray-700"><strong>Annual Collections (Current):</strong> ${(billingEfficiencyState.result.annualCollections).toFixed(2)}</p>
                         </div>
-                        {/* AccurusBill Achievable Targets */}
                         <div className="p-4 bg-white rounded-lg shadow-md">
                           <h3 className="text-lg font-semibold text-[#6C5CE7] mb-2">AccurusBill Achievable Targets</h3>
                           <p className="text-gray-700"><strong>Target Annual Collections (98%):</strong> ${(billingEfficiencyState.result.targetCollections * 12).toFixed(2)}</p>
                           <p className="text-gray-700"><strong>Additional Annual Revenue:</strong> ${billingEfficiencyState.result.annualAdditionalRevenue.toFixed(2)}</p>
-                          <p className="text-gray-700"><strong>Annual Billing Cost Savings:</strong> ${billingEfficiencyState.result.annualBillingCostSavings.toFixed(2)}</p>
+                          <p className="text-gray-700">
+                            <strong>Change in Annual Billing Cost:</strong>{" "}
+                            {billingEfficiencyState.result.annualBillingCostChange >= 0 ? (
+                              <span className="text-green-600">+${billingEfficiencyState.result.annualBillingCostChange.toFixed(2)}</span>
+                            ) : (
+                              <span className="text-red-600">-${Math.abs(billingEfficiencyState.result.annualBillingCostChange).toFixed(2)}</span>
+                            )}
+                          </p>
                           <p className="text-gray-700"><strong>Overall Annual ROI:</strong> {billingEfficiencyState.result.annualROI.toFixed(2)}%</p>
                         </div>
                       </div>
@@ -822,7 +850,6 @@ export default function EfficiencyCalculatorPage() {
                     </p>
                   </div>
 
-                  {/* CTA Button for Billing Efficiency */}
                   <div className="mt-6">
                     <Button
                       onClick={() => window.location.href = '/contact'}
@@ -1032,7 +1059,6 @@ export default function EfficiencyCalculatorPage() {
                     )}
                   </div>
 
-                  {/* CTA Button for Claim Denial */}
                   <div className="mt-6">
                     <Button
                       onClick={() => window.location.href = '/contact'}
@@ -1224,7 +1250,6 @@ export default function EfficiencyCalculatorPage() {
                     </p>
                   </div>
 
-                  {/* CTA Button for A/R Days */}
                   <div className="mt-6">
                     <Button
                       onClick={() => window.location.href = '/contact'}
@@ -1425,23 +1450,24 @@ export default function EfficiencyCalculatorPage() {
                   <div className="mt-6 text-sm text-gray-600">
                     <h3 className="font-semibold text-[#3E37A1] mb-2">Disclaimers & Guidance</h3>
                     <p>
-                      <strong>Varying Payer Rates:</strong> Exact reimbursement may differ by geographic region, payer, and plan type.
-                    </p>
-                    <p>
-                      <strong>Enrollment Reality:</strong> Not every eligible patient will opt-in; actual results depend on patient outreach, staff capacity, and continuity of care.
+                      These estimates are based on your inputs and typical reimbursement rates. Actual revenue may vary due to payer mix, regional rates, and program implementation costs.
                     </p>
                     <p className="mt-2">
-                      <strong>Tip:</strong> Try adjusting your enrollment % to see how small changes can significantly increase revenue.
+                      <strong>Next Steps:</strong> Ready to launch or optimize your CCM/RPM program?{" "}
+                      <Link href="/contact" className="text-[#6C5CE7] hover:underline">
+                        Contact AccurusBill
+                      </Link>{" "}
+                      for expert guidance and support.
                     </p>
                   </div>
 
-                  {/* CTA Button for CCM/RPM Revenue */}
                   <div className="mt-6">
                     <Button
                       onClick={() => window.location.href = '/contact'}
                       className="w-full bg-[#6C5CE7] text-white font-bold py-2 px-4 rounded hover:bg-[#3E37A1] transition duration-300 ease-in-out"
+                      aria-label="Start your CCM or RPM program with AccurusBill"
                     >
-                      Unlock CCM/RPM Growth – Contact Accurusbill Now
+                      Start Your CCM/RPM Program Today!
                     </Button>
                   </div>
                 </div>
@@ -1450,58 +1476,65 @@ export default function EfficiencyCalculatorPage() {
           )}
         </div>
 
-        {/* Blog Posts Section (Appears after results) */}
+        {/* Blog Section */}
         {hasResults && (
-          <section className="py-20 bg-[#F5F5FC]">
-            <div className="container mx-auto px-4">
-              <h2 className="text-4xl font-bold text-center mb-6 text-[#3E37A1] relative">
-                Latest Blog Posts
-                <span className="block w-24 h-1 bg-[#6C5CE7] mx-auto mt-2 rounded-full"></span>
-              </h2>
+          <div className="mt-16">
+            <h2 className="text-3xl font-bold text-[#3E37A1] text-center mb-8">
+              Learn More About Optimizing Your Practice
+            </h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
               {blogPosts.length > 0 ? (
-                <>
-                  <p className="text-center text-lg text-gray-700 mb-12">
-                    Explore insights, updates, and tips to optimize your practice’s financial performance.
-                  </p>
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
-                    {blogPosts.map((post, index) => (
-                      <div
-                        key={index}
-                        className="bg-white rounded-lg shadow-lg overflow-hidden transform hover:scale-105 transition duration-300"
-                      >
-                        <Link href={`/blog/${post.slug}`} className="block">
-                          <Image
-                            src={post.image}
-                            alt={post.title}
-                            width={400}
-                            height={250}
-                            className="w-full h-48 object-cover hover:opacity-90 transition duration-300"
-                          />
+                blogPosts.map((post) => (
+                  <div
+                    key={post.slug}
+                    className="bg-white rounded-xl shadow-lg overflow-hidden transform transition duration-300 hover:scale-105"
+                  >
+                    <Image
+                      src={post.image}
+                      alt={post.title}
+                      width={600}
+                      height={300}
+                      className="w-full h-48 object-cover"
+                      loading="lazy"
+                    />
+                    <div className="p-6">
+                      <h3 className="text-xl font-semibold text-[#3E37A1] mb-2">{post.title}</h3>
+                      <p className="text-gray-600 mb-4">{post.description}</p>
+                      <div className="flex justify-between items-center">
+                        <span className="text-sm text-gray-500">{post.date}</span>
+                        <Link
+                          href={`/blog/${post.slug}`}
+                          className="text-[#6C5CE7] font-semibold hover:underline flex items-center"
+                        >
+                          Read More <FaArrowRight className="ml-2" />
                         </Link>
-                        <div className="p-6">
-                          <p className="text-sm text-gray-500 mb-2">{post.date}</p>
-                          <h3 className="text-xl font-semibold text-[#3E37A1] mb-2">{post.title}</h3>
-                          <p className="text-gray-700 mb-4">{post.description}</p>
-                          <Link
-                            href={`/blog/${post.slug}`}
-                            className="inline-flex items-center text-[#6C5CE7] hover:text-[#FFC107] font-semibold transition duration-300"
-                          >
-                            Read More <FaArrowRight className="ml-2" />
-                          </Link>
-                        </div>
                       </div>
-                    ))}
+                    </div>
                   </div>
-                </>
+                ))
               ) : (
-                <p className="text-center text-lg text-gray-700">
-                  Stay tuned! We’re working on bringing you more insightful articles, updates, and tips for your practice. Check back soon for our latest blog posts.
-                </p>
+                <p className="text-center text-gray-600 col-span-2">No blog posts available at this time.</p>
               )}
             </div>
-          </section>
+          </div>
         )}
       </div>
+
+      {/* Footer */}
+      <footer className="bg-[#3E37A1] text-white py-8">
+        <div className="container mx-auto px-4 text-center">
+          <p>© {new Date().getFullYear()} AccurusBill. All rights reserved.</p>
+          <nav role="navigation" className="mt-2">
+            <Link href="/privacy" className="hover:underline">
+              Privacy Policy
+            </Link>{" "}
+            |{" "}
+            <Link href="/terms" className="hover:underline">
+              Terms of Service
+            </Link>
+          </nav>
+        </div>
+      </footer>
     </div>
   );
 }
