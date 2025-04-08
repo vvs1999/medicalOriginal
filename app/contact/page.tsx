@@ -9,6 +9,7 @@ import { Navbar } from "@/components/Navbar";
 import emailjs from "@emailjs/browser";
 import Link from "next/link";
 import { FaMapMarkerAlt, FaLinkedin, FaTwitter } from "react-icons/fa";
+import Head from "next/head";
 
 // Define form data type
 interface FormData {
@@ -35,6 +36,7 @@ function ContactFormContent() {
     message: "",
   });
   const [openFAQ, setOpenFAQ] = useState<number | null>(null);
+  const [errors, setErrors] = useState<Partial<FormData>>({});
 
   useEffect(() => {
     const plan = searchParams.get("plan");
@@ -71,10 +73,35 @@ function ContactFormContent() {
   ) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
+    // Clear error for the field when the user starts typing
+    setErrors((prev) => ({ ...prev, [name]: "" }));
+  };
+
+  const handleDateClick = () => {
+    // Ensure the date picker opens on click (for some browsers)
+    const dateInput = document.getElementById("date") as HTMLInputElement;
+    if (dateInput) {
+      dateInput.showPicker?.();
+    }
+  };
+
+  const validateForm = (): boolean => {
+    const newErrors: Partial<FormData> = {};
+    if (!formData.clinicName) newErrors.clinicName = "Clinic/Company Name is required";
+    if (!formData.fullName) newErrors.fullName = "Full Name is required";
+    if (!formData.email) newErrors.email = "Email is required";
+    if (!formData.phone) newErrors.phone = "Phone is required";
+    if (!formData.contactMethod) newErrors.contactMethod = "Preferred Contact Method is required";
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    if (!validateForm()) {
+      return;
+    }
 
     const submissionData = {
       ...formData,
@@ -147,6 +174,7 @@ function ContactFormContent() {
     setSelectedService("");
     setSelectedDate("");
     setSelectedTime("");
+    setErrors({});
   };
 
   // Full FAQ list
@@ -206,109 +234,173 @@ function ContactFormContent() {
   ];
 
   return (
-    <div className="min-h-screen bg-[#F5F5FC] flex flex-col">
+    <div className="min-h-screen bg-gradient-to-b from-[#F5F5FC] to-[#E0E0F5] flex flex-col">
+      <Head>
+        <title>Contact AccurusBill - Medical Billing Solutions</title>
+        <meta
+          name="description"
+          content="Get in touch with AccurusBill for expert medical billing, coding, and administrative solutions. Schedule a free audit to optimize your clinic's revenue cycle."
+        />
+        <meta
+          name="keywords"
+          content="medical billing, medical coding, prior authorization, virtual scribing, medical transcription, physician credentialing, contact AccurusBill"
+        />
+        <meta name="robots" content="index, follow" />
+        <meta name="author" content="AccurusBill Team" />
+        <meta property="og:title" content="Contact AccurusBill - Medical Billing Solutions" />
+        <meta
+          property="og:description"
+          content="Get in touch with AccurusBill for expert medical billing, coding, and administrative solutions. Schedule a free audit to optimize your clinic's revenue cycle."
+        />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://yourwebsite.com/contact" />
+        <meta property="og:image" content="https://yourwebsite.com/og-image.jpg" />
+      </Head>
       <Navbar />
       <main className="flex-grow">
         <div className="container mx-auto px-4 pt-24 pb-16">
-          <h1 className="text-6xl font-extrabold mb-6 text-center text-[#3E37A1]">
+          <h1 className="text-5xl md:text-6xl font-extrabold mb-6 text-center text-[#3E37A1] tracking-tight">
             Get in Touch with AccurusBill
           </h1>
-          <p className="text-2xl text-center mb-12 text-gray-700 max-w-3xl mx-auto">
-            Have questions about medical billing? Need a custom quote or a free
-            audit? We’re here to assist!
+          <p className="text-xl md:text-2xl text-center mb-12 text-gray-700 max-w-3xl mx-auto">
+            Have questions about medical billing? Need a custom quote or a free audit? We’re here to assist!
           </p>
 
-          <div className="bg-white p-8 rounded-xl shadow-lg border border-[#6C5CE7]/10 mb-12">
-            <p className="text-gray-600 mb-6">
-              Fill out the form below to reach out, and schedule a free audit to
-              optimize your revenue cycle.
+          <div className="bg-white p-6 md:p-8 rounded-xl shadow-lg border border-[#6C5CE7]/10 mb-12 max-w-3xl mx-auto">
+            <p className="text-gray-600 mb-6 text-center">
+              Fill out the form below to reach out, and schedule a free audit to optimize your revenue cycle.
             </p>
 
             <form onSubmit={handleSubmit} className="space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
-                  <label htmlFor="clinicName" className="sr-only">
-                    Clinic/Company Name
+                  <label
+                    htmlFor="clinicName"
+                    className="block text-base font-medium text-gray-800 mb-2"
+                  >
+                    Clinic/Company Name <span className="text-red-500">*</span>
                   </label>
                   <Input
                     id="clinicName"
                     type="text"
                     name="clinicName"
-                    placeholder="Clinic/Company Name"
+                    placeholder="Enter your clinic/company name"
                     required
                     value={formData.clinicName}
                     onChange={handleInputChange}
-                    className="border-[#6C5CE7]/20 rounded-lg border-2 bg-white/90 shadow-sm focus:border-[#6C5CE7] focus:ring-[#6C5CE7]/50"
+                    className={`w-full border-[#6C5CE7]/30 rounded-lg border-2 bg-white shadow-sm focus:border-[#6C5CE7] focus:ring-[#6C5CE7]/50 p-3 text-gray-700 placeholder:text-sm text-base md:text-base ${
+                      errors.clinicName ? "border-red-500" : ""
+                    }`}
                   />
+                  {errors.clinicName && (
+                    <p className="text-red-500 text-sm mt-1">{errors.clinicName}</p>
+                  )}
                 </div>
                 <div>
-                  <label htmlFor="fullName" className="sr-only">
-                    Full Name
+                  <label
+                    htmlFor="fullName"
+                    className="block text-base font-medium text-gray-800 mb-2"
+                  >
+                    Full Name <span className="text-red-500">*</span>
                   </label>
                   <Input
                     id="fullName"
                     type="text"
                     name="fullName"
-                    placeholder="Full Name"
+                    placeholder="Enter your full name"
                     required
                     value={formData.fullName}
                     onChange={handleInputChange}
-                    className="border-[#6C5CE7]/20 rounded-lg border-2 bg-white/90 shadow-sm focus:border-[#6C5CE7] focus:ring-[#6C5CE7]/50"
+                    className={`w-full border-[#6C5CE7]/30 rounded-lg border-2 bg-white shadow-sm focus:border-[#6C5CE7] focus:ring-[#6C5CE7]/50 p-3 text-gray-700 placeholder:text-sm text-base md:text-base ${
+                      errors.fullName ? "border-red-500" : ""
+                    }`}
                   />
+                  {errors.fullName && (
+                    <p className="text-red-500 text-sm mt-1">{errors.fullName}</p>
+                  )}
                 </div>
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
-                  <label htmlFor="email" className="sr-only">
-                    Email
+                  <label
+                    htmlFor="email"
+                    className="block text-base font-medium text-gray-800 mb-2"
+                  >
+                    Email <span className="text-red-500">*</span>
                   </label>
                   <Input
                     id="email"
                     type="email"
                     name="email"
-                    placeholder="Email"
+                    placeholder="Enter your email"
                     required
                     value={formData.email}
                     onChange={handleInputChange}
-                    className="border-[#6C5CE7]/20 rounded-lg border-2 bg-white/90 shadow-sm focus:border-[#6C5CE7] focus:ring-[#6C5CE7]/50"
+                    className={`w-full border-[#6C5CE7]/30 rounded-lg border-2 bg-white shadow-sm focus:border-[#6C5CE7] focus:ring-[#6C5CE7]/50 p-3 text-gray-700 placeholder:text-sm text-base md:text-base ${
+                      errors.email ? "border-red-500" : ""
+                    }`}
                   />
+                  {errors.email && (
+                    <p className="text-red-500 text-sm mt-1">{errors.email}</p>
+                  )}
                 </div>
                 <div>
-                  <label htmlFor="phone" className="sr-only">
-                    Phone
+                  <label
+                    htmlFor="phone"
+                    className="block text-base font-medium text-gray-800 mb-2"
+                  >
+                    Phone <span className="text-red-500">*</span>
                   </label>
                   <Input
                     id="phone"
                     type="tel"
                     name="phone"
-                    placeholder="Phone"
+                    placeholder="Enter your phone number"
+                    required
                     value={formData.phone}
                     onChange={handleInputChange}
-                    className="border-[#6C5CE7]/20 rounded-lg border-2 bg-white/90 shadow-sm focus:border-[#6C5CE7] focus:ring-[#6C5CE7]/50"
+                    className={`w-full border-[#6C5CE7]/30 rounded-lg border-2 bg-white shadow-sm focus:border-[#6C5CE7] focus:ring-[#6C5CE7]/50 p-3 text-gray-700 placeholder:text-sm text-base md:text-base ${
+                      errors.phone ? "border-red-500" : ""
+                    }`}
                   />
+                  {errors.phone && (
+                    <p className="text-red-500 text-sm mt-1">{errors.phone}</p>
+                  )}
                 </div>
               </div>
 
               <div>
-                <label htmlFor="contactMethod" className="sr-only">
-                  Preferred Contact Method
+                <label
+                  htmlFor="contactMethod"
+                  className="block text-base font-medium text-gray-800 mb-2"
+                >
+                  Preferred Contact Method <span className="text-red-500">*</span>
                 </label>
                 <select
                   id="contactMethod"
                   name="contactMethod"
                   value={formData.contactMethod}
                   onChange={handleInputChange}
-                  className="w-full border-[#6C5CE7]/20 rounded-lg border-2 bg-white/90 shadow-sm focus:border-[#6C5CE7] focus:ring-[#6C5CE7]/50"
+                  required
+                  className={`w-full border-[#6C5CE7]/30 rounded-lg border-2 bg-white shadow-sm focus:border-[#6C5CE7] focus:ring-[#6C5CE7]/50 p-3 text-gray-700 placeholder:text-sm text-base md:text-base ${
+                    errors.contactMethod ? "border-red-500" : ""
+                  }`}
                 >
-                  <option value="">Preferred Contact Method</option>
+                  <option value="">Select a contact method</option>
                   <option value="Email">Email</option>
                   <option value="Phone">Phone</option>
                 </select>
+                {errors.contactMethod && (
+                  <p className="text-red-500 text-sm mt-1">{errors.contactMethod}</p>
+                )}
               </div>
 
               <div>
-                <label htmlFor="date" className="sr-only">
+                <label
+                  htmlFor="date"
+                  className="block text-base font-medium text-gray-800 mb-2"
+                >
                   Select Date
                 </label>
                 <input
@@ -319,14 +411,18 @@ function ContactFormContent() {
                   onChange={(e: ChangeEvent<HTMLInputElement>) =>
                     setSelectedDate(e.target.value)
                   }
+                  onClick={handleDateClick}
                   min={currentDate.toISOString().split("T")[0]}
                   max={threeMonthsLater.toISOString().split("T")[0]}
-                  className="w-full border-[#6C5CE7]/20 rounded-lg border-2 bg-white/90 shadow-sm focus:border-[#6C5CE7] focus:ring-[#6C5CE7]/50"
+                  className="w-full border-[#6C5CE7]/30 rounded-lg border-2 bg-white shadow-sm focus:border-[#6C5CE7] focus:ring-[#6C5CE7]/50 p-3 text-gray-700 placeholder:text-sm text-base md:text-base"
                 />
               </div>
 
               <div>
-                <label htmlFor="time" className="sr-only">
+                <label
+                  htmlFor="time"
+                  className="block text-base font-medium text-gray-800 mb-2"
+                >
                   Select Time
                 </label>
                 <select
@@ -336,7 +432,7 @@ function ContactFormContent() {
                   onChange={(e: ChangeEvent<HTMLSelectElement>) =>
                     setSelectedTime(e.target.value)
                   }
-                  className="w-full border-[#6C5CE7]/20 rounded-lg border-2 bg-white/90 shadow-sm focus:border-[#6C5CE7] focus:ring-[#6C5CE7]/50"
+                  className="w-full border-[#6C5CE7]/30 rounded-lg border-2 bg-white shadow-sm focus:border-[#6C5CE7] focus:ring-[#6C5CE7]/50 p-3 text-gray-700 placeholder:text-sm text-base md:text-base"
                 >
                   <option value="">Select Time</option>
                   {timeSlots.map((slot, index) => (
@@ -348,7 +444,10 @@ function ContactFormContent() {
               </div>
 
               <div>
-                <label htmlFor="message" className="sr-only">
+                <label
+                  htmlFor="message"
+                  className="block text-base font-medium text-gray-800 mb-2"
+                >
                   Message
                 </label>
                 <Textarea
@@ -358,7 +457,7 @@ function ContactFormContent() {
                   value={formData.message}
                   onChange={handleInputChange}
                   rows={4}
-                  className="border-[#6C5CE7]/20 rounded-lg border-2 bg-white/90 shadow-sm focus:border-[#6C5CE7] focus:ring-[#6C5CE7]/50"
+                  className="w-full border-[#6C5CE7]/30 rounded-lg border-2 bg-white shadow-sm focus:border-[#6C5CE7] focus:ring-[#6C5CE7]/50 p-3 text-gray-700 placeholder:text-sm text-base md:text-base"
                 />
               </div>
 
@@ -371,16 +470,16 @@ function ContactFormContent() {
             </form>
           </div>
 
-          <div className="space-y-4">
-            <h2 className="text-2xl font-semibold text-[#3E37A1]">
+          <div className="space-y-4 max-w-3xl mx-auto">
+            <h2 className="text-2xl md:text-3xl font-semibold text-[#3E37A1] text-center">
               Frequently Asked Questions
             </h2>
-            <div className="bg-white p-8 rounded-xl shadow-lg border border-[#6C5CE7]/10">
+            <div className="bg-white p-6 md:p-8 rounded-xl shadow-lg border border-[#6C5CE7]/10">
               {faqs.map((faq, index) => (
                 <div key={index} className="mb-4">
                   <button
                     onClick={() => setOpenFAQ(openFAQ === index ? null : index)}
-                    className="w-full text-left text-xl font-medium text-[#3E37A1] py-2"
+                    className="w-full text-left text-xl font-medium text-[#3E37A1] py-2 hover:text-[#5A50DA] transition-colors"
                   >
                     {faq.question}
                   </button>
