@@ -642,9 +642,6 @@ export default function EfficiencyCalculatorPage() {
                 </div>
 
                 <div>
-                  <label htmlFor="totalCollections" className="block text-sm font-medium text-gray-700">
-                    Total Collections Received (Monthly) ($)
-                  </label>
                   <Input
                     id="totalCollections"
                     type="number"
@@ -759,7 +756,6 @@ export default function EfficiencyCalculatorPage() {
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div className="p-4 bg-white rounded-lg shadow-md">
                           <p className="text-gray-700"><strong>Monthly Billed Amount:</strong> ${billingEfficiencyState.result.monthlyBilled.toFixed(2)}</p>
-                          <p className="text-gray-700"><strong>Total Collections Received:</strong> ${billingEfficiencyState.result.annualCollections.toFixed(2)}</p>
                           <p className="text-gray-700"><strong>Current Collection Rate:</strong> {billingEfficiencyState.result.currentCollectionRate.toFixed(2)}%</p>
                         </div>
                         <div className="p-4 bg-white rounded-lg shadow-md">
