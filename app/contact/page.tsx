@@ -48,15 +48,17 @@ function ContactFormContent() {
   const threeMonthsLater = new Date(currentDate);
   threeMonthsLater.setMonth(currentDate.getMonth() + 3);
 
-  // Generate time slots (9:00 AM to 9:00 PM, every 30 minutes, Eastern Time)
+  // Generate time slots (9:00 AM to 5:00 PM, every 15 minutes, Eastern Time)
   const generateTimeSlots = (): string[] => {
     const slots: string[] = [];
     let hour = 9; // Start at 9 AM
-    while (hour < 21) { // End at 9 PM
+    while (hour < 17) {
       const period = hour < 12 ? "AM" : "PM";
-      const displayHour = hour > 12 ? hour - 12 : hour === 12 ? 12 : hour; // Convert 13-21 to 1-9 for PM, keep 12 as 12
+      const displayHour = hour > 12 ? hour - 12 : hour; // Convert 13-16 to 1-4 for PM
       slots.push(`${displayHour}:00 ${period}`);
+      slots.push(`${displayHour}:15 ${period}`);
       slots.push(`${displayHour}:30 ${period}`);
+      slots.push(`${displayHour}:45 ${period}`);
       hour++;
     }
     return slots;
@@ -73,20 +75,6 @@ function ContactFormContent() {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
-    // Validate required fields
-    if (
-      !formData.clinicName ||
-      !formData.fullName ||
-      !formData.email ||
-      !formData.phone ||
-      !formData.contactMethod ||
-      !selectedDate ||
-      !selectedTime
-    ) {
-      alert("Please fill out all required fields.");
-      return;
-    }
 
     const submissionData = {
       ...formData,
@@ -161,12 +149,6 @@ function ContactFormContent() {
     setSelectedTime("");
   };
 
-  // Handle click to open date picker
-  const handleDateClick = (e: React.MouseEvent<HTMLInputElement>) => {
-    const input = e.currentTarget as HTMLInputElement;
-    input.showPicker && input.showPicker(); // Programmatically open the date picker
-  };
-
   // Full FAQ list
   const faqs = [
     {
@@ -226,225 +208,184 @@ function ContactFormContent() {
   return (
     <div className="min-h-screen bg-[#F5F5FC] flex flex-col">
       <Navbar />
-      <main className="flex-grow pt-20">
+      <main className="flex-grow">
         <div className="container mx-auto px-4 pt-24 pb-16">
-          <h1 className="text-5xl md:text-6xl font-extrabold mb-6 text-center text-[#3E37A1]">
+          <h1 className="text-6xl font-extrabold mb-6 text-center text-[#3E37A1]">
             Get in Touch with AccurusBill
           </h1>
-          <p className="text-xl md:text-2xl text-center mb-12 text-gray-700 max-w-3xl mx-auto">
+          <p className="text-2xl text-center mb-12 text-gray-700 max-w-3xl mx-auto">
             Have questions about medical billing? Need a custom quote or a free
             audit? We’re here to assist!
           </p>
 
-          <div className="bg-gradient-to-br from-white to-[#E6E6FA] p-6 md:p-8 rounded-xl shadow-lg border border-[#6C5CE7]/20 mb-12 relative overflow-hidden">
-            {/* Decorative Background Element */}
-            <div className="absolute inset-0 opacity-10">
-              <svg className="w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
-                <circle cx="10" cy="10" r="30" fill="#6C5CE7" />
-                <circle cx="90" cy="90" r="40" fill="#5A50DA" />
-              </svg>
-            </div>
-
-            <p className="text-gray-600 mb-6 text-center font-medium">
+          <div className="bg-white p-8 rounded-xl shadow-lg border border-[#6C5CE7]/10 mb-12">
+            <p className="text-gray-600 mb-6">
               Fill out the form below to reach out, and schedule a free audit to
               optimize your revenue cycle.
             </p>
 
             <form onSubmit={handleSubmit} className="space-y-6">
-              {/* Wrap form fields in a div to constrain width and center them */}
-              <div className="max-w-lg mx-auto relative z-10">
-                <div className="grid grid-cols-1 gap-6">
-                  <div>
-                    <label
-                      htmlFor="clinicName"
-                      className="block text-base font-medium text-gray-800 mb-2"
-                    >
-                      Clinic/Company Name <span className="text-red-500">*</span>
-                    </label>
-                    <Input
-                      id="clinicName"
-                      type="text"
-                      name="clinicName"
-                      placeholder="Enter clinic or company name"
-                      required
-                      value={formData.clinicName}
-                      onChange={handleInputChange}
-                      className="border-[#6C5CE7]/30 rounded-lg border-2 bg-white shadow-sm focus:border-[#6C5CE7] focus:ring-[#6C5CE7]/50 w-full placeholder:text-sm py-3 md:py-3 text-base md:text-base"
-                    />
-                  </div>
-                  <div>
-                    <label
-                      htmlFor="fullName"
-                      className="block text-base font-medium text-gray-800 mb-2"
-                    >
-                      Full Name <span className="text-red-500">*</span>
-                    </label>
-                    <Input
-                      id="fullName"
-                      type="text"
-                      name="fullName"
-                      placeholder="Enter your full name"
-                      required
-                      value={formData.fullName}
-                      onChange={handleInputChange}
-                      className="border-[#6C5CE7]/30 rounded-lg border-2 bg-white shadow-sm focus:border-[#6C5CE7] focus:ring-[#6C5CE7]/50 w-full placeholder:text-sm py-3 md:py-3 text-base md:text-base"
-                    />
-                  </div>
-                  <div>
-                    <label
-                      htmlFor="email"
-                      className="block text-base font-medium text-gray-800 mb-2"
-                    >
-                      Email <span className="text-red-500">*</span>
-                    </label>
-                    <Input
-                      id="email"
-                      type="email"
-                      name="email"
-                      placeholder="Enter your email"
-                      required
-                      value={formData.email}
-                      onChange={handleInputChange}
-                      className="border-[#6C5CE7]/30 rounded-lg border-2 bg-white shadow-sm focus:border-[#6C5CE7] focus:ring-[#6C5CE7]/50 w-full placeholder:text-sm py-3 md:py-3 text-base md:text-base"
-                    />
-                  </div>
-                  <div>
-                    <label
-                      htmlFor="phone"
-                      className="block text-base font-medium text-gray-800 mb-2"
-                    >
-                      Phone <span className="text-red-500">*</span>
-                    </label>
-                    <Input
-                      id="phone"
-                      type="tel"
-                      name="phone"
-                      placeholder="Enter your phone number"
-                      required
-                      value={formData.phone}
-                      onChange={handleInputChange}
-                      className="border-[#6C5CE7]/30 rounded-lg border-2 bg-white shadow-sm focus:border-[#6C5CE7] focus:ring-[#6C5CE7]/50 w-full placeholder:text-sm py-3 md:py-3 text-base md:text-base"
-                    />
-                  </div>
-                  <div>
-                    <label
-                      htmlFor="contactMethod"
-                      className="block text-base font-medium text-gray-800 mb-2"
-                    >
-                      Preferred Contact Method <span className="text-red-500">*</span>
-                    </label>
-                    <select
-                      id="contactMethod"
-                      name="contactMethod"
-                      value={formData.contactMethod}
-                      onChange={handleInputChange}
-                      required
-                      className="w-full border-[#6C5CE7]/30 rounded-lg border-2 bg-white shadow-sm focus:border-[#6C5CE7] focus:ring-[#6C5CE7]/50 p-3 text-gray-700 placeholder:text-sm text-base md:text-base"
-                    >
-                      <option value="">Select a contact method</option>
-                      <option value="Email">Email</option>
-                      <option value="Phone">Phone</option>
-                    </select>
-                  </div>
-                  <div>
-                    <label
-                      htmlFor="date"
-                      className="block text-base font-medium text-gray-800 mb-2"
-                    >
-                      Select Date <span className="text-red-500">*</span>
-                    </label>
-                    <div className="relative">
-                      <input
-                        id="date"
-                        type="date"
-                        name="date"
-                        value={selectedDate}
-                        onChange={(e: ChangeEvent<HTMLInputElement>) =>
-                          setSelectedDate(e.target.value)
-                        }
-                        onClick={handleDateClick}
-                        min={currentDate.toISOString().split("T")[0]}
-                        max={threeMonthsLater.toISOString().split("T")[0]}
-                        required
-                        className="w-full border-[#6C5CE7]/30 rounded-lg border-2 bg-white shadow-sm focus:border-[#6C5CE7] focus:ring-[#6C5CE7]/50 p-3 text-gray-700 placeholder:text-sm appearance-none text-base md:text-base"
-                      />
-                      {/* Custom Placeholder */}
-                      {!selectedDate && (
-                        <span className="absolute inset-y-0 left-0 pl-3 flex items-center text-gray-400 pointer-events-none">
-                          2025/mm/dd
-                        </span>
-                      )}
-                    </div>
-                  </div>
-                  <div>
-                    <label
-                      htmlFor="time"
-                      className="block text-base font-medium text-gray-800 mb-2"
-                    >
-                      Select Time <span className="text-red-500">*</span>
-                    </label>
-                    <select
-                      id="time"
-                      name="time"
-                      value={selectedTime}
-                      onChange={(e: ChangeEvent<HTMLSelectElement>) =>
-                        setSelectedTime(e.target.value)
-                      }
-                      required
-                      className="w-full border-[#6C5CE7]/30 rounded-lg border-2 bg-white shadow-sm focus:border-[#6C5CE7] focus:ring-[#6C5CE7]/50 p-3 text-gray-700 placeholder:text-sm text-base md:text-base"
-                    >
-                      <option value="">Select a time slot</option>
-                      {timeSlots.map((slot, index) => (
-                        <option key={index} value={slot}>
-                          {slot}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-                  <div>
-                    <label
-                      htmlFor="message"
-                      className="block text-base font-medium text-gray-800 mb-2"
-                    >
-                      Any message or questions?
-                    </label>
-                    <Textarea
-                      id="message"
-                      name="message"
-                      placeholder="Enter any additional message or questions"
-                      value={formData.message}
-                      onChange={handleInputChange}
-                      rows={4}
-                      className="border-[#6C5CE7]/30 rounded-lg border-2 bg-white shadow-sm focus:border-[#6C5CE7] focus:ring-[#6C5CE7]/50 w-full placeholder:text-sm p-3 text-base md:text-base"
-                    />
-                  </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                  <label htmlFor="clinicName" className="sr-only">
+                    Clinic/Company Name
+                  </label>
+                  <Input
+                    id="clinicName"
+                    type="text"
+                    name="clinicName"
+                    placeholder="Clinic/Company Name"
+                    required
+                    value={formData.clinicName}
+                    onChange={handleInputChange}
+                    className="border-[#6C5CE7]/20 rounded-lg border-2 bg-white/90 shadow-sm focus:border-[#6C5CE7] focus:ring-[#6C5CE7]/50"
+                  />
                 </div>
-
-                <Button
-                  type="submit"
-                  className="w-full bg-gradient-to-r from-[#6C5CE7] to-[#5A50DA] text-white py-3 rounded-lg hover:from-[#5A50DA] hover:to-[#4B46C1] shadow-md hover:shadow-xl transition-all duration-300 mt-6 text-lg font-semibold"
-                >
-                  Submit
-                </Button>
+                <div>
+                  <label htmlFor="fullName" className="sr-only">
+                    Full Name
+                  </label>
+                  <Input
+                    id="fullName"
+                    type="text"
+                    name="fullName"
+                    placeholder="Full Name"
+                    required
+                    value={formData.fullName}
+                    onChange={handleInputChange}
+                    className="border-[#6C5CE7]/20 rounded-lg border-2 bg-white/90 shadow-sm focus:border-[#6C5CE7] focus:ring-[#6C5CE7]/50"
+                  />
+                </div>
               </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                  <label htmlFor="email" className="sr-only">
+                    Email
+                  </label>
+                  <Input
+                    id="email"
+                    type="email"
+                    name="email"
+                    placeholder="Email"
+                    required
+                    value={formData.email}
+                    onChange={handleInputChange}
+                    className="border-[#6C5CE7]/20 rounded-lg border-2 bg-white/90 shadow-sm focus:border-[#6C5CE7] focus:ring-[#6C5CE7]/50"
+                  />
+                </div>
+                <div>
+                  <label htmlFor="phone" className="sr-only">
+                    Phone
+                  </label>
+                  <Input
+                    id="phone"
+                    type="tel"
+                    name="phone"
+                    placeholder="Phone"
+                    value={formData.phone}
+                    onChange={handleInputChange}
+                    className="border-[#6C5CE7]/20 rounded-lg border-2 bg-white/90 shadow-sm focus:border-[#6C5CE7] focus:ring-[#6C5CE7]/50"
+                  />
+                </div>
+              </div>
+
+              <div>
+                <label htmlFor="contactMethod" className="sr-only">
+                  Preferred Contact Method
+                </label>
+                <select
+                  id="contactMethod"
+                  name="contactMethod"
+                  value={formData.contactMethod}
+                  onChange={handleInputChange}
+                  className="w-full border-[#6C5CE7]/20 rounded-lg border-2 bg-white/90 shadow-sm focus:border-[#6C5CE7] focus:ring-[#6C5CE7]/50"
+                >
+                  <option value="">Preferred Contact Method</option>
+                  <option value="Email">Email</option>
+                  <option value="Phone">Phone</option>
+                </select>
+              </div>
+
+              <div>
+                <label htmlFor="date" className="sr-only">
+                  Select Date
+                </label>
+                <input
+                  id="date"
+                  type="date"
+                  name="date"
+                  value={selectedDate}
+                  onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                    setSelectedDate(e.target.value)
+                  }
+                  min={currentDate.toISOString().split("T")[0]}
+                  max={threeMonthsLater.toISOString().split("T")[0]}
+                  className="w-full border-[#6C5CE7]/20 rounded-lg border-2 bg-white/90 shadow-sm focus:border-[#6C5CE7] focus:ring-[#6C5CE7]/50"
+                />
+              </div>
+
+              <div>
+                <label htmlFor="time" className="sr-only">
+                  Select Time
+                </label>
+                <select
+                  id="time"
+                  name="time"
+                  value={selectedTime}
+                  onChange={(e: ChangeEvent<HTMLSelectElement>) =>
+                    setSelectedTime(e.target.value)
+                  }
+                  className="w-full border-[#6C5CE7]/20 rounded-lg border-2 bg-white/90 shadow-sm focus:border-[#6C5CE7] focus:ring-[#6C5CE7]/50"
+                >
+                  <option value="">Select Time</option>
+                  {timeSlots.map((slot, index) => (
+                    <option key={index} value={slot}>
+                      {slot}
+                    </option>
+                  ))}
+                </select>
+              </div>
+
+              <div>
+                <label htmlFor="message" className="sr-only">
+                  Message
+                </label>
+                <Textarea
+                  id="message"
+                  name="message"
+                  placeholder="Any message or questions?"
+                  value={formData.message}
+                  onChange={handleInputChange}
+                  rows={4}
+                  className="border-[#6C5CE7]/20 rounded-lg border-2 bg-white/90 shadow-sm focus:border-[#6C5CE7] focus:ring-[#6C5CE7]/50"
+                />
+              </div>
+
+              <Button
+                type="submit"
+                className="w-full bg-[#6C5CE7] text-white py-3 rounded-lg hover:bg-[#5A50DA] shadow-md hover:shadow-lg transition-all duration-300"
+              >
+                Submit
+              </Button>
             </form>
           </div>
 
-          <div className="space-y-4 max-w-3xl mx-auto">
-            <h2 className="text-2xl font-semibold text-[#3E37A1] text-center">
+          <div className="space-y-4">
+            <h2 className="text-2xl font-semibold text-[#3E37A1]">
               Frequently Asked Questions
             </h2>
-            <div className="bg-white p-6 md:p-8 rounded-xl shadow-lg border border-[#6C5CE7]/10">
+            <div className="bg-white p-8 rounded-xl shadow-lg border border-[#6C5CE7]/10">
               {faqs.map((faq, index) => (
                 <div key={index} className="mb-4">
                   <button
                     onClick={() => setOpenFAQ(openFAQ === index ? null : index)}
-                    className="w-full text-left text-lg md:text-xl font-medium text-[#3E37A1] py-2"
+                    className="w-full text-left text-xl font-medium text-[#3E37A1] py-2"
                   >
                     {faq.question}
                   </button>
                   {openFAQ === index && (
-                    <div className="pt-2 text-base md:text-lg text-gray-700">{faq.answer}</div>
+                    <div className="pt-2 text-lg text-gray-700">{faq.answer}</div>
                   )}
                 </div>
               ))}
