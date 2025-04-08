@@ -396,7 +396,7 @@ function ContactFormContent() {
                 )}
               </div>
 
-              <div>
+              <div className="relative">
                 <label
                   htmlFor="date"
                   className="block text-base font-medium text-gray-800 mb-2"
@@ -416,6 +416,11 @@ function ContactFormContent() {
                   max={threeMonthsLater.toISOString().split("T")[0]}
                   className="w-full appearance-none border-[#6C5CE7]/30 rounded-lg border-2 bg-white shadow-sm focus:border-[#6C5CE7] focus:ring-[#6C5CE7]/50 p-3 text-gray-700 placeholder:text-sm text-base md:text-base"
                 />
+                {!selectedDate && (
+                  <span className="absolute left-4 top-[50%] text-gray-500 pointer-events-none translate-y-[10%] text-sm">
+                    yyyy-mm-dd
+                  </span>
+                )}
               </div>
 
               <div>
