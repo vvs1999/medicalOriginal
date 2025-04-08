@@ -253,8 +253,8 @@ function ContactFormContent() {
           content="Get in touch with AccurusBill for expert medical billing, coding, and administrative solutions. Schedule a free audit to optimize your clinic's revenue cycle."
         />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://yourwebsite.com/contact" />
-        <meta property="og:image" content="https://yourwebsite.com/og-image.jpg" />
+        <meta property="og:url" content="https://accurusbill.com/contact" />
+        <meta property="og:image" content="https://accurusbill.com/og-image.jpg" />
       </Head>
       <Navbar />
       <main className="flex-grow">
@@ -414,7 +414,7 @@ function ContactFormContent() {
                   onClick={handleDateClick}
                   min={currentDate.toISOString().split("T")[0]}
                   max={threeMonthsLater.toISOString().split("T")[0]}
-                  className="w-full border-[#6C5CE7]/30 rounded-lg border-2 bg-white shadow-sm focus:border-[#6C5CE7] focus:ring-[#6C5CE7]/50 p-3 text-gray-700 placeholder:text-sm text-base md:text-base"
+                  className="w-full appearance-none border-[#6C5CE7]/30 rounded-lg border-2 bg-white shadow-sm focus:border-[#6C5CE7] focus:ring-[#6C5CE7]/50 p-3 text-gray-700 placeholder:text-sm text-base md:text-base"
                 />
               </div>
 
